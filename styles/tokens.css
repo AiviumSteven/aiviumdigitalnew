@@ -1,0 +1,79 @@
+/* ============================================================
+   Aivium Digital design tokens
+   Theme: "Frontier Observatory" (cold void, warm signal)
+   Single dark theme, locked at page level.
+   ============================================================ */
+
+:root {
+  /* ---- Color: the void (cool near-blacks, from brand ink #0D1117) ---- */
+  --void-950: #090c10;              /* page background */
+  --void-900: #0d1117;              /* brand ink, elevated surfaces */
+  --void-850: #111722;              /* raised panels, cards */
+
+  /* ---- Color: the signal (warm, from the wordmark) ---- */
+  --cream: #f6f2ea;                 /* primary text, brand cream */
+  --cream-72: rgba(246, 242, 234, 0.72);   /* body copy on dark */
+  --cream-55: rgba(246, 242, 234, 0.55);   /* secondary text, captions */
+  --cream-32: rgba(246, 242, 234, 0.32);   /* disabled, faint labels */
+  --line:     rgba(246, 242, 234, 0.10);   /* hairlines, borders */
+  --line-strong: rgba(246, 242, 234, 0.22);/* interactive borders */
+
+  --accent: #e5391b;                /* brand vermillion: text accents, rules, glows */
+  --ok: #3ecf8e;                    /* status green: telemetry lock-in, systems go */
+  --accent-bright: #f03e1f;         /* button fills (passes AA with ink text) */
+  --accent-deep: #7e1e0c;           /* horizon glow depths, never text */
+  --on-accent: #0b0806;             /* text on accent fills */
+
+  /* ---- Typography ---- */
+  /* Archivo variable: width axis 62..125. Display runs Expanded (121%),
+     body runs normal width. Premium upgrade path: Söhne Breit, ABC Diatype
+     Expanded, or Aeonik: swap here, keep the stretch tokens. */
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+  --stretch-display: 121%;
+  --stretch-subhead: 108%;
+
+  --text-display: clamp(2.5rem, 1.1rem + 4.7vw, 4.375rem); /* hero h1 */
+  --text-h2: clamp(1.875rem, 1.2rem + 2.2vw, 3rem);
+  --text-h3: clamp(1.375rem, 1.1rem + 0.9vw, 1.75rem);
+  --text-body: 1.0625rem;
+  --text-small: 0.875rem;
+  --text-label: 0.8125rem;          /* mono telemetry labels */
+
+  --leading-display: 1.02;
+  --leading-body: 1.65;
+  --tracking-display: -0.02em;
+  --tracking-label: 0.16em;         /* mono labels, uppercase */
+
+  /* ---- Spacing (4px base) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-section: clamp(6rem, 4rem + 8vw, 10rem);
+
+  /* ---- Shape rule: surfaces are sharp, interactive is pill. Nothing else. ---- */
+  --radius-surface: 0;
+  --radius-interactive: 999px;
+
+  /* ---- Layout ---- */
+  --container: 1320px;
+  --nav-height: 72px;
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 180ms;
+  --duration-base: 320ms;
+  --duration-slow: 700ms;
+
+  /* ---- Z scale ---- */
+  --z-atmosphere: 0;                /* starfield, horizon */
+  --z-content: 10;
+  --z-nav: 40;
+  --z-grain: 60;
+}

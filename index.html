@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aivium Digital | AI SEO Agency, GEO &amp; Custom AI Solutions</title>
+  <!-- TODO: REMOVE noindex at production launch. Keeps the GitHub Pages preview out of Google. -->
+  <meta name="robots" content="noindex" />
+  <meta name="description" content="Aivium Digital is an AI SEO agency: we get your brand cited by ChatGPT, Perplexity, and Google AI Overviews, and build custom AI automations for your business." />
+
+  <!-- TODO: confirm the production domain before launch -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://aiviumdigital.com/#website",
+        "url": "https://aiviumdigital.com/",
+        "name": "Aivium Digital",
+        "publisher": { "@id": "https://aiviumdigital.com/#org" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://aiviumdigital.com/#org",
+        "name": "Aivium Digital",
+        "url": "https://aiviumdigital.com/",
+        "logo": "https://aiviumdigital.com/assets/aivium-digital-lockup-horizontal-dark.svg",
+        "description": "AI SEO agency offering generative engine optimization (GEO), answer engine optimization (AEO), and custom AI automation services."
+      }
+    ]
+  }
+  </script>
+
+  <!-- Scaffold only: self-host these before production -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+
+  <header class="nav" data-nav>
+    <div class="container nav__inner">
+      <a class="nav__logo" href="/" aria-label="Aivium Digital home">
+        <img src="assets/aivium-digital-lockup-horizontal-dark.svg" alt="Aivium Digital" />
+      </a>
+      <nav class="nav__primary" aria-label="Primary">
+        <ul class="nav__links">
+          <li><a href="ai-seo/">AI Visibility</a></li>
+          <li><a href="ai-automation/">AI Solutions</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <div class="nav__actions">
+        <a class="btn btn--primary nav__cta" href="#contact">Book a free AI audit</a>
+        <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-overlay">
+          <span class="visually-hidden">Menu</span>
+          <span class="nav__toggle-line" aria-hidden="true"></span>
+          <span class="nav__toggle-line" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="nav__overlay" id="nav-overlay" inert>
+      <nav aria-label="Primary, mobile">
+        <ul class="nav__overlay-links">
+          <li><a href="ai-seo/"><span class="nav__overlay-index">01</span>AI Visibility</a></li>
+          <li><a href="ai-automation/"><span class="nav__overlay-index">02</span>AI Solutions</a></li>
+          <li><a href="#process"><span class="nav__overlay-index">03</span>Process</a></li>
+          <li><a href="#work"><span class="nav__overlay-index">04</span>Work</a></li>
+          <li><a href="#faq"><span class="nav__overlay-index">05</span>FAQ</a></li>
+        </ul>
+      </nav>
+      <div class="nav__overlay-footer">
+        <a class="btn btn--primary" href="#contact">Book a free AI audit</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero__atmosphere" aria-hidden="true">
+        <img class="hero__planet" src="assets/planet-1.webp" alt="" fetchpriority="high" />
+        <canvas class="hero__stars"></canvas>
+        <svg class="hero__orbits" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="22" />
+          <circle cx="50" cy="50" r="34" />
+          <circle cx="50" cy="50" r="48" />
+          <g class="orbit-rotor orbit-rotor--outer">
+            <circle class="orbit-body" cx="79.4" cy="67" r="1.1" />
+          </g>
+          <g class="orbit-rotor orbit-rotor--inner">
+            <circle class="orbit-body orbit-body--gray" cx="34.4" cy="65.6" r="0.9" />
+          </g>
+        </svg>
+      </div>
+
+      <div class="container">
+        <div class="hero__content">
+          <hgroup class="hero__title">
+            <h1 class="hero__eyebrow">The AI SEO agency for getting cited, not just ranked.</h1>
+            <p class="hero__headline">Be the answer in AI&nbsp;search.</p>
+          </hgroup>
+          <p class="lede">
+            Aivium Digital is the AI SEO agency that makes your brand the
+            answer in ChatGPT, Perplexity, Claude, and Google AI Overviews.
+            Then we find where AI can grow your business and build the
+            systems to do it.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#contact">Book a free AI audit</a>
+            <a class="btn btn--ghost" href="#services">The Services</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="engines" aria-label="Answer engines we cover">
+      <div class="container engines__inner">
+        <p class="engines__caption">Your buyers are already asking AI</p>
+        <ul class="engines__list">
+          <li><img src="assets/engines/openai.svg" alt="" /><span>ChatGPT</span></li>
+          <li><img src="assets/engines/claude.svg" alt="" /><span>Claude</span></li>
+          <li><img src="assets/engines/googlegemini.svg" alt="" /><span>Gemini</span></li>
+          <li><img src="assets/engines/perplexity.svg" alt="" /><span>Perplexity</span></li>
+          <li><img src="assets/engines/copilot.svg" alt="" /><span>Copilot</span></li>
+          <li><img src="assets/engines/grok.svg" alt="" /><span>Grok</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mission" id="mission">
+      <div class="container">
+        <h2 class="mission__statement">
+          <span class="mission__statement-dim">We make businesses</span>
+          future&#8209;proof.
+        </h2>
+        <p class="lede mission__lede">
+          The AI landscape is unmapped territory, and the old routes to your
+          customers are closing. We navigate brands to the frontier:
+          into the answers AI gives today, and onto the systems that keep
+          them ahead of whatever comes next.
+        </p>
+
+        <!-- TODO: verify figures and cite sources on-page before launch.
+             800M weekly ChatGPT users: OpenAI, late 2025.
+             ~60% zero-click searches: SparkToro/Datos study, 2024.
+             4.4x conversion: Semrush AI search traffic study, 2025. -->
+        <dl class="mission__stats">
+          <div class="mission__stat">
+            <dd>800M+</dd>
+            <dt>people ask ChatGPT for answers every week</dt>
+          </div>
+          <div class="mission__stat">
+            <dd>60%</dd>
+            <dt>of Google searches now end without a click</dt>
+          </div>
+          <div class="mission__stat">
+            <dd>4.4&times;</dd>
+            <dt>higher conversion rate from AI search visitors</dt>
+          </div>
+        </dl>
+      </div>
+
+      <div class="mission__record">
+        <div class="container mission__record-caption">
+          <span class="mission__record-note">Brands our team has worked with</span>
+        </div>
+        <div class="marquee" aria-label="Brands our team has worked with">
+          <!-- Four copies: (copies - 1) x group width must exceed the widest
+               viewport, or the loop's right edge shows a gap. Track slides
+               exactly one group width (-25%). -->
+          <div class="marquee__track">
+            <ul class="marquee__group">
+              <li><img src="assets/clients/carnival.svg" alt="Carnival Cruise Line" /></li>
+              <li><img src="assets/clients/gatorade.svg" alt="Gatorade" /></li>
+              <li><img src="assets/clients/visitorlando.svg" alt="Visit Orlando" /></li>
+              <li><img src="assets/clients/disney.svg" alt="Disney" /></li>
+              <li><img src="assets/clients/fullsail.svg" alt="Full Sail University" /></li>
+              <li><img src="assets/clients/ea.svg" alt="EA" /></li>
+            </ul>
+            <ul class="marquee__group" aria-hidden="true">
+              <li><img src="assets/clients/carnival.svg" alt="" /></li>
+              <li><img src="assets/clients/gatorade.svg" alt="" /></li>
+              <li><img src="assets/clients/visitorlando.svg" alt="" /></li>
+              <li><img src="assets/clients/disney.svg" alt="" /></li>
+              <li><img src="assets/clients/fullsail.svg" alt="" /></li>
+              <li><img src="assets/clients/ea.svg" alt="" /></li>
+            </ul>
+            <ul class="marquee__group" aria-hidden="true">
+              <li><img src="assets/clients/carnival.svg" alt="" /></li>
+              <li><img src="assets/clients/gatorade.svg" alt="" /></li>
+              <li><img src="assets/clients/visitorlando.svg" alt="" /></li>
+              <li><img src="assets/clients/disney.svg" alt="" /></li>
+              <li><img src="assets/clients/fullsail.svg" alt="" /></li>
+              <li><img src="assets/clients/ea.svg" alt="" /></li>
+            </ul>
+            <ul class="marquee__group" aria-hidden="true">
+              <li><img src="assets/clients/carnival.svg" alt="" /></li>
+              <li><img src="assets/clients/gatorade.svg" alt="" /></li>
+              <li><img src="assets/clients/visitorlando.svg" alt="" /></li>
+              <li><img src="assets/clients/disney.svg" alt="" /></li>
+              <li><img src="assets/clients/fullsail.svg" alt="" /></li>
+              <li><img src="assets/clients/ea.svg" alt="" /></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="systems" id="services">
+      <div class="container">
+        <div class="systems__head">
+          <h2>Two engines.<br />One trajectory.</h2>
+          <p class="lede systems__lede">
+            One AI SEO company, two proven systems: one makes you the answer
+            AI gives, the other puts AI to work inside your business.
+          </p>
+        </div>
+
+        <div class="systems__grid">
+          <article class="system-card">
+            <div class="system-card__visual" aria-hidden="true">
+              <img src="assets/systems/pixel-visibility.png" alt="" loading="lazy" />
+            </div>
+            <div class="system-card__body">
+              <p class="system-card__designation label">SYS&#8209;01 / Signal</p>
+              <h3>AI Visibility</h3>
+              <p class="system-card__pitch">
+                When buyers ask ChatGPT what to buy or who to hire, the answer
+                should be you. We make that happen with generative engine
+                optimization (GEO) and answer engine optimization (AEO).
+              </p>
+              <ol class="system-card__caps">
+                <li>Answer audit: where AI mentions you today, and where it doesn&rsquo;t</li>
+                <li>Content and citations engineered so AI engines recommend you</li>
+                <li>Share&#8209;of&#8209;answer tracking across all six answer engines</li>
+              </ol>
+              <a class="system-card__link" href="ai-seo/">See how AI Visibility works</a>
+            </div>
+          </article>
+
+          <article class="system-card">
+            <div class="system-card__visual" aria-hidden="true">
+              <img src="assets/systems/pixel-solutions.png" alt="" loading="lazy" />
+            </div>
+            <div class="system-card__body">
+              <p class="system-card__designation label">SYS&#8209;02 / Machinery</p>
+              <h3>AI Solutions</h3>
+              <p class="system-card__pitch">
+                Custom AI solutions built around how your business actually
+                runs: agents, assistants, and automations that take the
+                busywork off your team&rsquo;s plate.
+              </p>
+              <ol class="system-card__caps">
+                <li>Opportunity mapping: where AI automation saves you the most, first</li>
+                <li>Custom AI agents and automations built on your own data</li>
+                <li>Deployment, team training, and monitoring after launch</li>
+              </ol>
+              <a class="system-card__link" href="ai-automation/">See how AI Solutions works</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="flow" id="process">
+      <div class="container">
+        <div class="flow__head">
+          <h2>From getting found<br />to getting it done.</h2>
+          <p class="lede flow__lede">
+            Two systems, one loop. What we learn getting you found shapes what
+            we build, and what we build creates the proof that gets you
+            found. Every orbit compounds.
+          </p>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="flow__diagram">
+          <div class="flow__chart">
+            <svg class="flow__wires" viewBox="0 0 1280 600" fill="none" aria-hidden="true">
+              <!-- Corner registration marks -->
+              <g class="flow__corners">
+                <path d="M14 30 V14 H30" />
+                <path d="M1250 14 H1266 V30" />
+                <path d="M1266 570 V586 H1250" />
+                <path d="M30 586 H14 V570" />
+              </g>
+
+              <!-- Bus routing: orthogonal runs, one junction split, one merge -->
+              <g class="flow__wire-base">
+                <path d="M100 300 H250" />
+                <path d="M250 300 V170 H1060 V284 H1090" />
+                <path d="M250 300 V430 H1060 V316 H1090" />
+              </g>
+
+              <!-- Feedback return: the output feeds the next cycle's input -->
+              <path class="flow__return" d="M1165 332 V520 H90 V324" />
+
+              <!-- Input port -->
+              <g class="flow__launch">
+                <rect class="flow__launch-core" x="86.5" y="296.5" width="7" height="7" />
+                <rect class="flow__launch-ring" x="78" y="288" width="24" height="24" />
+                <rect class="flow__launch-ring flow__launch-ring--faint" x="70" y="280" width="40" height="40" />
+              </g>
+
+              <!-- Process nodes -->
+              <g class="flow__waypoints">
+                <circle cx="250" cy="300" r="5" />
+                <circle cx="460" cy="170" r="5" />
+                <circle cx="700" cy="170" r="5" />
+                <circle cx="940" cy="170" r="5" />
+                <circle cx="460" cy="430" r="5" />
+                <circle cx="700" cy="430" r="5" />
+                <circle cx="940" cy="430" r="5" />
+              </g>
+              <g class="flow__waypoint-rings">
+                <circle cx="250" cy="300" r="10" />
+                <circle cx="460" cy="170" r="10" />
+                <circle cx="700" cy="170" r="10" />
+                <circle cx="940" cy="170" r="10" />
+                <circle cx="460" cy="430" r="10" />
+                <circle cx="700" cy="430" r="10" />
+                <circle cx="940" cy="430" r="10" />
+              </g>
+
+              <!-- Signal pulses; js/flow.js drives the motion -->
+              <g class="flow__pulses">
+                <path pathLength="100" d="M100 300 H250" />
+                <path pathLength="100" d="M250 300 V170 H1060 V284 H1090" />
+                <path pathLength="100" d="M250 300 V430 H1060 V316 H1090" />
+              </g>
+            </svg>
+
+            <p class="flow__wp flow__wp--below" style="--x: 7%; --y: 50%">
+              <span class="flow__wp-tag">Input</span>Your company
+            </p>
+            <p class="flow__wp flow__wp--below" style="--x: 19.5%; --y: 50%">Discovery</p>
+
+            <p class="flow__lane-title" style="--x: 54.7%; --y: 8.7%">Get found in AI search</p>
+            <p class="flow__wp" style="--x: 35.9%; --y: 28.3%">AI Visibility</p>
+            <p class="flow__wp" style="--x: 54.7%; --y: 28.3%">Content Engine</p>
+            <p class="flow__wp" style="--x: 73.4%; --y: 28.3%">AI Answers</p>
+
+            <p class="flow__lane-title" style="--x: 54.7%; --y: 63.3%">Deliver with AI</p>
+            <p class="flow__wp flow__wp--below" style="--x: 35.9%; --y: 71.7%">AI Agents</p>
+            <p class="flow__wp flow__wp--below" style="--x: 54.7%; --y: 71.7%">AI Integrations</p>
+            <p class="flow__wp flow__wp--below" style="--x: 73.4%; --y: 71.7%">Autonomous Delivery</p>
+
+            <p class="flow__wp flow__wp--growth" style="--x: 91%; --y: 50%">
+              <span class="flow__wp-tag">Output</span>Growth &amp; Scaling
+            </p>
+            <p class="flow__return-label" style="--x: 50%; --y: 86.7%">Proof sharpens the answers</p>
+          </div>
+        </div>
+
+        <p class="flow__loop-caption">
+          Answers create demand. Delivery creates proof. Growth compounds
+          with every orbit.
+        </p>
+      </div>
+    </section>
+
+    <section class="case" id="work">
+      <div class="container">
+        <div class="case__head">
+          <h2>Proof over promises.</h2>
+          <p class="lede case__lede">
+            One brand, one quarter, measured in answers. This is what the
+            system looks like when it ships.
+          </p>
+        </div>
+
+        <!-- TODO: replace the placeholder client, figures, and quote with a
+             real case study before launch; keep the structure -->
+        <article class="case__card">
+          <div class="case__intro">
+            <p class="case__client">Regional home services brand &middot; USA</p>
+            <h3 class="case__headline">
+              From invisible in AI search to the name ChatGPT recommends
+              first.
+            </h3>
+            <p class="case__summary">
+              Ninety days of generative engine optimization: an answer audit,
+              entity cleanup, and the content AI engines cite. Then a custom
+              AI assistant that turns the new demand into booked jobs.
+            </p>
+            <a class="system-card__link" href="#contact">Read the full case study</a>
+          </div>
+          <div class="case__aside">
+            <dl class="case__stats">
+              <div>
+                <dd>0 &rarr; 27</dd>
+                <dt>AI answers citing the brand</dt>
+              </div>
+              <div>
+                <dd>+64%</dd>
+                <dt>qualified leads in 90 days</dt>
+              </div>
+              <div>
+                <dd>31 hrs</dd>
+                <dt>saved weekly through automation</dt>
+              </div>
+            </dl>
+            <figure class="case__quote">
+              <blockquote>
+                &ldquo;We stopped guessing where customers come from. They
+                tell us: ChatGPT sent them.&rdquo;
+              </blockquote>
+              <figcaption>Owner, home services company</figcaption>
+            </figure>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="container faq__inner">
+        <div class="faq__head">
+          <h2>Questions, answered.</h2>
+          <p class="lede faq__lede">
+            The ones every owner asks before they book the call.
+          </p>
+        </div>
+
+        <div class="faq__list">
+          <details class="faq__item">
+            <summary>What is an AI SEO agency?</summary>
+            <p>
+              An AI SEO agency gets your brand recommended by AI, not just
+              ranked by Google. Aivium Digital does both: the classic search
+              signals that still matter, plus the citations, content, and
+              structure that put you in answers from ChatGPT, Claude, Gemini,
+              Perplexity, Copilot, and Google AI Overviews.
+            </p>
+          </details>
+          <details class="faq__item">
+            <summary>What is generative engine optimization (GEO)?</summary>
+            <p>
+              Generative engine optimization is the practice of getting your
+              brand cited in AI-generated answers. Where traditional SEO
+              competes for a position on a results page, GEO competes for a
+              mention in the answer itself.
+            </p>
+          </details>
+          <details class="faq__item">
+            <summary>How is GEO different from SEO?</summary>
+            <p>
+              SEO earns you a link in a list. GEO earns you a place in the
+              answer. The two share foundations, and strong SEO makes GEO
+              easier, but GEO adds the entity signals, structured content,
+              and trusted citations that AI engines pull from.
+            </p>
+          </details>
+          <details class="faq__item">
+            <summary>How do you get a brand mentioned by ChatGPT?</summary>
+            <p>
+              We start with an answer audit to see where AI engines mention
+              you today. Then we build what they trust: authoritative content
+              on your site, consistent entity data, and citations on the
+              sources each engine reads. Mentions follow the trust.
+            </p>
+          </details>
+          <details class="faq__item">
+            <summary>Do you build custom AI systems as well?</summary>
+            <p>
+              Yes. AI Solutions is our second system: custom agents,
+              assistants, and automations built on your own data, so the
+              demand AI search creates lands in a business that runs faster
+              than your competitors.
+            </p>
+          </details>
+          <details class="faq__item">
+            <summary>How do you measure AI visibility?</summary>
+            <p>
+              We track share of answer: how often your brand appears in the
+              responses the six major answer engines give for the questions
+              your buyers ask. You see where you showed up, where your
+              competitors did, and the trend over time.
+            </p>
+          </details>
+        </div>
+      </div>
+
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is an AI SEO agency?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An AI SEO agency gets your brand recommended by AI, not just ranked by Google. Aivium Digital does both: the classic search signals that still matter, plus the citations, content, and structure that put you in answers from ChatGPT, Claude, Gemini, Perplexity, Copilot, and Google AI Overviews."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is generative engine optimization (GEO)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Generative engine optimization is the practice of getting your brand cited in AI-generated answers. Where traditional SEO competes for a position on a results page, GEO competes for a mention in the answer itself."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How is GEO different from SEO?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "SEO earns you a link in a list. GEO earns you a place in the answer. The two share foundations, and strong SEO makes GEO easier, but GEO adds the entity signals, structured content, and trusted citations that AI engines pull from."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do you get a brand mentioned by ChatGPT?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We start with an answer audit to see where AI engines mention you today. Then we build what they trust: authoritative content on your site, consistent entity data, and citations on the sources each engine reads. Mentions follow the trust."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you build custom AI systems as well?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. AI Solutions is our second system: custom agents, assistants, and automations built on your own data, so the demand AI search creates lands in a business that runs faster than your competitors."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do you measure AI visibility?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We track share of answer: how often your brand appears in the responses the six major answer engines give for the questions your buyers ask. You see where you showed up, where your competitors did, and the trend over time."
+            }
+          }
+        ]
+      }
+      </script>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container cta__inner">
+        <div class="cta__content">
+          <h2 class="cta__heading">
+            <span class="cta__question">Ready to be the answer in ChatGPT?</span>
+            We&rsquo;ll get you there.
+          </h2>
+          <!-- TODO: point at the real booking link once it exists -->
+          <a class="btn btn--primary cta__btn" href="#contact">Book a discovery call</a>
+          <ul class="cta__checklist" aria-label="What the discovery call involves">
+            <li>30 minutes</li>
+            <li>Free</li>
+            <li>No deck</li>
+            <li>No obligation</li>
+          </ul>
+        </div>
+
+        <!-- The spaceplan: only the first leg is plotted solid; the rest
+             stays dashed until the discovery call charts it -->
+        <div class="cta__plan" aria-hidden="true">
+          <svg class="cta__plan-wires" viewBox="0 0 680 520" fill="none">
+            <circle class="cta__plan-home-ring" cx="90" cy="430" r="24" />
+            <circle class="cta__plan-home-ring cta__plan-home-ring--faint" cx="90" cy="430" r="36" />
+
+            <path class="cta__plan-leg" d="M108 416 C150 394 192 362 235 333" />
+
+            <path class="cta__plan-route" d="M254 317 C310 282 350 266 398 242 C452 214 472 194 506 168 C542 140 572 116 600 94" />
+
+            <g class="cta__plan-stop cta__plan-stop--discovery">
+              <circle cx="244" cy="326" r="6.5" />
+              <circle class="cta__plan-stop-ring" cx="244" cy="326" r="13" />
+            </g>
+            <circle class="cta__plan-stop cta__plan-stop--2" cx="400" cy="241" r="4.5" />
+            <circle class="cta__plan-stop cta__plan-stop--3" cx="508" cy="167" r="4" />
+            <circle class="cta__plan-stop cta__plan-stop--4" cx="600" cy="94" r="3.5" />
+          </svg>
+
+          <img class="cta__plan-home" src="assets/flow/pixel-home.png" alt="" style="--x: 13.2%; --y: 82.7%" />
+          <p class="cta__plan-label cta__plan-label--home" style="--x: 13.2%; --y: 93%">You are here</p>
+
+          <p class="cta__plan-label cta__plan-label--discovery" style="--x: 40%; --y: 70.5%">
+            <span>01 &middot; 30 min</span>Discovery call
+          </p>
+          <p class="cta__plan-label cta__plan-label--2" style="--x: 62%; --y: 54.5%">
+            <span>02</span>Roadmap
+          </p>
+          <p class="cta__plan-label cta__plan-label--3" style="--x: 78%; --y: 40.5%">
+            <span>03</span>Build
+          </p>
+          <p class="cta__plan-label cta__plan-label--4" style="--x: 91%; --y: 26.5%">
+            <span>04</span>Orbit
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="assets/aivium-digital-lockup-horizontal-dark.svg" alt="Aivium Digital" />
+        <p class="footer__tagline">
+          The AI SEO agency for getting cited, not just ranked. Custom AI
+          systems for putting the answers to work.
+        </p>
+      </div>
+      <nav class="footer__nav" aria-label="Footer">
+        <div class="footer__col">
+          <p class="footer__col-title">Services</p>
+          <ul>
+            <li><a href="ai-seo/">AI Visibility (GEO &amp; AEO)</a></li>
+            <li><a href="ai-automation/">AI Solutions &amp; Automation</a></li>
+            <li><a href="#contact">Free AI audit</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <p class="footer__col-title">Company</p>
+          <ul>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <p class="footer__col-title">Contact</p>
+          <ul>
+            <!-- TODO: confirm email + swap in the real booking link -->
+            <li><a href="mailto:hello@aiviumdigital.com">hello@aiviumdigital.com</a></li>
+            <li><a href="#contact">Book a discovery call</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="container footer__bottom">
+      <p>&copy; 2026 Aivium Digital. All rights reserved.</p>
+      <p>Be the answer AI gives.</p>
+    </div>
+  </footer>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <script src="js/starfield.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/flow.js"></script>
+</body>
+</html>

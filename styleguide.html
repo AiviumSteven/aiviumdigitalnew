@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aivium Digital | Style Tile</title>
+
+  <!-- Scaffold only: self-host these before production -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/main.css" />
+
+  <style>
+    /* Styleguide-local layout */
+    .sg-header {
+      padding-block: var(--space-24) var(--space-16);
+      border-bottom: 1px solid var(--line);
+    }
+    .sg-header img { height: 34px; margin-bottom: var(--space-8); }
+    .sg-header p { color: var(--cream-72); max-width: 62ch; margin-top: var(--space-4); }
+
+    .sg-section {
+      padding-block: var(--space-16);
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      gap: var(--space-8);
+    }
+
+    /* Swatches */
+    .sg-swatches {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--space-4);
+    }
+    .sg-swatch {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-surface);
+    }
+    .sg-swatch__chip { height: 96px; }
+    .sg-swatch__meta {
+      padding: var(--space-3) var(--space-4);
+      display: grid;
+      gap: 2px;
+      background: var(--void-900);
+    }
+    .sg-swatch__meta .label { font-size: 0.6875rem; }
+    .sg-swatch__meta code {
+      font-family: var(--font-mono);
+      font-size: var(--text-small);
+      color: var(--cream);
+    }
+
+    /* Type specimens */
+    .sg-type { display: grid; gap: var(--space-8); }
+    .sg-type figure { display: grid; gap: var(--space-2); }
+    .sg-type figcaption { order: -1; }
+
+    /* Spacing bars */
+    .sg-space { display: grid; gap: var(--space-3); }
+    .sg-space__row {
+      display: grid;
+      grid-template-columns: 10rem 1fr;
+      align-items: center;
+      gap: var(--space-4);
+    }
+    .sg-space__bar { height: 14px; background: var(--accent-deep); border-right: 2px solid var(--accent); }
+
+    /* Component demos */
+    .sg-demo {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-4);
+    }
+    .sg-card {
+      max-width: 400px;
+      padding: var(--space-8);
+      background: var(--void-900);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-surface);
+      display: grid;
+      gap: var(--space-3);
+      transition: border-color var(--duration-fast) var(--ease-out);
+    }
+    .sg-card:hover { border-color: var(--line-strong); }
+    .sg-card h3 { margin-top: var(--space-2); }
+    .sg-card p { color: var(--cream-72); font-size: var(--text-small); }
+    .sg-card a {
+      color: var(--accent);
+      font-size: var(--text-small);
+      font-weight: 500;
+    }
+
+    .sg-note {
+      color: var(--cream-55);
+      font-size: var(--text-small);
+      max-width: 62ch;
+    }
+    .sg-footer { padding-block: var(--space-16); color: var(--cream-55); font-size: var(--text-small); }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <header class="sg-header">
+      <img src="assets/aivium-digital-lockup-horizontal-dark.svg" alt="Aivium Digital" />
+      <h1 style="font-size: var(--text-h2);">Style tile</h1>
+      <p>
+        Theme: Frontier Observatory. Cold void, warm signal. The page lives in
+        cool near-black space; the brand cream and vermillion are the human
+        signal cutting through it. One dark theme, locked. One accent, locked.
+      </p>
+    </header>
+
+    <section class="sg-section">
+      <h2>Color</h2>
+      <div class="sg-swatches">
+        <div class="sg-swatch">
+          <div class="sg-swatch__chip" style="background: var(--void-950);"></div>
+          <div class="sg-swatch__meta"><span class="label">void-950 · page</span><code>#090C10</code></div>
+        </div>
+        <div class="sg-swatch">
+          <div class="sg-swatch__chip" style="background: var(--void-900);"></div>
+          <div class="sg-swatch__meta"><span class="label">void-900 · surface</span><code>#0D1117</code></div>
+        </div>
+        <div class="sg-swatch">
+          <div class="sg-swatch__chip" style="background: var(--void-850);"></div>
+          <div class="sg-swatch__meta"><span class="label">void-850 · raised</span><code>#111722</code></div>
+        </div>
+        <div class="sg-swatch">
+          <div class="sg-swatch__chip" style="background: var(--cream);"></div>
+          <div class="sg-swatch__meta"><span class="label">cream · text</span><code>#F6F2EA</code></div>
+        </div>
+        <div class="sg-swatch">
+          <div class="sg-swatch__chip" style="background: var(--accent);"></div>
+          <div class="sg-swatch__meta"><span class="label">accent · brand</span><code>#E5391B</code></div>
+        </div>
+        <div class="sg-swatch">
+          <div class="sg-swatch__chip" style="background: var(--accent-bright);"></div>
+          <div class="sg-swatch__meta"><span class="label">accent-bright · buttons</span><code>#F03E1F</code></div>
+        </div>
+        <div class="sg-swatch">
+          <div class="sg-swatch__chip" style="background: var(--accent-deep);"></div>
+          <div class="sg-swatch__meta"><span class="label">accent-deep · glows only</span><code>#7E1E0C</code></div>
+        </div>
+      </div>
+      <p class="sg-note">
+        Usage: #E5391B is the brand accent for text, rules, and glows against the
+        void. Button fills step up to #F03E1F so ink-on-accent labels pass WCAG AA.
+        The deep tone is reserved for atmosphere (horizon glow, bars), never text.
+      </p>
+    </section>
+
+    <section class="sg-section">
+      <h2>Typography</h2>
+      <div class="sg-type">
+        <figure>
+          <figcaption class="label">Display · Archivo Expanded Medium</figcaption>
+          <p style="font-size: var(--text-display); line-height: var(--leading-display); letter-spacing: var(--tracking-display); font-weight: 500; font-stretch: var(--stretch-display);">Be the answer AI gives.</p>
+        </figure>
+        <figure>
+          <figcaption class="label">Heading 2</figcaption>
+          <h2>Visibility is the new ranking.</h2>
+        </figure>
+        <figure>
+          <figcaption class="label">Body · max 65ch</figcaption>
+          <p class="lede" style="max-width: 65ch;">
+            Search didn't die, it moved. Buyers now ask ChatGPT, Perplexity, and
+            Google AI before they ever see a results page. We make sure the answer
+            they get includes you.
+          </p>
+        </figure>
+        <figure>
+          <figcaption class="label">Data and captions · IBM Plex Mono</figcaption>
+          <p class="label">Citation rate, measured across 6 answer engines</p>
+        </figure>
+      </div>
+      <p class="sg-note">
+        Two families only. Archivo carries display (Expanded width) through body
+        (normal width); IBM Plex Mono is reserved for data, figures, and captions.
+        No uppercase eyebrow labels above headlines: the headline does the work.
+      </p>
+    </section>
+
+    <section class="sg-section">
+      <h2>Spacing</h2>
+      <div class="sg-space">
+        <div class="sg-space__row"><span class="label">space-4 · 1rem</span><div class="sg-space__bar" style="width: 1rem;"></div></div>
+        <div class="sg-space__row"><span class="label">space-8 · 2rem</span><div class="sg-space__bar" style="width: 2rem;"></div></div>
+        <div class="sg-space__row"><span class="label">space-16 · 4rem</span><div class="sg-space__bar" style="width: 4rem;"></div></div>
+        <div class="sg-space__row"><span class="label">space-24 · 6rem</span><div class="sg-space__bar" style="width: 6rem;"></div></div>
+        <div class="sg-space__row"><span class="label">section · 6-10rem</span><div class="sg-space__bar" style="width: 10rem;"></div></div>
+      </div>
+      <p class="sg-note">
+        4px base scale. Sections breathe at 6 to 10rem (fluid). Density stays low:
+        this is an observatory, not a cockpit.
+      </p>
+    </section>
+
+    <section class="sg-section">
+      <h2>Shape and components</h2>
+      <p class="sg-note">
+        Shape rule: surfaces are sharp (radius 0), interactive elements are pills
+        (radius 999). No in-between radii anywhere.
+      </p>
+      <div class="sg-demo">
+        <a class="btn btn--primary" href="#">Book a free AI audit</a>
+        <a class="btn btn--ghost" href="#">The Services</a>
+        <span class="label">Hover, press, and focus states included</span>
+      </div>
+      <div class="sg-card">
+        <h3>Generative Engine Optimization</h3>
+        <p>
+          Entity building, structured data, and authority content tuned for how
+          LLMs retrieve, rank, and cite sources.
+        </p>
+        <a href="#">See the service</a>
+      </div>
+    </section>
+
+    <section class="sg-section">
+      <h2>Motion</h2>
+      <p class="sg-note">
+        Restrained and cinematic: content rises 20px on load with a 90ms stagger,
+        stars drift imperceptibly, orbit rings rotate once per four minutes.
+        Everything collapses to static under prefers-reduced-motion. Ease:
+        cubic-bezier(0.16, 1, 0.3, 1). Nothing loops for attention.
+      </p>
+    </section>
+
+    <footer class="sg-footer">
+      Aivium Digital style tile. Tokens live in styles/tokens.css.
+    </footer>
+
+  </div>
+
+</body>
+</html>
