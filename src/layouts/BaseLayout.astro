@@ -1,0 +1,64 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical: string; // path, e.g. "/" or "/ai-seo/"
+  ogTitle?: string;
+  ogDescription?: string;
+  noindex?: boolean;
+  styles?: string[]; // extra stylesheets loaded after main.css
+  bodyClass?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogTitle = title,
+  ogDescription = description,
+  noindex = false,
+  styles = [],
+  bodyClass,
+} = Astro.props;
+
+const site = "https://aiviumdigital.com";
+const url = site + canonical;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="description" content={description} />
+    <link rel="canonical" href={url} />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Aivium Digital" />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:url" content={url} />
+    <meta property="og:image" content={`${site}/assets/og-image.jpg`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
+    <meta name="twitter:image" content={`${site}/assets/og-image.jpg`} />
+
+    <link rel="stylesheet" href="/styles/fonts.css" />
+    <link rel="stylesheet" href="/styles/tokens.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    {styles.map((href) => <link rel="stylesheet" href={href} />)}
+
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <slot />
+    <div class="grain" aria-hidden="true"></div>
+    <slot name="scripts" />
+  </body>
+</html>

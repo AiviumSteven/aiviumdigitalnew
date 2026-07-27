@@ -1,0 +1,440 @@
+/* ============================================================
+   Discovery quiz: one question per screen, option rows,
+   contact step, Calendly close. Inherits tokens.css + main.css.
+   ============================================================ */
+
+.quiz-page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Minimal header: logo + phone, no menu. Focused funnel. ---- */
+
+.quiz-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  background: rgba(9, 12, 16, 0.86);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.quiz-nav__inner {
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.quiz-nav__logo img {
+  height: 26px;
+  display: block;
+}
+
+/* ---- Progress ---- */
+
+.quiz-progress {
+  border-bottom: 1px solid var(--line);
+}
+
+.quiz-progress__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-3);
+}
+
+.quiz-progress__count {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--cream-55);
+}
+
+.quiz-progress__count strong {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.quiz-progress__track {
+  flex: 1;
+  max-width: 320px;
+  height: 2px;
+  background: var(--line);
+}
+
+.quiz-progress__fill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transition: width var(--duration-base) var(--ease-out);
+}
+
+/* ---- Stage ---- */
+
+.quiz-main {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  padding-block: clamp(2.5rem, 2rem + 3vw, 5rem) var(--space-16);
+}
+
+.quiz-stage {
+  position: relative;
+  width: 100%;
+  max-width: 780px;
+  margin-inline: auto;
+}
+
+/* Corner registration marks, echoing the flow diagram */
+
+.quiz-stage::before,
+.quiz-stage::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--line-strong);
+  border-style: solid;
+  pointer-events: none;
+}
+
+.quiz-stage::before {
+  top: -10px;
+  left: -10px;
+  border-width: 1px 0 0 1px;
+}
+
+.quiz-stage::after {
+  bottom: -10px;
+  right: -10px;
+  border-width: 0 1px 1px 0;
+}
+
+/* ---- Steps ---- */
+
+.quiz-step {
+  display: none;
+}
+
+.quiz-step.is-active {
+  display: block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .quiz-step.is-active {
+    animation: quiz-rise var(--duration-base) var(--ease-out);
+  }
+}
+
+@keyframes quiz-rise {
+  from {
+    opacity: 0;
+    translate: 0 14px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.quiz-step__question {
+  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
+  font-weight: 500;
+  font-stretch: var(--stretch-subhead);
+  letter-spacing: var(--tracking-display);
+  line-height: 1.15;
+  margin-bottom: var(--space-2);
+  max-width: 24ch;
+}
+
+.quiz-step__hint {
+  color: var(--cream-55);
+  font-size: var(--text-small);
+  margin-bottom: var(--space-8);
+  max-width: 52ch;
+}
+
+.quiz-step fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+/* ---- Option rows ---- */
+
+.quiz-options {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.quiz-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-6);
+  background: var(--void-900);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-surface);
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.quiz-option:hover {
+  border-color: var(--line-strong);
+  background: var(--void-850);
+}
+
+.quiz-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.quiz-option__key {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  color: var(--accent);
+  min-width: 1.25rem;
+}
+
+.quiz-option__text {
+  flex: 1;
+  font-size: var(--text-body);
+  color: var(--cream-72);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.quiz-option__ring {
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.quiz-option:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--void-850);
+}
+
+.quiz-option:has(input:checked) .quiz-option__text {
+  color: var(--cream);
+}
+
+.quiz-option:has(input:checked) .quiz-option__ring {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 4px var(--void-850), inset 0 0 0 12px var(--accent);
+}
+
+.quiz-option:has(input:focus-visible) {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 3px;
+}
+
+/* ---- Step controls ---- */
+
+.quiz-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-8);
+  min-height: 3rem;
+}
+
+.quiz-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--cream-55);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: var(--space-2) 0;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.quiz-back:hover,
+.quiz-back:focus-visible {
+  color: var(--cream);
+}
+
+.quiz-back[hidden] {
+  display: none;
+}
+
+/* ---- Contact step ---- */
+
+.quiz-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4) var(--space-6);
+}
+
+.quiz-field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.quiz-field--full {
+  grid-column: 1 / -1;
+}
+
+.quiz-field label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--cream-55);
+}
+
+.quiz-field label span {
+  color: var(--cream-32);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.quiz-field input,
+.quiz-field textarea {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: var(--void-900);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-surface);
+  color: var(--cream);
+  font-family: inherit;
+  font-size: var(--text-body);
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+.quiz-field input::placeholder,
+.quiz-field textarea::placeholder {
+  color: var(--cream-32);
+}
+
+.quiz-field input:hover,
+.quiz-field textarea:hover {
+  border-color: var(--line-strong);
+}
+
+.quiz-field input:focus-visible,
+.quiz-field textarea:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.quiz-field input[aria-invalid="true"] {
+  border-color: var(--accent-bright);
+}
+
+.quiz-field__error {
+  font-size: var(--text-small);
+  color: var(--accent);
+  display: none;
+}
+
+.quiz-field__error.is-visible {
+  display: block;
+}
+
+.quiz-submit {
+  height: 3rem;
+  padding-inline: var(--space-8);
+  font-size: 1rem;
+}
+
+.quiz-submit[disabled] {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.quiz-submit[hidden] {
+  display: none;
+}
+
+/* ---- Finish: Calendly ---- */
+
+.quiz-finish__kicker {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ok);
+  margin-bottom: var(--space-3);
+}
+
+.quiz-finish__calendly {
+  margin-top: var(--space-8);
+  border: 1px solid var(--line);
+  background: var(--void-900);
+  /* <=650px inside the iframe triggers Calendly's single-column layout,
+     which fills the frame edge to edge (no white page gutters) */
+  max-width: 648px;
+}
+
+.quiz-finish__calendly .calendly-inline-widget {
+  min-width: 100%;
+  height: 760px;
+}
+
+/* ---- Footer ---- */
+
+.quiz-footer {
+  border-top: 1px solid var(--line);
+  padding-block: var(--space-6);
+}
+
+.quiz-footer__inner {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  font-size: var(--text-small);
+  color: var(--cream-55);
+}
+
+.quiz-footer a {
+  color: var(--cream-72);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.quiz-footer a:hover {
+  color: var(--cream);
+}
+
+@media (max-width: 640px) {
+  .quiz-fields {
+    grid-template-columns: 1fr;
+  }
+  .quiz-option {
+    padding: var(--space-4);
+  }
+  .quiz-finish__calendly .calendly-inline-widget {
+    height: 900px;
+  }
+}
+
+/* The site nav hides the phone on mobile; on the quiz page it is the
+   only header action, so keep it. */
+@media (max-width: 767px) {
+  .quiz-nav .nav__phone {
+    display: inline-flex;
+  }
+}

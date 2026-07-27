@@ -1,2 +1,6 @@
 *Zone.Identifier
 .gstack/
+node_modules/
+dist/
+.astro/
+.env

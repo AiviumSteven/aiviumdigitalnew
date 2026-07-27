@@ -1,25 +1,18 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Aivium Digital | AI Automation Agency &amp; Custom AI Solutions</title>
-  <!-- TODO: REMOVE noindex at production launch. Keeps the GitHub Pages preview out of Google. -->
-  <meta name="robots" content="noindex" />
-  <meta name="description" content="Aivium Digital is an AI automation agency for small and mid-size businesses: custom AI agents, assistants, and automations built on your own data, with transparent pricing." />
-  <!-- TODO: confirm the production domain before launch -->
-  <link rel="canonical" href="https://aiviumdigital.com/ai-automation/" />
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteNav from "../components/SiteNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
 
-  <!-- Scaffold only: self-host these before production -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="../styles/tokens.css" />
-  <link rel="stylesheet" href="../styles/main.css" />
-
-  <script type="application/ld+json">
-  {
+<BaseLayout
+  title="Aivium Digital | AI Automation Agency & Custom AI Solutions"
+  description="Aivium Digital is an AI automation agency for small and mid-size businesses: custom AI agents, assistants, and automations built on your own data."
+  ogDescription="Custom AI agents, assistants, and automations for small and mid-size businesses, built on your own data. Book a free AI audit."
+  canonical="/ai-automation/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -28,7 +21,7 @@
         "serviceType": "AI automation, custom AI agents, AI assistants, generative AI consulting, AI integration services",
         "provider": { "@id": "https://aiviumdigital.com/#org" },
         "areaServed": "US",
-        "description": "Custom AI agents, assistants, and workflow automations for small and mid-size businesses, built on the client's own data with transparent, fixed-scope pricing."
+        "description": "Custom AI agents, assistants, and workflow automations for small and mid-size businesses, built on the client's own data."
       },
       {
         "@type": "BreadcrumbList",
@@ -39,49 +32,10 @@
       }
     ]
   }
-  </script>
-</head>
-<body>
+    </script>
+  </Fragment>
 
-  <header class="nav" data-nav>
-    <div class="container nav__inner">
-      <a class="nav__logo" href="../" aria-label="Aivium Digital home">
-        <img src="../assets/aivium-digital-lockup-horizontal-dark.svg" alt="Aivium Digital" />
-      </a>
-      <nav class="nav__primary" aria-label="Primary">
-        <ul class="nav__links">
-          <li><a href="../ai-seo/">AI Visibility</a></li>
-          <li><a href="../ai-automation/" aria-current="true">AI Solutions</a></li>
-          <li><a href="../#process">Process</a></li>
-          <li><a href="../#work">Work</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-      </nav>
-      <div class="nav__actions">
-        <a class="btn btn--primary nav__cta" href="#contact">Book a free AI audit</a>
-        <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-overlay">
-          <span class="visually-hidden">Menu</span>
-          <span class="nav__toggle-line" aria-hidden="true"></span>
-          <span class="nav__toggle-line" aria-hidden="true"></span>
-        </button>
-      </div>
-    </div>
-
-    <div class="nav__overlay" id="nav-overlay" inert>
-      <nav aria-label="Primary, mobile">
-        <ul class="nav__overlay-links">
-          <li><a href="../ai-seo/"><span class="nav__overlay-index">01</span>AI Visibility</a></li>
-          <li><a href="../ai-automation/"><span class="nav__overlay-index">02</span>AI Solutions</a></li>
-          <li><a href="../#process"><span class="nav__overlay-index">03</span>Process</a></li>
-          <li><a href="../#work"><span class="nav__overlay-index">04</span>Work</a></li>
-          <li><a href="#faq"><span class="nav__overlay-index">05</span>FAQ</a></li>
-        </ul>
-      </nav>
-      <div class="nav__overlay-footer">
-        <a class="btn btn--primary" href="#contact">Book a free AI audit</a>
-      </div>
-    </div>
-  </header>
+  <SiteNav active="solutions" />
 
   <main>
     <section class="page-hero">
@@ -94,11 +48,11 @@
           <p class="lede">
             Aivium Digital builds custom AI solutions for small and mid-size
             businesses: agents, assistants, and automations designed around
-            how you actually operate, priced so you know exactly what you're
-            buying.
+            how you actually operate, scoped so you know exactly what you're
+            getting.
           </p>
           <div class="page-hero__actions">
-            <a class="btn btn--primary" href="#contact">Book a free AI audit</a>
+            <a class="btn btn--primary" href="/discovery/">Book a free AI audit</a>
             <a class="btn btn--ghost" href="#process">See how it runs</a>
           </div>
         </div>
@@ -106,7 +60,7 @@
     </section>
 
     <div class="band" aria-hidden="true">
-      <img src="../assets/pages/automation-hero.webp" alt="" loading="lazy" />
+      <img src="/assets/pages/automation-hero.webp" alt="" loading="lazy" />
     </div>
 
     <nav class="jumpnav" aria-label="On this page">
@@ -181,7 +135,7 @@
           <p class="defblock__big">
             You don't need an enterprise transformation program. You need
             the three automations that give you your evenings back, built in
-            weeks and priced up front.
+            weeks, not quarters.
           </p>
           <p>
             That's the engagement we've built for small and mid-size
@@ -254,12 +208,12 @@
     <section class="pagesec" id="engagement">
       <div class="container">
         <div class="pagesec__head">
-          <h2>Know the cost before we build</h2>
+          <h2>Know the plan before we build</h2>
           <p class="lede">
-            Every engagement starts with the audit: a fixed-price review
-            that ends in a ranked automation map and an exact quote. If we
-            don't think an automation pays for itself, we'll tell you not
-            to build it.
+            Every engagement starts with the audit: a review that ends in a
+            ranked automation map and a clear scope of work. If we don't
+            think an automation pays for itself, we'll tell you not to
+            build it.
           </p>
         </div>
 
@@ -271,7 +225,7 @@
               makes sure AI search keeps sending it.
             </p>
           </div>
-          <a class="btn btn--ghost" href="../ai-seo/">Explore GEO services</a>
+          <a class="btn btn--ghost" href="/ai-seo/">Explore GEO services</a>
         </div>
       </div>
     </section>
@@ -296,16 +250,6 @@
             </p>
           </details>
           <details class="faq__item">
-            <summary>What does AI automation cost for a small business?</summary>
-            <p>
-              It depends on scope, which is why every engagement starts
-              with a fixed-price audit that ends in an exact quote and a
-              payback estimate in hours saved. Builds are fixed scope, and
-              ongoing partnerships are monthly and cancelable anytime, so
-              you always know the cost before we write code.
-            </p>
-          </details>
-          <details class="faq__item">
             <summary>What should we automate first?</summary>
             <p>
               The work that is high-volume, rule-shaped, and hated: lead
@@ -325,16 +269,15 @@
           <details class="faq__item">
             <summary>Which AI models and tools do you build on?</summary>
             <p>
-              Whatever fits the job and your budget: the major model
-              providers plus the automation platforms your stack already
-              touches. We're vendor-neutral, and we design so you can swap
+              Whatever fits the job: the major model providers plus the
+              automation platforms your stack already touches. We're vendor-neutral, and we design so you can swap
               models later without rebuilding.
             </p>
           </details>
         </div>
       </div>
 
-      <script type="application/ld+json">
+      <script type="application/ld+json" is:inline>
       {
         "@context": "https://schema.org",
         "@type": "FAQPage",
@@ -343,11 +286,6 @@
             "@type": "Question",
             "name": "What does an AI automation agency do?",
             "acceptedAnswer": { "@type": "Answer", "text": "An AI automation agency finds the work inside a business that software can do reliably, then builds and maintains the AI systems that do it: agents, assistants, and workflow automations connected to the tools you already run." }
-          },
-          {
-            "@type": "Question",
-            "name": "What does AI automation cost for a small business?",
-            "acceptedAnswer": { "@type": "Answer", "text": "It depends on scope. Every Aivium Digital engagement starts with a fixed-price audit that ends in an exact quote and a payback estimate in hours saved. Builds are fixed scope, and ongoing partnerships are monthly and cancelable anytime." }
           },
           {
             "@type": "Question",
@@ -362,7 +300,7 @@
           {
             "@type": "Question",
             "name": "Which AI models and tools do you build on?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Whatever fits the job and budget: the major model providers plus the automation platforms your stack already touches. Aivium Digital is vendor-neutral and designs so models can be swapped later without rebuilding." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Whatever fits the job: the major model providers plus the automation platforms your stack already touches. Aivium Digital is vendor-neutral and designs so models can be swapped later without rebuilding." }
           }
         ]
       }
@@ -376,8 +314,7 @@
             <span class="cta__question">Wondering what AI could take off your plate?</span>
             The audit will tell you.
           </h2>
-          <!-- TODO: point at the real booking link once it exists -->
-          <a class="btn btn--primary cta__btn" href="#contact">Book a free AI audit</a>
+          <a class="btn btn--primary cta__btn" href="/discovery/">Book a free AI audit</a>
           <ul class="cta__checklist" aria-label="What the audit involves">
             <li>30 minutes</li>
             <li>Free</li>
@@ -389,50 +326,9 @@
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer__inner">
-      <div class="footer__brand">
-        <img src="../assets/aivium-digital-lockup-horizontal-dark.svg" alt="Aivium Digital" />
-        <p class="footer__tagline">
-          The AI SEO agency for getting cited, not just ranked. Custom AI
-          systems for putting the answers to work.
-        </p>
-      </div>
-      <nav class="footer__nav" aria-label="Footer">
-        <div class="footer__col">
-          <p class="footer__col-title">Services</p>
-          <ul>
-            <li><a href="../ai-seo/">AI Visibility (GEO &amp; AEO)</a></li>
-            <li><a href="../ai-automation/">AI Solutions &amp; Automation</a></li>
-            <li><a href="#contact">Free AI audit</a></li>
-          </ul>
-        </div>
-        <div class="footer__col">
-          <p class="footer__col-title">Company</p>
-          <ul>
-            <li><a href="../#process">Process</a></li>
-            <li><a href="../#work">Work</a></li>
-            <li><a href="#faq">FAQ</a></li>
-          </ul>
-        </div>
-        <div class="footer__col">
-          <p class="footer__col-title">Contact</p>
-          <ul>
-            <!-- TODO: confirm email + swap in the real booking link -->
-            <li><a href="mailto:hello@aiviumdigital.com">hello@aiviumdigital.com</a></li>
-            <li><a href="#contact">Book a discovery call</a></li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-    <div class="container footer__bottom">
-      <p>&copy; 2026 Aivium Digital. All rights reserved.</p>
-      <p>Be the answer AI gives.</p>
-    </div>
-  </footer>
+  <SiteFooter />
 
-  <div class="grain" aria-hidden="true"></div>
-
-  <script src="../js/nav.js"></script>
-</body>
-</html>
+  <Fragment slot="scripts">
+    <script is:inline src="/js/nav.js"></script>
+  </Fragment>
+</BaseLayout>

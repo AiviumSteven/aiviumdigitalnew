@@ -1,25 +1,18 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Aivium Digital | Generative Engine Optimization Services</title>
-  <!-- TODO: REMOVE noindex at production launch. Keeps the GitHub Pages preview out of Google. -->
-  <meta name="robots" content="noindex" />
-  <meta name="description" content="Generative engine optimization (GEO) and AEO services: Aivium Digital gets your brand cited by ChatGPT, Perplexity, Claude, and Google AI Overviews. Book a free AI visibility audit." />
-  <!-- TODO: confirm the production domain before launch -->
-  <link rel="canonical" href="https://aiviumdigital.com/ai-seo/" />
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteNav from "../components/SiteNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
 
-  <!-- Scaffold only: self-host these before production -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="../styles/tokens.css" />
-  <link rel="stylesheet" href="../styles/main.css" />
-
-  <script type="application/ld+json">
-  {
+<BaseLayout
+  title="Aivium Digital | Generative Engine Optimization Services"
+  description="Generative engine optimization (GEO) and AEO services that get your brand cited by ChatGPT, Perplexity, Claude, and Google AI Overviews. Book a free AI audit."
+  ogDescription="GEO and AEO services that get your brand cited by ChatGPT, Perplexity, Claude, and Google AI Overviews. Book a free AI audit."
+  canonical="/ai-seo/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -39,49 +32,10 @@
       }
     ]
   }
-  </script>
-</head>
-<body>
+    </script>
+  </Fragment>
 
-  <header class="nav" data-nav>
-    <div class="container nav__inner">
-      <a class="nav__logo" href="../" aria-label="Aivium Digital home">
-        <img src="../assets/aivium-digital-lockup-horizontal-dark.svg" alt="Aivium Digital" />
-      </a>
-      <nav class="nav__primary" aria-label="Primary">
-        <ul class="nav__links">
-          <li><a href="../ai-seo/" aria-current="true">AI Visibility</a></li>
-          <li><a href="../ai-automation/">AI Solutions</a></li>
-          <li><a href="../#process">Process</a></li>
-          <li><a href="../#work">Work</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-      </nav>
-      <div class="nav__actions">
-        <a class="btn btn--primary nav__cta" href="#contact">Book a free AI audit</a>
-        <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-overlay">
-          <span class="visually-hidden">Menu</span>
-          <span class="nav__toggle-line" aria-hidden="true"></span>
-          <span class="nav__toggle-line" aria-hidden="true"></span>
-        </button>
-      </div>
-    </div>
-
-    <div class="nav__overlay" id="nav-overlay" inert>
-      <nav aria-label="Primary, mobile">
-        <ul class="nav__overlay-links">
-          <li><a href="../ai-seo/"><span class="nav__overlay-index">01</span>AI Visibility</a></li>
-          <li><a href="../ai-automation/"><span class="nav__overlay-index">02</span>AI Solutions</a></li>
-          <li><a href="../#process"><span class="nav__overlay-index">03</span>Process</a></li>
-          <li><a href="../#work"><span class="nav__overlay-index">04</span>Work</a></li>
-          <li><a href="#faq"><span class="nav__overlay-index">05</span>FAQ</a></li>
-        </ul>
-      </nav>
-      <div class="nav__overlay-footer">
-        <a class="btn btn--primary" href="#contact">Book a free AI audit</a>
-      </div>
-    </div>
-  </header>
+  <SiteNav active="visibility" />
 
   <main>
     <section class="page-hero">
@@ -98,7 +52,7 @@
             share-of-answer tracking.
           </p>
           <div class="page-hero__actions">
-            <a class="btn btn--primary" href="#contact">Book a free AI audit</a>
+            <a class="btn btn--primary" href="/discovery/">Book a free AI audit</a>
             <a class="btn btn--ghost" href="#system">See the system</a>
           </div>
         </div>
@@ -106,7 +60,7 @@
     </section>
 
     <div class="band" aria-hidden="true">
-      <img src="../assets/pages/geo-hero.webp" alt="" loading="lazy" />
+      <img src="/assets/pages/geo-hero.webp" alt="" loading="lazy" />
     </div>
 
     <nav class="jumpnav" aria-label="On this page">
@@ -283,7 +237,7 @@
               delivered work.
             </p>
           </div>
-          <a class="btn btn--ghost" href="../ai-automation/">Explore AI automation</a>
+          <a class="btn btn--ghost" href="/ai-automation/">Explore AI automation</a>
         </div>
       </div>
     </section>
@@ -306,16 +260,6 @@
               cited in AI-generated answers. At Aivium Digital that means
               one continuous system across ChatGPT, Claude, Gemini,
               Perplexity, Copilot, and Google AI Overviews.
-            </p>
-          </details>
-          <details class="faq__item">
-            <summary>How much do GEO services cost?</summary>
-            <!-- TODO: confirm real pricing before launch -->
-            <p>
-              Our GEO engagements start at $2,500 per month, and every one
-              begins with a fixed-price answer audit so you see your
-              baseline before committing to ongoing work. No long lock-ins:
-              the tracking either shows growth or it doesn't.
             </p>
           </details>
           <details class="faq__item">
@@ -346,7 +290,7 @@
         </div>
       </div>
 
-      <script type="application/ld+json">
+      <script type="application/ld+json" is:inline>
       {
         "@context": "https://schema.org",
         "@type": "FAQPage",
@@ -355,11 +299,6 @@
             "@type": "Question",
             "name": "What are generative engine optimization services?",
             "acceptedAnswer": { "@type": "Answer", "text": "Generative engine optimization services are the audit, engineering, content, and tracking work that gets a brand cited in AI-generated answers. At Aivium Digital that means one continuous system across ChatGPT, Claude, Gemini, Perplexity, Copilot, and Google AI Overviews." }
-          },
-          {
-            "@type": "Question",
-            "name": "How much do GEO services cost?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Aivium Digital's GEO engagements start at $2,500 per month, and every one begins with a fixed-price answer audit so you see your baseline before committing to ongoing work." }
           },
           {
             "@type": "Question",
@@ -388,8 +327,7 @@
             <span class="cta__question">Ready to see where AI mentions you today?</span>
             The audit answers it.
           </h2>
-          <!-- TODO: point at the real booking link once it exists -->
-          <a class="btn btn--primary cta__btn" href="#contact">Book a free AI audit</a>
+          <a class="btn btn--primary cta__btn" href="/discovery/">Book a free AI audit</a>
           <ul class="cta__checklist" aria-label="What the audit involves">
             <li>30 minutes</li>
             <li>Free</li>
@@ -401,50 +339,9 @@
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer__inner">
-      <div class="footer__brand">
-        <img src="../assets/aivium-digital-lockup-horizontal-dark.svg" alt="Aivium Digital" />
-        <p class="footer__tagline">
-          The AI SEO agency for getting cited, not just ranked. Custom AI
-          systems for putting the answers to work.
-        </p>
-      </div>
-      <nav class="footer__nav" aria-label="Footer">
-        <div class="footer__col">
-          <p class="footer__col-title">Services</p>
-          <ul>
-            <li><a href="../ai-seo/">AI Visibility (GEO &amp; AEO)</a></li>
-            <li><a href="../ai-automation/">AI Solutions &amp; Automation</a></li>
-            <li><a href="#contact">Free AI audit</a></li>
-          </ul>
-        </div>
-        <div class="footer__col">
-          <p class="footer__col-title">Company</p>
-          <ul>
-            <li><a href="../#process">Process</a></li>
-            <li><a href="../#work">Work</a></li>
-            <li><a href="#faq">FAQ</a></li>
-          </ul>
-        </div>
-        <div class="footer__col">
-          <p class="footer__col-title">Contact</p>
-          <ul>
-            <!-- TODO: confirm email + swap in the real booking link -->
-            <li><a href="mailto:hello@aiviumdigital.com">hello@aiviumdigital.com</a></li>
-            <li><a href="#contact">Book a discovery call</a></li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-    <div class="container footer__bottom">
-      <p>&copy; 2026 Aivium Digital. All rights reserved.</p>
-      <p>Be the answer AI gives.</p>
-    </div>
-  </footer>
+  <SiteFooter />
 
-  <div class="grain" aria-hidden="true"></div>
-
-  <script src="../js/nav.js"></script>
-</body>
-</html>
+  <Fragment slot="scripts">
+    <script is:inline src="/js/nav.js"></script>
+  </Fragment>
+</BaseLayout>

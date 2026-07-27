@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Aivium Digital | Page Not Found"
+  description="This page doesn't exist, or it moved to a new orbit."
+  canonical="/404"
+  noindex={true}
+>
+  <Fragment slot="head">
+    <style is:inline>
+      .notfound {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: var(--space-8, 2rem);
+      }
+      .notfound__code {
+        font-family: var(--font-mono, monospace);
+        color: var(--accent, #e5391b);
+        margin-bottom: 1rem;
+      }
+      .notfound h1 { margin-bottom: 1rem; }
+      .notfound p { margin-bottom: 2rem; }
+    </style>
+  </Fragment>
+
+  <main class="notfound">
+    <div>
+      <p class="notfound__code">404</p>
+      <h1>Lost in space.</h1>
+      <p class="lede">This page doesn&rsquo;t exist, or it moved to a new orbit.</p>
+      <a class="btn btn--primary" href="/">Back to the homepage</a>
+    </div>
+  </main>
+</BaseLayout>

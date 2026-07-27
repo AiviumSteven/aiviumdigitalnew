@@ -1,16 +1,18 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Aivium Digital | AI SEO Agency, GEO &amp; Custom AI Solutions</title>
-  <!-- TODO: REMOVE noindex at production launch. Keeps the GitHub Pages preview out of Google. -->
-  <meta name="robots" content="noindex" />
-  <meta name="description" content="Aivium Digital is an AI SEO agency: we get your brand cited by ChatGPT, Perplexity, and Google AI Overviews, and build custom AI automations for your business." />
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteNav from "../components/SiteNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
 
-  <!-- TODO: confirm the production domain before launch -->
-  <script type="application/ld+json">
-  {
+<BaseLayout
+  title="Aivium Digital | AI SEO Agency, GEO & Custom AI Solutions"
+  description="Aivium Digital is an AI SEO agency: we get your brand cited by ChatGPT, Perplexity, and Google AI Overviews, and build custom AI automations for your business."
+  ogDescription="Be the answer in AI search. We get your brand cited by ChatGPT, Perplexity, and Google AI Overviews, and build custom AI automations for your business."
+  canonical="/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>
+    {
     "@context": "https://schema.org",
     "@graph": [
       {
@@ -30,62 +32,15 @@
       }
     ]
   }
-  </script>
+    </script>
+  </Fragment>
 
-  <!-- Scaffold only: self-host these before production -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="styles/tokens.css" />
-  <link rel="stylesheet" href="styles/main.css" />
-</head>
-<body>
-
-  <header class="nav" data-nav>
-    <div class="container nav__inner">
-      <a class="nav__logo" href="/" aria-label="Aivium Digital home">
-        <img src="assets/aivium-digital-lockup-horizontal-dark.svg" alt="Aivium Digital" />
-      </a>
-      <nav class="nav__primary" aria-label="Primary">
-        <ul class="nav__links">
-          <li><a href="ai-seo/">AI Visibility</a></li>
-          <li><a href="ai-automation/">AI Solutions</a></li>
-          <li><a href="#process">Process</a></li>
-          <li><a href="#work">Work</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-      </nav>
-      <div class="nav__actions">
-        <a class="btn btn--primary nav__cta" href="#contact">Book a free AI audit</a>
-        <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-overlay">
-          <span class="visually-hidden">Menu</span>
-          <span class="nav__toggle-line" aria-hidden="true"></span>
-          <span class="nav__toggle-line" aria-hidden="true"></span>
-        </button>
-      </div>
-    </div>
-
-    <div class="nav__overlay" id="nav-overlay" inert>
-      <nav aria-label="Primary, mobile">
-        <ul class="nav__overlay-links">
-          <li><a href="ai-seo/"><span class="nav__overlay-index">01</span>AI Visibility</a></li>
-          <li><a href="ai-automation/"><span class="nav__overlay-index">02</span>AI Solutions</a></li>
-          <li><a href="#process"><span class="nav__overlay-index">03</span>Process</a></li>
-          <li><a href="#work"><span class="nav__overlay-index">04</span>Work</a></li>
-          <li><a href="#faq"><span class="nav__overlay-index">05</span>FAQ</a></li>
-        </ul>
-      </nav>
-      <div class="nav__overlay-footer">
-        <a class="btn btn--primary" href="#contact">Book a free AI audit</a>
-      </div>
-    </div>
-  </header>
+  <SiteNav home={true} />
 
   <main>
     <section class="hero">
       <div class="hero__atmosphere" aria-hidden="true">
-        <img class="hero__planet" src="assets/planet-1.webp" alt="" fetchpriority="high" />
+        <img class="hero__planet" src="/assets/planet-1.webp" alt="" fetchpriority="high" />
         <canvas class="hero__stars"></canvas>
         <svg class="hero__orbits" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="22" />
@@ -113,7 +68,7 @@
             systems to do it.
           </p>
           <div class="hero__actions">
-            <a class="btn btn--primary" href="#contact">Book a free AI audit</a>
+            <a class="btn btn--primary" href="/discovery/">Book a free AI audit</a>
             <a class="btn btn--ghost" href="#services">The Services</a>
           </div>
         </div>
@@ -124,12 +79,12 @@
       <div class="container engines__inner">
         <p class="engines__caption">Your buyers are already asking AI</p>
         <ul class="engines__list">
-          <li><img src="assets/engines/openai.svg" alt="" /><span>ChatGPT</span></li>
-          <li><img src="assets/engines/claude.svg" alt="" /><span>Claude</span></li>
-          <li><img src="assets/engines/googlegemini.svg" alt="" /><span>Gemini</span></li>
-          <li><img src="assets/engines/perplexity.svg" alt="" /><span>Perplexity</span></li>
-          <li><img src="assets/engines/copilot.svg" alt="" /><span>Copilot</span></li>
-          <li><img src="assets/engines/grok.svg" alt="" /><span>Grok</span></li>
+          <li><img src="/assets/engines/openai.svg" alt="" /><span>ChatGPT</span></li>
+          <li><img src="/assets/engines/claude.svg" alt="" /><span>Claude</span></li>
+          <li><img src="/assets/engines/googlegemini.svg" alt="" /><span>Gemini</span></li>
+          <li><img src="/assets/engines/perplexity.svg" alt="" /><span>Perplexity</span></li>
+          <li><img src="/assets/engines/copilot.svg" alt="" /><span>Copilot</span></li>
+          <li><img src="/assets/engines/grok.svg" alt="" /><span>Grok</span></li>
         </ul>
       </div>
     </section>
@@ -177,36 +132,36 @@
                exactly one group width (-25%). -->
           <div class="marquee__track">
             <ul class="marquee__group">
-              <li><img src="assets/clients/carnival.svg" alt="Carnival Cruise Line" /></li>
-              <li><img src="assets/clients/gatorade.svg" alt="Gatorade" /></li>
-              <li><img src="assets/clients/visitorlando.svg" alt="Visit Orlando" /></li>
-              <li><img src="assets/clients/disney.svg" alt="Disney" /></li>
-              <li><img src="assets/clients/fullsail.svg" alt="Full Sail University" /></li>
-              <li><img src="assets/clients/ea.svg" alt="EA" /></li>
+              <li><img src="/assets/clients/carnival.svg" alt="Carnival Cruise Line" /></li>
+              <li><img src="/assets/clients/gatorade.svg" alt="Gatorade" /></li>
+              <li><img src="/assets/clients/visitorlando.svg" alt="Visit Orlando" /></li>
+              <li><img src="/assets/clients/disney.svg" alt="Disney" /></li>
+              <li><img src="/assets/clients/fullsail.svg" alt="Full Sail University" /></li>
+              <li><img src="/assets/clients/ea.svg" alt="EA" /></li>
             </ul>
             <ul class="marquee__group" aria-hidden="true">
-              <li><img src="assets/clients/carnival.svg" alt="" /></li>
-              <li><img src="assets/clients/gatorade.svg" alt="" /></li>
-              <li><img src="assets/clients/visitorlando.svg" alt="" /></li>
-              <li><img src="assets/clients/disney.svg" alt="" /></li>
-              <li><img src="assets/clients/fullsail.svg" alt="" /></li>
-              <li><img src="assets/clients/ea.svg" alt="" /></li>
+              <li><img src="/assets/clients/carnival.svg" alt="" /></li>
+              <li><img src="/assets/clients/gatorade.svg" alt="" /></li>
+              <li><img src="/assets/clients/visitorlando.svg" alt="" /></li>
+              <li><img src="/assets/clients/disney.svg" alt="" /></li>
+              <li><img src="/assets/clients/fullsail.svg" alt="" /></li>
+              <li><img src="/assets/clients/ea.svg" alt="" /></li>
             </ul>
             <ul class="marquee__group" aria-hidden="true">
-              <li><img src="assets/clients/carnival.svg" alt="" /></li>
-              <li><img src="assets/clients/gatorade.svg" alt="" /></li>
-              <li><img src="assets/clients/visitorlando.svg" alt="" /></li>
-              <li><img src="assets/clients/disney.svg" alt="" /></li>
-              <li><img src="assets/clients/fullsail.svg" alt="" /></li>
-              <li><img src="assets/clients/ea.svg" alt="" /></li>
+              <li><img src="/assets/clients/carnival.svg" alt="" /></li>
+              <li><img src="/assets/clients/gatorade.svg" alt="" /></li>
+              <li><img src="/assets/clients/visitorlando.svg" alt="" /></li>
+              <li><img src="/assets/clients/disney.svg" alt="" /></li>
+              <li><img src="/assets/clients/fullsail.svg" alt="" /></li>
+              <li><img src="/assets/clients/ea.svg" alt="" /></li>
             </ul>
             <ul class="marquee__group" aria-hidden="true">
-              <li><img src="assets/clients/carnival.svg" alt="" /></li>
-              <li><img src="assets/clients/gatorade.svg" alt="" /></li>
-              <li><img src="assets/clients/visitorlando.svg" alt="" /></li>
-              <li><img src="assets/clients/disney.svg" alt="" /></li>
-              <li><img src="assets/clients/fullsail.svg" alt="" /></li>
-              <li><img src="assets/clients/ea.svg" alt="" /></li>
+              <li><img src="/assets/clients/carnival.svg" alt="" /></li>
+              <li><img src="/assets/clients/gatorade.svg" alt="" /></li>
+              <li><img src="/assets/clients/visitorlando.svg" alt="" /></li>
+              <li><img src="/assets/clients/disney.svg" alt="" /></li>
+              <li><img src="/assets/clients/fullsail.svg" alt="" /></li>
+              <li><img src="/assets/clients/ea.svg" alt="" /></li>
             </ul>
           </div>
         </div>
@@ -226,7 +181,7 @@
         <div class="systems__grid">
           <article class="system-card">
             <div class="system-card__visual" aria-hidden="true">
-              <img src="assets/systems/pixel-visibility.png" alt="" loading="lazy" />
+              <img src="/assets/systems/pixel-visibility.png" alt="" loading="lazy" />
             </div>
             <div class="system-card__body">
               <p class="system-card__designation label">SYS&#8209;01 / Signal</p>
@@ -241,13 +196,13 @@
                 <li>Content and citations engineered so AI engines recommend you</li>
                 <li>Share&#8209;of&#8209;answer tracking across all six answer engines</li>
               </ol>
-              <a class="system-card__link" href="ai-seo/">See how AI Visibility works</a>
+              <a class="system-card__link" href="/ai-seo/">See how AI Visibility works</a>
             </div>
           </article>
 
           <article class="system-card">
             <div class="system-card__visual" aria-hidden="true">
-              <img src="assets/systems/pixel-solutions.png" alt="" loading="lazy" />
+              <img src="/assets/systems/pixel-solutions.png" alt="" loading="lazy" />
             </div>
             <div class="system-card__body">
               <p class="system-card__designation label">SYS&#8209;02 / Machinery</p>
@@ -262,7 +217,7 @@
                 <li>Custom AI agents and automations built on your own data</li>
                 <li>Deployment, team training, and monitoring after launch</li>
               </ol>
-              <a class="system-card__link" href="ai-automation/">See how AI Solutions works</a>
+              <a class="system-card__link" href="/ai-automation/">See how AI Solutions works</a>
             </div>
           </article>
         </div>
@@ -367,58 +322,6 @@
       </div>
     </section>
 
-    <section class="case" id="work">
-      <div class="container">
-        <div class="case__head">
-          <h2>Proof over promises.</h2>
-          <p class="lede case__lede">
-            One brand, one quarter, measured in answers. This is what the
-            system looks like when it ships.
-          </p>
-        </div>
-
-        <!-- TODO: replace the placeholder client, figures, and quote with a
-             real case study before launch; keep the structure -->
-        <article class="case__card">
-          <div class="case__intro">
-            <p class="case__client">Regional home services brand &middot; USA</p>
-            <h3 class="case__headline">
-              From invisible in AI search to the name ChatGPT recommends
-              first.
-            </h3>
-            <p class="case__summary">
-              Ninety days of generative engine optimization: an answer audit,
-              entity cleanup, and the content AI engines cite. Then a custom
-              AI assistant that turns the new demand into booked jobs.
-            </p>
-            <a class="system-card__link" href="#contact">Read the full case study</a>
-          </div>
-          <div class="case__aside">
-            <dl class="case__stats">
-              <div>
-                <dd>0 &rarr; 27</dd>
-                <dt>AI answers citing the brand</dt>
-              </div>
-              <div>
-                <dd>+64%</dd>
-                <dt>qualified leads in 90 days</dt>
-              </div>
-              <div>
-                <dd>31 hrs</dd>
-                <dt>saved weekly through automation</dt>
-              </div>
-            </dl>
-            <figure class="case__quote">
-              <blockquote>
-                &ldquo;We stopped guessing where customers come from. They
-                tell us: ChatGPT sent them.&rdquo;
-              </blockquote>
-              <figcaption>Owner, home services company</figcaption>
-            </figure>
-          </div>
-        </article>
-      </div>
-    </section>
 
     <section class="faq" id="faq">
       <div class="container faq__inner">
@@ -488,7 +391,7 @@
         </div>
       </div>
 
-      <script type="application/ld+json">
+      <script type="application/ld+json" is:inline>
       {
         "@context": "https://schema.org",
         "@type": "FAQPage",
@@ -553,8 +456,7 @@
             <span class="cta__question">Ready to be the answer in ChatGPT?</span>
             We&rsquo;ll get you there.
           </h2>
-          <!-- TODO: point at the real booking link once it exists -->
-          <a class="btn btn--primary cta__btn" href="#contact">Book a discovery call</a>
+          <a class="btn btn--primary cta__btn" href="/discovery/">Book a discovery call</a>
           <ul class="cta__checklist" aria-label="What the discovery call involves">
             <li>30 minutes</li>
             <li>Free</li>
@@ -583,7 +485,7 @@
             <circle class="cta__plan-stop cta__plan-stop--4" cx="600" cy="94" r="3.5" />
           </svg>
 
-          <img class="cta__plan-home" src="assets/flow/pixel-home.png" alt="" style="--x: 13.2%; --y: 82.7%" />
+          <img class="cta__plan-home" src="/assets/flow/pixel-home.png" alt="" style="--x: 13.2%; --y: 82.7%" />
           <p class="cta__plan-label cta__plan-label--home" style="--x: 13.2%; --y: 93%">You are here</p>
 
           <p class="cta__plan-label cta__plan-label--discovery" style="--x: 40%; --y: 70.5%">
@@ -603,52 +505,11 @@
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer__inner">
-      <div class="footer__brand">
-        <img src="assets/aivium-digital-lockup-horizontal-dark.svg" alt="Aivium Digital" />
-        <p class="footer__tagline">
-          The AI SEO agency for getting cited, not just ranked. Custom AI
-          systems for putting the answers to work.
-        </p>
-      </div>
-      <nav class="footer__nav" aria-label="Footer">
-        <div class="footer__col">
-          <p class="footer__col-title">Services</p>
-          <ul>
-            <li><a href="ai-seo/">AI Visibility (GEO &amp; AEO)</a></li>
-            <li><a href="ai-automation/">AI Solutions &amp; Automation</a></li>
-            <li><a href="#contact">Free AI audit</a></li>
-          </ul>
-        </div>
-        <div class="footer__col">
-          <p class="footer__col-title">Company</p>
-          <ul>
-            <li><a href="#process">Process</a></li>
-            <li><a href="#work">Work</a></li>
-            <li><a href="#faq">FAQ</a></li>
-          </ul>
-        </div>
-        <div class="footer__col">
-          <p class="footer__col-title">Contact</p>
-          <ul>
-            <!-- TODO: confirm email + swap in the real booking link -->
-            <li><a href="mailto:hello@aiviumdigital.com">hello@aiviumdigital.com</a></li>
-            <li><a href="#contact">Book a discovery call</a></li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-    <div class="container footer__bottom">
-      <p>&copy; 2026 Aivium Digital. All rights reserved.</p>
-      <p>Be the answer AI gives.</p>
-    </div>
-  </footer>
+  <SiteFooter />
 
-  <div class="grain" aria-hidden="true"></div>
-
-  <script src="js/starfield.js"></script>
-  <script src="js/nav.js"></script>
-  <script src="js/flow.js"></script>
-</body>
-</html>
+  <Fragment slot="scripts">
+    <script is:inline src="/js/starfield.js"></script>
+    <script is:inline src="/js/nav.js"></script>
+    <script is:inline src="/js/flow.js"></script>
+  </Fragment>
+</BaseLayout>

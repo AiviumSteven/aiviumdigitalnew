@@ -1,0 +1,6 @@
+# Aivium Digital — all crawlers welcome, including AI answer engines.
+User-agent: *
+Allow: /
+Disallow: /styleguide.html
+
+Sitemap: https://aiviumdigital.com/sitemap.xml

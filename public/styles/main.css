@@ -255,6 +255,54 @@ h3 {
   font-size: var(--text-small);
 }
 
+/* Phone: quiet utility link beside the CTA */
+
+.nav__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--cream-72);
+  white-space: nowrap;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.nav__phone:hover,
+.nav__phone:focus-visible {
+  color: var(--cream);
+}
+
+.nav__phone svg {
+  width: 0.9375rem;
+  height: 0.9375rem;
+  color: var(--accent);
+}
+
+.nav__overlay-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--cream-72);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.nav__overlay-phone:hover,
+.nav__overlay-phone:focus-visible {
+  color: var(--cream);
+}
+
+.nav__overlay-phone svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--accent);
+}
+
 /* Toggle: two lines that fold into an X. Hidden on desktop. */
 
 .nav__toggle {
@@ -394,7 +442,12 @@ body.nav-locked {
 @media (max-width: 767px) {
   .nav__primary { display: none; }
   .nav__cta { display: none; }
+  .nav__phone { display: none; }
   .nav__toggle { display: block; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .nav__phone span { display: none; } /* icon-only when the bar tightens */
 }
 
 @media (min-width: 768px) {
