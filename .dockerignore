@@ -1,0 +1,8 @@
+node_modules
+dist
+.astro
+.git
+.env
+.gstack
+SEO-PLAN.md
+keyword-map-site-copy.md

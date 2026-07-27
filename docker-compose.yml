@@ -1,0 +1,29 @@
+services:
+  aiviumdigital:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: aiviumdigital:latest
+    container_name: aiviumdigital
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      - web
+    expose:
+      - "3000"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:3000/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+networks:
+  web:
+    external: true
