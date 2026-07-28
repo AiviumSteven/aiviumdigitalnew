@@ -560,8 +560,12 @@ body.nav-locked {
 
 @media (max-width: 900px) {
   .hero__planet {
-    inset: 0;
-    height: 100%;
+    /* Keep the desktop top anchor but extend further past the hero
+       bottom so the rim light lands below the CTAs, not through the
+       copy. The rim's height above the image bottom scales with
+       viewport width (cover crop), so the vw term holds the rim at
+       the fold on any phone size. */
+    height: calc(100% + 65vw + 70px);
   }
 }
 
