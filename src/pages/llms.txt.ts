@@ -1,15 +1,15 @@
 /**
  * /llms.txt — a plain-text site guide for AI crawlers and agents,
- * generated at build time so Field Notes posts are always listed
+ * generated at build time so Signals posts are always listed
  * (replaces the hand-maintained public/llms.txt). Spec: https://llmstxt.org/
  */
 import type { APIRoute } from 'astro';
-import { getFieldNoteRefs } from '../lib/fieldNotes';
+import { getSignalRefs } from '../lib/signals';
 
 const SITE = 'https://aiviumdigital.com';
 
 export const GET: APIRoute = async () => {
-  const posts = await getFieldNoteRefs();
+  const posts = await getSignalRefs();
   const lines: string[] = [
     '# Aivium Digital',
     '',
@@ -26,10 +26,10 @@ export const GET: APIRoute = async () => {
     '',
     ...(posts.length > 0
       ? [
-          '## Field Notes',
+          '## Signals',
           '',
           ...posts.map(
-            (p) => `- [${p.title}](${SITE}/field-notes/${p.slug}/): ${p.excerpt ?? ''}`.trimEnd(),
+            (p) => `- [${p.title}](${SITE}/signals/${p.slug}/): ${p.excerpt ?? ''}`.trimEnd(),
           ),
           '',
         ]
@@ -37,7 +37,7 @@ export const GET: APIRoute = async () => {
     '## Company',
     '',
     `- [Homepage](${SITE}/): Overview of both service systems, process, and FAQ.`,
-    `- [Field Notes](${SITE}/field-notes/): Working notes from the team on GEO, AI search visibility, and AI automation.`,
+    `- [Signals](${SITE}/signals/): Working notes from the team on GEO, AI search visibility, and AI automation.`,
     '- Contact: hello@aiviumdigital.com',
     '',
   ];

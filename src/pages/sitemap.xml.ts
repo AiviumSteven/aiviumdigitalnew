@@ -1,9 +1,9 @@
 /**
- * /sitemap.xml — generated at build time so Field Notes posts are always
+ * /sitemap.xml — generated at build time so Signals posts are always
  * included (replaces the hand-maintained public/sitemap.xml).
  */
 import type { APIRoute } from 'astro';
-import { getFieldNoteRefs } from '../lib/fieldNotes';
+import { getSignalRefs } from '../lib/signals';
 
 const SITE = 'https://aiviumdigital.com';
 
@@ -13,17 +13,17 @@ const STATIC_PAGES: { loc: string; lastmod: string }[] = [
   { loc: '/', lastmod: '2026-07-27' },
   { loc: '/ai-seo/', lastmod: '2026-07-27' },
   { loc: '/ai-automation/', lastmod: '2026-07-27' },
-  { loc: '/field-notes/', lastmod: '2026-08-01' },
+  { loc: '/signals/', lastmod: '2026-08-01' },
 ];
 
 const day = (iso: string) => iso.slice(0, 10);
 
 export const GET: APIRoute = async () => {
-  const posts = await getFieldNoteRefs();
+  const posts = await getSignalRefs();
   const urls = [
     ...STATIC_PAGES,
     ...posts.map((p) => ({
-      loc: `/field-notes/${p.slug}/`,
+      loc: `/signals/${p.slug}/`,
       lastmod: day(p.updatedAt ?? p.publishedAt ?? new Date(0).toISOString()),
     })),
   ];

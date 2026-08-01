@@ -14,11 +14,11 @@ import { parse } from 'node-html-parser';
 const DIST = path.resolve(process.cwd(), 'dist/client');
 const SITE = 'https://aiviumdigital.com';
 
-// Field Notes launched empty (fresh blog); flip to 1 when the first post
+// Signals launched empty (fresh blog); flip to 1 when the first post
 // merges so a content-pipeline regression can never ship a postless site.
 const MIN_POSTS = 0;
 
-const ROUTES = ['/', '/ai-seo/', '/ai-automation/', '/discovery/', '/field-notes/'];
+const ROUTES = ['/', '/ai-seo/', '/ai-automation/', '/discovery/', '/signals/'];
 
 // The discovery funnel deliberately ships without site chrome.
 const NAV_EXEMPT = new Set(['/discovery/']);
@@ -42,13 +42,13 @@ async function exists(p) {
 // ── discover generated post pages ─────────────────────────────────────
 let postRoutes = [];
 try {
-  const entries = await readdir(path.join(DIST, 'field-notes'), { withFileTypes: true });
-  postRoutes = entries.filter((e) => e.isDirectory()).map((e) => `/field-notes/${e.name}/`);
+  const entries = await readdir(path.join(DIST, 'signals'), { withFileTypes: true });
+  postRoutes = entries.filter((e) => e.isDirectory()).map((e) => `/signals/${e.name}/`);
 } catch {
-  // /field-notes/index.html missing entirely is caught by the ROUTES check.
+  // /signals/index.html missing entirely is caught by the ROUTES check.
 }
 if (postRoutes.length < MIN_POSTS)
-  fail(`field-notes: ${postRoutes.length} post page(s) in dist, expected at least ${MIN_POSTS}`);
+  fail(`signals: ${postRoutes.length} post page(s) in dist, expected at least ${MIN_POSTS}`);
 
 // ── per-route checks ──────────────────────────────────────────────────
 const seenTitles = new Map();
@@ -80,15 +80,15 @@ for (const route of [...ROUTES, ...postRoutes]) {
   ok(`${route} — title/meta/canonical/OG/h1${NAV_EXEMPT.has(route) ? '' : '/nav'}`);
 }
 
-// ── field-notes specifics ─────────────────────────────────────────────
+// ── signals specifics ─────────────────────────────────────────────────
 {
-  const idxHtml = await readFile(distPath('/field-notes/'), 'utf8').catch(() => '');
+  const idxHtml = await readFile(distPath('/signals/'), 'utf8').catch(() => '');
   if (idxHtml) {
     if (!idxHtml.includes('data-posts-state="loaded"') && !idxHtml.includes('data-posts-state="empty"'))
-      fail('/field-notes/: neither posts nor the explicit empty-state marker rendered');
-    else ok(`field-notes index state: ${idxHtml.includes('data-posts-state="loaded"') ? 'loaded' : 'empty (marker present)'}`);
+      fail('/signals/: neither posts nor the explicit empty-state marker rendered');
+    else ok(`signals index state: ${idxHtml.includes('data-posts-state="loaded"') ? 'loaded' : 'empty (marker present)'}`);
     if (MIN_POSTS > 0 && !idxHtml.includes('data-posts-state="loaded"'))
-      fail('/field-notes/: index is not rendered with posts');
+      fail('/signals/: index is not rendered with posts');
   }
 
   for (const route of postRoutes) {
@@ -97,7 +97,7 @@ for (const route of [...ROUTES, ...postRoutes]) {
     if (!postHtml.includes('article:published_time')) fail(`${route}: no article:published_time meta`);
   }
   if (postRoutes.length)
-    ok(`field-notes: ${postRoutes.length} post page(s), all with BlogPosting JSON-LD`);
+    ok(`signals: ${postRoutes.length} post page(s), all with BlogPosting JSON-LD`);
 }
 
 // ── site files ────────────────────────────────────────────────────────

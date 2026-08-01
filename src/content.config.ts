@@ -2,15 +2,15 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 /**
- * Field Notes posts authored as markdown in this repo. Publishing = merge
- * a .md file + deploy (see src/content/field-notes/_template.md for the
+ * Signals posts authored as markdown in this repo. Publishing = merge
+ * a .md file + deploy (see src/content/signals/_template.md for the
  * authoring contract). Underscore-prefixed files are never published.
  *
  * The frontmatter contract matches aivium-nexus's insights collection —
  * the /publish-post skill targets both sites with the same shape.
  */
-const fieldNotes = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.md', base: './src/content/field-notes' }),
+const signals = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: './src/content/signals' }),
   schema: ({ image }) =>
     z
       .object({
@@ -30,4 +30,4 @@ const fieldNotes = defineCollection({
       }),
 });
 
-export const collections = { fieldNotes };
+export const collections = { signals };

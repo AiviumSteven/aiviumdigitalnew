@@ -1,6 +1,6 @@
 /**
- * Pure Field Notes logic — no Astro imports, so it runs under any test
- * runner and any runtime. src/lib/fieldNotes.ts is the Astro adapter.
+ * Pure Signals logic — no Astro imports, so it runs under any test
+ * runner and any runtime. src/lib/signals.ts is the Astro adapter.
  */
 
 /** Drop drafts, newest publishedAt first. */

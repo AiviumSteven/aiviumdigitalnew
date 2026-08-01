@@ -66,9 +66,9 @@ ChatGPT/Copilot retrieval):
 npm run indexnow
 ```
 
-## Publishing a Field Note
+## Publishing a Signal
 
-Posts are markdown in `src/content/field-notes/` (copy `_template.md`,
+Posts are markdown in `src/content/signals/` (copy `_template.md`,
 fill the frontmatter, set `draft: false`). Publishing = merge + release
 as above; the sitemap, llms.txt, and index update automatically. When the
 first real post merges, flip `MIN_POSTS` to 1 in `scripts/verify-dist.mjs`

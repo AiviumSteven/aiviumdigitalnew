@@ -4,17 +4,17 @@ import { Image, getImage } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteNav from "../../components/SiteNav.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
-import { getFieldNotes, type FieldNoteEntry } from "../../lib/fieldNotes";
+import { getSignals, type SignalEntry } from "../../lib/signals";
 
 export async function getStaticPaths() {
-  return (await getFieldNotes()).map((entry) => ({
+  return (await getSignals()).map((entry) => ({
     params: { slug: entry.id },
     props: { entry },
   }));
 }
 
 interface Props {
-  entry: FieldNoteEntry;
+  entry: SignalEntry;
 }
 
 const { entry } = Astro.props;
@@ -35,7 +35,7 @@ const heroOg = entry.data.image
   : null;
 const ogImage = heroOg?.src ?? "/assets/og-image.jpg";
 
-const description = excerpt ?? `${title} — a field note from Aivium Digital.`;
+const description = excerpt ?? `${title} — a signal from Aivium Digital.`;
 
 const fmtDate = (iso: string | null) =>
   iso
@@ -54,21 +54,21 @@ const jsonLd = {
       "@type": "BlogPosting",
       headline: title,
       description,
-      url: `${site}/field-notes/${slug}/`,
-      mainEntityOfPage: `${site}/field-notes/${slug}/`,
+      url: `${site}/signals/${slug}/`,
+      mainEntityOfPage: `${site}/signals/${slug}/`,
       image: new URL(ogImage, site).href,
       datePublished: publishedAt,
       ...(updatedAt ? { dateModified: updatedAt } : {}),
       author: { "@id": `${site}/#org` },
       publisher: { "@id": `${site}/#org` },
-      isPartOf: { "@id": `${site}/field-notes/#blog` },
+      isPartOf: { "@id": `${site}/signals/#blog` },
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: `${site}/` },
-        { "@type": "ListItem", position: 2, name: "Field Notes", item: `${site}/field-notes/` },
-        { "@type": "ListItem", position: 3, name: title, item: `${site}/field-notes/${slug}/` },
+        { "@type": "ListItem", position: 2, name: "Signals", item: `${site}/signals/` },
+        { "@type": "ListItem", position: 3, name: title, item: `${site}/signals/${slug}/` },
       ],
     },
   ],
@@ -76,9 +76,9 @@ const jsonLd = {
 ---
 
 <BaseLayout
-  title={`${title} | Aivium Digital Field Notes`}
+  title={`${title} | Aivium Digital Signals`}
   description={description}
-  canonical={`/field-notes/${slug}/`}
+  canonical={`/signals/${slug}/`}
   ogImage={ogImage}
   article={{ publishedTime: publishedAt, modifiedTime: updatedAt }}
 >
@@ -86,12 +86,12 @@ const jsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>
 
-  <SiteNav active="notes" />
+  <SiteNav active="signals" />
 
   <main>
     <article class="note">
       <div class="container note__container">
-        <a href="/field-notes/" class="note__back">← All field notes</a>
+        <a href="/signals/" class="note__back">← All signals</a>
         <h1 class="note__title">{title}</h1>
         {
           fmtDate(publishedAt) && (

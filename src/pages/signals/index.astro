@@ -2,9 +2,9 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteNav from "../../components/SiteNav.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
-import { getFieldNoteRefs } from "../../lib/fieldNotes";
+import { getSignalRefs } from "../../lib/signals";
 
-const posts = await getFieldNoteRefs();
+const posts = await getSignalRefs();
 const site = "https://aiviumdigital.com";
 
 const fmtDate = (iso: string | null) =>
@@ -22,18 +22,18 @@ const blogJsonLd = {
   "@graph": [
     {
       "@type": "Blog",
-      "@id": `${site}/field-notes/#blog`,
-      name: "Field Notes",
-      url: `${site}/field-notes/`,
+      "@id": `${site}/signals/#blog`,
+      name: "Signals",
+      url: `${site}/signals/`,
       description:
-        "Field notes from Aivium Digital on generative engine optimization, AI search visibility, and putting AI to work inside a business.",
+        "Signals from Aivium Digital on generative engine optimization, AI search visibility, and putting AI to work inside a business.",
       publisher: { "@id": `${site}/#org` },
       ...(posts.length > 0
         ? {
             blogPost: posts.map((p) => ({
               "@type": "BlogPosting",
               headline: p.title,
-              url: `${site}/field-notes/${p.slug}/`,
+              url: `${site}/signals/${p.slug}/`,
               ...(p.publishedAt ? { datePublished: p.publishedAt } : {}),
             })),
           }
@@ -43,7 +43,7 @@ const blogJsonLd = {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: `${site}/` },
-        { "@type": "ListItem", position: 2, name: "Field Notes", item: `${site}/field-notes/` },
+        { "@type": "ListItem", position: 2, name: "Signals", item: `${site}/signals/` },
       ],
     },
   ],
@@ -51,22 +51,22 @@ const blogJsonLd = {
 ---
 
 <BaseLayout
-  title="Field Notes | Aivium Digital on GEO & AI Search"
-  description="Field notes from Aivium Digital: what we see working in generative engine optimization, AI search visibility, and AI automation for small and mid-size businesses."
-  canonical="/field-notes/"
+  title="Signals | Aivium Digital on GEO & AI Search"
+  description="Signals from Aivium Digital: what we see working in generative engine optimization, AI search visibility, and AI automation for small and mid-size businesses."
+  canonical="/signals/"
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(blogJsonLd)} />
   </Fragment>
 
-  <SiteNav active="notes" />
+  <SiteNav active="signals" />
 
   <main>
     <section class="page-hero">
       <div class="container">
         <div class="page-hero__content">
           <hgroup class="hero__title">
-            <h1 class="hero__eyebrow">Field Notes</h1>
+            <h1 class="hero__eyebrow">Signals</h1>
             <p class="hero__headline">What we're seeing from the&nbsp;frontier.</p>
           </hgroup>
           <p class="lede">
@@ -86,7 +86,7 @@ const blogJsonLd = {
             <ol class="notes" data-posts-state="loaded" reversed>
               {posts.map((p) => (
                 <li class="notes__item">
-                  <a href={`/field-notes/${p.slug}/`} class="notes__link">
+                  <a href={`/signals/${p.slug}/`} class="notes__link">
                     {fmtDate(p.publishedAt) && (
                       <time datetime={p.publishedAt} class="notes__date">
                         {fmtDate(p.publishedAt)}
@@ -94,7 +94,7 @@ const blogJsonLd = {
                     )}
                     <h2 class="notes__title">{p.title}</h2>
                     {p.excerpt && <p class="notes__excerpt">{p.excerpt}</p>}
-                    <span class="notes__cta">Read the note</span>
+                    <span class="notes__cta">Read the signal</span>
                   </a>
                 </li>
               ))}
@@ -103,9 +103,10 @@ const blogJsonLd = {
             <div class="notes-empty" data-posts-state="empty">
               <p class="notes-empty__label">Transmission pending</p>
               <p class="notes-empty__body">
-                The first field notes are being written. Until they land, the
-                <a href="/ai-seo/">GEO service page</a> explains what we do and
-                the <a href="/#faq">FAQ</a> answers what businesses ask us most.
+                The first signals go out soon. Until they land,
+                the <a href="/ai-seo/">GEO service page</a> explains what we
+                do and the <a href="/#faq">FAQ</a> answers what businesses ask
+                us most.
               </p>
             </div>
           )
