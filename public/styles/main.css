@@ -764,6 +764,25 @@ body.nav-locked {
   color: var(--cream-55);
 }
 
+.mission__sources {
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--cream-32);
+}
+
+.mission__sources a {
+  color: var(--cream-32);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line-strong);
+}
+
+.mission__sources a:hover {
+  color: var(--cream-72);
+}
+
 @media (max-width: 767px) {
   .mission__stats {
     grid-template-columns: 1fr;
