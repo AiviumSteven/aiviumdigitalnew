@@ -5,6 +5,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteNav from "../../components/SiteNav.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import { getSignals, type SignalEntry } from "../../lib/signals";
+import { getAuthor } from "../../data/authors";
 
 export async function getStaticPaths() {
   return (await getSignals()).map((entry) => ({
@@ -25,6 +26,7 @@ const excerpt = entry.data.excerpt;
 const publishedAt = entry.data.publishedAt.toISOString();
 const updatedAt = entry.data.updatedAt?.toISOString() ?? null;
 const slug = entry.id;
+const author = getAuthor(entry.data.author);
 
 const { Content } = await render(entry);
 
@@ -59,9 +61,26 @@ const jsonLd = {
       image: new URL(ogImage, site).href,
       datePublished: publishedAt,
       ...(updatedAt ? { dateModified: updatedAt } : {}),
-      author: { "@id": `${site}/#org` },
+      author: { "@id": `${site}/#${author.id}` },
       publisher: { "@id": `${site}/#org` },
       isPartOf: { "@id": `${site}/signals/#blog` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${site}/#${author.id}`,
+      name: author.name,
+      jobTitle: author.role,
+      description: author.bio,
+      worksFor: { "@id": `${site}/#org` },
+      url: `${site}/`,
+      ...(author.sameAs.length ? { sameAs: author.sameAs } : {}),
+    },
+    {
+      "@type": "Organization",
+      "@id": `${site}/#org`,
+      name: "Aivium Digital",
+      url: `${site}/`,
+      logo: `${site}/assets/aivium-digital-lockup-horizontal-dark.svg`,
     },
     {
       "@type": "BreadcrumbList",
@@ -93,13 +112,29 @@ const jsonLd = {
       <div class="container note__container">
         <a href="/signals/" class="note__back">← All signals</a>
         <h1 class="note__title">{title}</h1>
-        {
-          fmtDate(publishedAt) && (
-            <time datetime={publishedAt} class="note__date">
-              {fmtDate(publishedAt)}
-            </time>
-          )
-        }
+        <div class="note__byline">
+          {
+            author.image ? (
+              <Image src={author.image} alt={author.name} width={44} height={44} class="note__avatar" />
+            ) : (
+              <span class="note__avatar note__avatar--monogram" aria-hidden="true">{author.initials}</span>
+            )
+          }
+          <div>
+            <p class="note__author">
+              By {author.name} <span class="note__author-role">· {author.role}</span>
+            </p>
+            <p class="note__date">
+              <time datetime={publishedAt}>{fmtDate(publishedAt)}</time>
+              {updatedAt && (
+                <>
+                  {" · Updated "}
+                  <time datetime={updatedAt}>{fmtDate(updatedAt)}</time>
+                </>
+              )}
+            </p>
+          </div>
+        </div>
         {
           excerpt && (
             <p class="note__lede">{excerpt}</p>
@@ -119,6 +154,21 @@ const jsonLd = {
         <div class="note__body">
           <Content />
         </div>
+
+        <aside class="note__bio" aria-label="About the author">
+          {
+            author.image ? (
+              <Image src={author.image} alt={author.name} width={64} height={64} class="note__bio-avatar" />
+            ) : (
+              <span class="note__bio-avatar note__avatar--monogram" aria-hidden="true">{author.initials}</span>
+            )
+          }
+          <div>
+            <p class="note__bio-label">About the author</p>
+            <p class="note__bio-name">{author.name} <span class="note__author-role">· {author.role}</span></p>
+            <p class="note__bio-text">{author.bio}</p>
+          </div>
+        </aside>
       </div>
     </article>
   </main>
@@ -153,14 +203,85 @@ const jsonLd = {
     line-height: 1.1;
     color: var(--cream);
   }
+  .note__byline {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+  }
+  .note__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+  .note__avatar--monogram {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--void-850);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    color: var(--cream-55);
+  }
+  .note__author {
+    margin: 0;
+    font-size: var(--text-small);
+    font-weight: 600;
+    color: var(--cream);
+  }
+  .note__author-role {
+    font-weight: 400;
+    color: var(--cream-55);
+  }
   .note__date {
-    display: block;
-    margin-top: var(--space-4);
+    margin: var(--space-1) 0 0;
     font-family: var(--font-mono);
     font-size: var(--text-label);
     letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--cream-55);
+  }
+  .note__bio {
+    display: flex;
+    gap: var(--space-6);
+    align-items: flex-start;
+    margin-top: var(--space-16);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--line);
+  }
+  .note__bio-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+  .note__bio-avatar.note__avatar--monogram {
+    font-size: 1.25rem;
+  }
+  .note__bio-label {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .note__bio-name {
+    margin: var(--space-2) 0 0;
+    font-weight: 600;
+    color: var(--cream);
+  }
+  .note__bio-text {
+    margin: var(--space-3) 0 0;
+    font-size: var(--text-small);
+    line-height: var(--leading-body);
+    color: var(--cream-72);
   }
   .note__lede {
     margin: var(--space-6) 0 0;

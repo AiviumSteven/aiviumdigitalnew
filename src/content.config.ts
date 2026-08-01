@@ -19,6 +19,9 @@ const signals = defineCollection({
         publishedAt: z.coerce.date(),
         updatedAt: z.coerce.date().optional(),
         draft: z.boolean().default(false),
+        // Key into src/data/authors.ts — the page render fails the build
+        // on an unknown id, so bylines can't silently break.
+        author: z.string().default('steven-mills'),
         // Optional hero, processed by astro:assets: shown above the body,
         // reused as the post's og:image (sitewide og-image.jpg fallback).
         image: image().optional(),

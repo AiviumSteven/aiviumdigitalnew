@@ -101,6 +101,8 @@ for (const route of [...ROUTES, ...postRoutes]) {
     const postHtml = await readFile(distPath(route), 'utf8');
     if (!postHtml.includes('"BlogPosting"')) fail(`${route}: no BlogPosting JSON-LD`);
     if (!postHtml.includes('article:published_time')) fail(`${route}: no article:published_time meta`);
+    if (!postHtml.includes('"Person"')) fail(`${route}: no Person (author) JSON-LD — E-E-A-T regression`);
+    if (!postHtml.includes('About the author')) fail(`${route}: author bio box missing`);
   }
   if (postRoutes.length)
     ok(`signals: ${postRoutes.length} post page(s), all with BlogPosting JSON-LD`);

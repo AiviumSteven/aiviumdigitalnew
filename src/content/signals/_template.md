@@ -8,6 +8,12 @@ title: 'Post title, also the H1 and browser-tab title'
 excerpt: 'One or two sentences shown on the index and as the meta description. 280 characters max. This is what makes people click.'
 publishedAt: 2026-08-01
 draft: true
+# Author key from src/data/authors.ts. Omit for the default
+# (steven-mills); the build fails on an unknown key.
+# author: steven-mills
+# Set updatedAt when a post gets a substantive revision — it renders as
+# "Updated <date>" and feeds dateModified in the structured data:
+# updatedAt: 2026-08-15
 # Optional hero image, processed by Astro (responsive sizes, compression,
 # no layout shift) and reused as this post's og:image. Store it in
 # src/assets/signals/<slug>/ and reference it RELATIVE to this file:
