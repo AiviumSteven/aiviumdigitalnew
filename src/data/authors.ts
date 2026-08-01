@@ -1,4 +1,6 @@
 import type { ImageMetadata } from 'astro';
+import stevenMills from '../assets/authors/steven-mills.jpg';
+import stevenMillsPortrait from '../assets/authors/steven-mills-portrait.jpg';
 
 /**
  * Post authors — the E-E-A-T layer. Every Signals post carries an
@@ -13,13 +15,22 @@ import type { ImageMetadata } from 'astro';
 export interface Author {
   name: string;
   role: string;
+  /**
+   * The canonical bio — this exact text appears verbatim in the byline
+   * bio box, the author page, and Person JSON-LD. Entity consistency
+   * is the point: edit it HERE only, never inline on a page.
+   */
   bio: string;
   /** Initials for the monogram fallback avatar. */
   initials: string;
   /** Headshot (astro:assets). Optional until a photo exists. */
   image?: ImageMetadata;
-  /** Profile URLs (LinkedIn, X, …) for Person JSON-LD sameAs. */
+  /** Larger portrait for the author page (falls back to image). */
+  portrait?: ImageMetadata;
+  /** PERSONAL profile URLs (LinkedIn, X, …) for Person JSON-LD sameAs. */
   sameAs: string[];
+  /** Author page path on this site (Person JSON-LD url), if one exists. */
+  page?: string;
 }
 
 export const AUTHORS: Record<string, Author> = {
@@ -33,7 +44,10 @@ export const AUTHORS: Record<string, Author> = {
       'entity engineering, and the content that earns citations from ' +
       'ChatGPT, Claude, Gemini, Perplexity, Copilot, and Google AI Overviews.',
     initials: 'SM',
-    sameAs: ['https://www.linkedin.com/company/aiviumdigital/'],
+    image: stevenMills,
+    portrait: stevenMillsPortrait,
+    sameAs: ['https://www.linkedin.com/in/stevenwmills/'],
+    page: '/about-steven/',
   },
 };
 

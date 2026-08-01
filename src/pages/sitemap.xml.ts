@@ -14,6 +14,7 @@ const STATIC_PAGES: { loc: string; lastmod: string }[] = [
   { loc: '/ai-seo/', lastmod: '2026-07-27' },
   { loc: '/ai-automation/', lastmod: '2026-07-27' },
   { loc: '/signals/', lastmod: '2026-08-01' },
+  { loc: '/about-steven/', lastmod: '2026-08-01' },
 ];
 
 const day = (iso: string) => iso.slice(0, 10);

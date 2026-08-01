@@ -37,6 +37,10 @@ const heroOg = entry.data.image
   : null;
 const ogImage = heroOg?.src ?? "/assets/og-image.jpg";
 
+const authorImg = author.image ? await getImage({ src: author.image, width: 800 }) : null;
+const authorUrl = author.page ? `${site}${author.page}` : `${site}/`;
+const faq = entry.data.faq;
+
 const description = excerpt ?? `${title} — a signal from Aivium Digital.`;
 
 const fmtDate = (iso: string | null) =>
@@ -72,7 +76,8 @@ const jsonLd = {
       jobTitle: author.role,
       description: author.bio,
       worksFor: { "@id": `${site}/#org` },
-      url: `${site}/`,
+      url: authorUrl,
+      ...(authorImg ? { image: new URL(authorImg.src, site).href } : {}),
       ...(author.sameAs.length ? { sameAs: author.sameAs } : {}),
     },
     {
@@ -81,7 +86,27 @@ const jsonLd = {
       name: "Aivium Digital",
       url: `${site}/`,
       logo: `${site}/assets/aivium-digital-lockup-horizontal-dark.svg`,
+      sameAs: ["https://aivium.com/", "https://www.linkedin.com/company/aiviumdigital/"],
+      parentOrganization: {
+        "@type": "Organization",
+        "@id": "https://aivium.com/#organization",
+        name: "Aivium",
+        url: "https://aivium.com/",
+      },
     },
+    ...(faq.length > 0
+      ? [
+          {
+            "@type": "FAQPage",
+            "@id": `${site}/signals/${slug}/#faq`,
+            mainEntity: faq.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          },
+        ]
+      : []),
     {
       "@type": "BreadcrumbList",
       itemListElement: [
@@ -122,7 +147,8 @@ const jsonLd = {
           }
           <div>
             <p class="note__author">
-              By {author.name} <span class="note__author-role">· {author.role}</span>
+              By {author.page ? <a href={author.page} class="note__author-link">{author.name}</a> : author.name}{" "}
+              <span class="note__author-role">· {author.role}</span>
             </p>
             <p class="note__date">
               <time datetime={publishedAt}>{fmtDate(publishedAt)}</time>
@@ -155,6 +181,22 @@ const jsonLd = {
           <Content />
         </div>
 
+        {
+          faq.length > 0 && (
+            <section class="note__faq" aria-labelledby="post-faq-heading">
+              <h2 id="post-faq-heading" class="note__faq-heading">Questions, answered.</h2>
+              <div class="note__faq-list">
+                {faq.map((f, i) => (
+                  <details class="note__faq-item" open={i === 0}>
+                    <summary>{f.q}</summary>
+                    <p>{f.a}</p>
+                  </details>
+                ))}
+              </div>
+            </section>
+          )
+        }
+
         <aside class="note__bio" aria-label="About the author">
           {
             author.image ? (
@@ -165,8 +207,17 @@ const jsonLd = {
           }
           <div>
             <p class="note__bio-label">About the author</p>
-            <p class="note__bio-name">{author.name} <span class="note__author-role">· {author.role}</span></p>
+            <p class="note__bio-name">
+              {author.page ? <a href={author.page} class="note__author-link">{author.name}</a> : author.name}{" "}
+              <span class="note__author-role">· {author.role}</span>
+            </p>
             <p class="note__bio-text">{author.bio}</p>
+            {author.sameAs.length > 0 && (
+              <p class="note__bio-links">
+                {author.page && <a href={author.page}>More about {author.name.split(" ")[0]} →</a>}
+                <a href={author.sameAs[0]} target="_blank" rel="noopener">LinkedIn ↗</a>
+              </p>
+            )}
           </div>
         </aside>
       </div>
@@ -279,6 +330,73 @@ const jsonLd = {
   }
   .note__bio-text {
     margin: var(--space-3) 0 0;
+    font-size: var(--text-small);
+    line-height: var(--leading-body);
+    color: var(--cream-72);
+  }
+  .note__author-link {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--line-strong);
+  }
+  .note__author-link:hover {
+    color: var(--accent);
+  }
+  .note__bio-links {
+    margin: var(--space-4) 0 0;
+    display: flex;
+    gap: var(--space-6);
+  }
+  .note__bio-links a {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--cream-55);
+    text-decoration: none;
+  }
+  .note__bio-links a:hover {
+    color: var(--cream);
+  }
+  .note__faq {
+    margin-top: var(--space-16);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--line);
+  }
+  .note__faq-heading {
+    margin: 0;
+    font-size: var(--text-h3);
+    color: var(--cream);
+  }
+  .note__faq-list {
+    margin-top: var(--space-6);
+    border-top: 1px solid var(--line);
+  }
+  .note__faq-item {
+    border-bottom: 1px solid var(--line);
+  }
+  .note__faq-item summary {
+    padding: var(--space-4) 0;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--cream);
+    list-style: none;
+  }
+  .note__faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .note__faq-item summary::before {
+    content: "+ ";
+    color: var(--accent);
+    font-family: var(--font-mono);
+  }
+  .note__faq-item[open] summary::before {
+    content: "− ";
+  }
+  .note__faq-item p {
+    margin: 0;
+    padding: 0 0 var(--space-4) var(--space-6);
     font-size: var(--text-small);
     line-height: var(--leading-body);
     color: var(--cream-72);

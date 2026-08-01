@@ -18,7 +18,7 @@ const SITE = 'https://aiviumdigital.com';
 // pipeline regression and must not ship.
 const MIN_POSTS = 1;
 
-const ROUTES = ['/', '/ai-seo/', '/ai-automation/', '/discovery/', '/signals/'];
+const ROUTES = ['/', '/ai-seo/', '/ai-automation/', '/discovery/', '/signals/', '/about-steven/'];
 
 // The discovery funnel deliberately ships without site chrome.
 const NAV_EXEMPT = new Set(['/discovery/']);

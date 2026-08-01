@@ -22,6 +22,9 @@ const signals = defineCollection({
         // Key into src/data/authors.ts — the page render fails the build
         // on an unknown id, so bylines can't silently break.
         author: z.string().default('steven-mills'),
+        // Optional Q&A section: rendered after the body and emitted as
+        // FAQPage JSON-LD. Add only questions the post genuinely answers.
+        faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
         // Optional hero, processed by astro:assets: shown above the body,
         // reused as the post's og:image (sitewide og-image.jpg fallback).
         image: image().optional(),

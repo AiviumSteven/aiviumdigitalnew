@@ -1,0 +1,274 @@
+---
+import { Image, getImage } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteNav from "../components/SiteNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { getAuthor } from "../data/authors";
+import { getSignalRefs } from "../lib/signals";
+
+const site = "https://aiviumdigital.com";
+const author = getAuthor("steven-mills");
+const posts = (await getSignalRefs()).slice(0, 6);
+
+const authorImg = author.image ? await getImage({ src: author.image, width: 800 }) : null;
+
+const fmtDate = (iso: string | null) =>
+  iso
+    ? new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" })
+    : null;
+
+// ProfilePage: this URL is the canonical home of the Person entity that
+// every post's byline JSON-LD points at.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": `${site}/about-steven/#page`,
+      url: `${site}/about-steven/`,
+      name: `About ${author.name}`,
+      mainEntity: { "@id": `${site}/#${author.id}` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${site}/#${author.id}`,
+      name: author.name,
+      jobTitle: author.role,
+      description: author.bio,
+      url: `${site}/about-steven/`,
+      worksFor: { "@id": `${site}/#org` },
+      ...(authorImg ? { image: new URL(authorImg.src, site).href } : {}),
+      ...(author.sameAs.length ? { sameAs: author.sameAs } : {}),
+      knowsAbout: [
+        "Generative engine optimization (GEO)",
+        "Answer engine optimization (AEO)",
+        "AI search visibility",
+        "SEO",
+        "AI agents and workflow automation",
+      ],
+    },
+    {
+      "@type": "Organization",
+      "@id": `${site}/#org`,
+      name: "Aivium Digital",
+      url: `${site}/`,
+      logo: `${site}/assets/aivium-digital-lockup-horizontal-dark.svg`,
+      sameAs: ["https://aivium.com/", "https://www.linkedin.com/company/aiviumdigital/"],
+      founder: { "@id": `${site}/#${author.id}` },
+      parentOrganization: {
+        "@type": "Organization",
+        "@id": "https://aivium.com/#organization",
+        name: "Aivium",
+        url: "https://aivium.com/",
+      },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="About Steven Mills | Founder, Aivium Digital"
+  description="Steven Mills is the founder of Aivium and Aivium Digital, helping small and mid-size businesses get found and cited by AI search: ChatGPT, Claude, Gemini, Perplexity, Copilot, and Google AI Overviews."
+  canonical="/about-steven/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <SiteNav />
+
+  <main>
+    <section class="author-hero">
+      <div class="container author-hero__inner">
+        <div class="author-hero__media">
+          {
+            author.portrait ? (
+              <Image
+                src={author.portrait}
+                alt={`${author.name}, ${author.role}`}
+                widths={[400, 600, 800]}
+                sizes="(max-width: 820px) 100vw, 380px"
+              />
+            ) : null
+          }
+        </div>
+        <div class="author-hero__content">
+          <p class="author-hero__eyebrow">About the founder</p>
+          <h1 class="author-hero__name">{author.name}</h1>
+          <p class="author-hero__role">{author.role}</p>
+          <p class="author-hero__bio">{author.bio}</p>
+          <p class="author-hero__bio">
+            Every Signals post on this site is written or reviewed by Steven,
+            with sourced data over opinion. If a claim carries a number, it
+            carries a citation.
+          </p>
+          <div class="author-hero__links">
+            <a class="btn btn--primary" href="/discovery/">Book a call with Steven</a>
+            <a class="author-hero__linkedin" href={author.sameAs[0]} target="_blank" rel="noopener">
+              LinkedIn ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {
+      posts.length > 0 && (
+        <section class="author-posts">
+          <div class="container">
+            <div class="author-posts__head">
+              <h2>Signals by {author.name.split(" ")[0]}</h2>
+              <a class="author-posts__all" href="/signals/">All signals →</a>
+            </div>
+            <ul class="author-posts__list">
+              {posts.map((p) => (
+                <li>
+                  <a href={`/signals/${p.slug}/`} class="author-posts__link">
+                    {fmtDate(p.publishedAt) && (
+                      <time datetime={p.publishedAt}>{fmtDate(p.publishedAt)}</time>
+                    )}
+                    <span>{p.title}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )
+    }
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .author-hero {
+    padding: calc(var(--space-24) + var(--space-12)) 0 var(--space-16);
+  }
+  .author-hero__inner {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: var(--space-16);
+    align-items: start;
+  }
+  @media (max-width: 820px) {
+    .author-hero__inner {
+      grid-template-columns: 1fr;
+    }
+    .author-hero__media {
+      max-width: 340px;
+    }
+  }
+  .author-hero__media :global(img) {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    display: block;
+  }
+  .author-hero__eyebrow {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .author-hero__name {
+    margin: var(--space-4) 0 0;
+    font-size: var(--text-h2);
+    font-family: var(--font-display);
+    font-stretch: var(--stretch-display);
+    letter-spacing: var(--tracking-display);
+    line-height: 1.05;
+    color: var(--cream);
+  }
+  .author-hero__role {
+    margin: var(--space-3) 0 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--cream-55);
+  }
+  .author-hero__bio {
+    margin: var(--space-6) 0 0;
+    max-width: 40rem;
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--cream-72);
+  }
+  .author-hero__links {
+    margin-top: var(--space-8);
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    flex-wrap: wrap;
+  }
+  .author-hero__linkedin {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--cream-55);
+    text-decoration: none;
+  }
+  .author-hero__linkedin:hover {
+    color: var(--cream);
+  }
+  .author-posts {
+    padding: var(--space-16) 0 var(--space-section);
+  }
+  .author-posts__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-8);
+    margin-bottom: var(--space-8);
+  }
+  .author-posts__head h2 {
+    margin: 0;
+    font-size: var(--text-h3);
+    color: var(--cream);
+  }
+  .author-posts__all {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--cream-55);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .author-posts__all:hover {
+    color: var(--cream);
+  }
+  .author-posts__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+  .author-posts__link {
+    display: flex;
+    gap: var(--space-8);
+    align-items: baseline;
+    padding: var(--space-5, 1.25rem) 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+  }
+  .author-posts__link time {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--cream-55);
+  }
+  .author-posts__link span {
+    color: var(--cream);
+    transition: color 0.2s ease;
+  }
+  .author-posts__link:hover span {
+    color: var(--accent);
+  }
+</style>

@@ -2,9 +2,17 @@
 title: 'AI search is now part of how your customers decide. Here are the numbers.'
 excerpt: '37% of consumers now start with AI instead of Google, and 30% of Americans have used AI to inform a purchase. The July 2026 numbers on AI search and buying decisions, and what they mean for your business.'
 publishedAt: 2026-07-31
+updatedAt: 2026-08-01
 draft: false
 image: ../../assets/signals/ai-search-decision-making-2026/hero.png
 imageAlt: 'Stat hero on a dark radar backdrop: 37% of consumers now start their search with AI, not Google.'
+faq:
+  - q: 'What percentage of people use AI search in 2026?'
+    a: 'About 37% of consumers now start searches with an AI tool instead of a search engine, and AI-driven search accounts for roughly 30% of all search interactions in 2026, up from under 10% in 2023. Most people use AI alongside Google rather than replacing it.'
+  - q: 'Do people trust AI recommendations when making purchases?'
+    a: "Cautiously. Gartner's May 2026 survey found that 86% of consumers who used AI for product research verified the recommendation somewhere else before buying. The AI answer works as a shortlist; your reviews, profiles, and website then close or lose the sale."
+  - q: 'How do Google AI Overviews affect website clicks?'
+    a: 'When Google shows an AI Overview, users click a result on only about 8% of visits versus 15% without one, and the top organic result loses roughly 58% of its click-through rate. The clicks that remain concentrate on the sites the AI Overview cites.'
 ---
 
 As of mid-2026, roughly 37% of consumers start their search with an AI tool

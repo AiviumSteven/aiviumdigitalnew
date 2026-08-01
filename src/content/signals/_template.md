@@ -14,6 +14,12 @@ draft: true
 # Set updatedAt when a post gets a substantive revision — it renders as
 # "Updated <date>" and feeds dateModified in the structured data:
 # updatedAt: 2026-08-15
+# Optional FAQ: rendered after the body + emitted as FAQPage JSON-LD.
+# Only add questions the post genuinely answers; 40-60 word answers
+# that stand alone (AI engines lift them verbatim).
+# faq:
+#   - q: 'A question buyers actually ask?'
+#     a: 'A liftable, self-contained answer.'
 # Optional hero image, processed by Astro (responsive sizes, compression,
 # no layout shift) and reused as this post's og:image. Store it in
 # src/assets/signals/<slug>/ and reference it RELATIVE to this file:
