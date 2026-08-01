@@ -113,9 +113,10 @@ Three practical conclusions fall out of the data:
 2. **The verification layer decides the sale.** With 86% of AI-assisted
    buyers double-checking, your reviews, profiles, and site have to agree
    with what the AI said about you. Contradictions kill conversions.
-3. **The window is a first-mover window.** Most local and mid-size
-   competitors have not done this work. The seats in the answer are
-   limited, and early entities tend to keep getting cited.
+3. **The window is a first-mover window.** Most of your competitors,
+   from local operators to mid-market brands, have not done this work.
+   The seats in the answer are limited, and early entities tend to keep
+   getting cited.
 
 This is the exact problem [our GEO service](/ai-seo/) exists to solve: we
 audit what the six major engines say when your buyers ask, engineer your
