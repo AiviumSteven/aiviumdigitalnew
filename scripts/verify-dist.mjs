@@ -82,6 +82,12 @@ for (const route of [...ROUTES, ...postRoutes]) {
 
 // ── signals specifics ─────────────────────────────────────────────────
 {
+  // With posts published, the homepage must carry the Latest AI Signals grid.
+  const homeHtml = await readFile(distPath('/'), 'utf8').catch(() => '');
+  if (MIN_POSTS > 0 && homeHtml && !homeHtml.includes('data-latest-signals'))
+    fail('/: Latest AI Signals section missing from the homepage');
+  else if (homeHtml.includes('data-latest-signals')) ok('homepage carries the Latest AI Signals grid');
+
   const idxHtml = await readFile(distPath('/signals/'), 'utf8').catch(() => '');
   if (idxHtml) {
     if (!idxHtml.includes('data-posts-state="loaded"') && !idxHtml.includes('data-posts-state="empty"'))
