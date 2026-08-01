@@ -36,13 +36,15 @@ export interface Author {
 export const AUTHORS: Record<string, Author> = {
   'steven-mills': {
     name: 'Steven Mills',
-    role: 'Founder, Aivium Digital',
+    role: 'Founder & CEO, Aivium Digital',
     bio:
-      'Steven Mills is the founder of Aivium and Aivium Digital, where he ' +
-      'helps small and mid-size businesses get found and cited by AI ' +
-      'search. He works hands-on across every engagement: answer audits, ' +
-      'entity engineering, and the content that earns citations from ' +
-      'ChatGPT, Claude, Gemini, Perplexity, Copilot, and Google AI Overviews.',
+      'Steven Mills is the founder and CEO of Aivium and Aivium Digital. ' +
+      'A digital marketer for over a decade, specialized in AI since 2022, ' +
+      'he helps established businesses get found and cited by AI search: ' +
+      'ChatGPT, Claude, Gemini, Perplexity, Copilot, and Google AI ' +
+      'Overviews. He also builds the AI solutions that make those ' +
+      'businesses run more efficiently, working hands-on from answer ' +
+      'audits to entity engineering and custom automation.',
     initials: 'SM',
     image: stevenMills,
     portrait: stevenMillsPortrait,

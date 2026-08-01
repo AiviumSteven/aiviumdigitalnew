@@ -38,7 +38,7 @@ export const GET: APIRoute = async () => {
     '',
     `- [Homepage](${SITE}/): Overview of both service systems, process, and FAQ.`,
     `- [Signals](${SITE}/signals/): Working notes from the team on GEO, AI search visibility, and AI automation.`,
-    `- [About Steven Mills](${SITE}/about-steven/): Founder of Aivium and Aivium Digital; writes or reviews every Signals post.`,
+    `- [About Steven Mills](${SITE}/about-steven/): Founder & CEO of Aivium and Aivium Digital; a decade-plus in digital marketing, specialized in AI since 2022; writes or reviews every Signals post.`,
     '- Contact: hello@aiviumdigital.com',
     '',
   ];
