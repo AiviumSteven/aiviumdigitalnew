@@ -1,8 +1,11 @@
 /**
  * Field Notes source: markdown authored in src/content/field-notes/ —
- * the only post channel. Mirrors aivium-nexus's src/lib/insights.ts.
+ * the only post channel. Thin Astro adapter over fieldNotesCore.mjs
+ * (the pure logic lives there so node --test can cover it without an
+ * Astro build). Mirrors aivium-nexus's src/lib/insights.ts.
  */
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { publishable, toRefs } from './fieldNotesCore.mjs';
 
 export type FieldNoteEntry = CollectionEntry<'fieldNotes'>;
 
@@ -16,18 +19,10 @@ export interface FieldNoteRef {
 }
 
 export async function getFieldNotes(): Promise<FieldNoteEntry[]> {
-  return (await getCollection('fieldNotes', ({ data }) => !data.draft)).sort((a, b) =>
-    b.data.publishedAt.toISOString().localeCompare(a.data.publishedAt.toISOString())
-  );
+  return publishable(await getCollection('fieldNotes')) as FieldNoteEntry[];
 }
 
 /** Newest-first refs for the /field-notes/ index, sitemap, and llms.txt. */
 export async function getFieldNoteRefs(): Promise<FieldNoteRef[]> {
-  return (await getFieldNotes()).map((e) => ({
-    slug: e.id,
-    title: e.data.title,
-    excerpt: e.data.excerpt,
-    publishedAt: e.data.publishedAt.toISOString(),
-    updatedAt: e.data.updatedAt?.toISOString() ?? null,
-  }));
+  return toRefs(await getFieldNotes()) as FieldNoteRef[];
 }
