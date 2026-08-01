@@ -4,6 +4,39 @@ Companion to SEO-PLAN.md. That plan builds pages; this one builds the
 authority (DR, citations, entity trust) those pages need to rank. Three
 plays plus the local layer. Written 2026-08-01.
 
+## Scope: which brand does what (decided 2026-08-01, fact-checked)
+
+**This entire playbook executes for ONE brand: Aivium Digital.** Not the
+parent, not the other divisions. Why:
+
+- **GBP:** multiple profiles from the same owner/address/phone with
+  similar AI-ish categories is a textbook suspension pattern, and Google
+  filters lookalike same-address listings so only one shows anyway.
+  One profile: Aivium Digital.
+- **Directories & reviews:** reviews are the currency and they don't
+  transfer. Four Clutch profiles with two reviews each lose to one
+  profile with eight. Every review ask routes to Aivium Digital.
+- **Expert quotes:** Steven is one person; one byline ("founder & CEO of
+  Aivium Digital"), always. Rotating brand attributions fragments the
+  person-entity we're building.
+- **Domains:** one strong domain beats several weak ones; search engines
+  detect common ownership, and same-owner sites chasing the same terms
+  split authority instead of multiplying it.
+
+**Parent Aivium gets an entity footprint only** (no agency directories,
+no GBP): LinkedIn company page, Crunchbase-type organization listings,
+and the cross-site schema already live (parentOrganization /
+subOrganization). Its job is to make Aivium Digital more credible, not
+to compete with it for listings.
+
+**Partners / Scale / Spark get NOTHING until launch.** When a division
+is live with a genuinely distinct service, its own reviews, and ideally
+its own phone/contact, it earns its own profiles then — distinctness is
+what makes multi-brand legitimate. Premature duplication is what reads
+as spam.
+
+---
+
 The one rule that makes all of this compound: **every listing, profile,
 and pitch uses the canonical kit below, verbatim.** Consistent entity
 data across the web is what teaches both Google and AI engines who
