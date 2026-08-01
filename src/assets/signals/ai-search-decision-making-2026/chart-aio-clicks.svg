@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="382" viewBox="0 0 1200 382" role="img">
+<rect width="1200" height="382" fill="#0d1117"/>
+<text x="48" y="58" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="19" letter-spacing="3" fill="#e5391b">SIGNAL 02</text>
+<text x="48" y="92" font-family="Archivo, Helvetica Neue, Arial, sans-serif" font-weight="600" font-size="27" fill="#f6f2ea">Share of Google visits where the user clicks any result</text>
+<line x1="250" y1="96" x2="250" y2="296" stroke="rgba(246,242,234,0.10)" stroke-width="1"/>,<text x="250" y="328" text-anchor="middle" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="19" fill="rgba(246,242,234,0.32)">0%</text>,<line x1="665" y1="96" x2="665" y2="296" stroke="rgba(246,242,234,0.10)" stroke-width="1"/>,<text x="665" y="328" text-anchor="middle" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="19" fill="rgba(246,242,234,0.32)">10%</text>,<line x1="1080" y1="96" x2="1080" y2="296" stroke="rgba(246,242,234,0.10)" stroke-width="1"/>,<text x="1080" y="328" text-anchor="middle" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="19" fill="rgba(246,242,234,0.32)">20%</text>
+<text x="228" y="161" text-anchor="end" font-family="Archivo, Helvetica Neue, Arial, sans-serif" font-size="23" fill="rgba(246,242,234,0.72)">No AI Overview</text>
+<path d="M250 142 h618.5 a4 4 0 0 1 4 4 v16 a4 4 0 0 1 -4 4 h-618.5 z" fill="#e5391b"/>
+<text x="888.5" y="162" font-family="Archivo, Helvetica Neue, Arial, sans-serif" font-weight="600" font-size="25" fill="#f6f2ea">15%</text>
+<text x="228" y="249" text-anchor="end" font-family="Archivo, Helvetica Neue, Arial, sans-serif" font-size="23" fill="rgba(246,242,234,0.72)">AI Overview shown</text>
+<path d="M250 230 h328 a4 4 0 0 1 4 4 v16 a4 4 0 0 1 -4 4 h-328 z" fill="#e5391b"/>
+<text x="598" y="250" font-family="Archivo, Helvetica Neue, Arial, sans-serif" font-weight="600" font-size="25" fill="#f6f2ea">8%</text>
+<text x="48" y="356" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="17" fill="rgba(246,242,234,0.32)">When Google answers on the page, roughly half the clicks disappear.</text>
+<text x="1152" y="356" text-anchor="end" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="17" fill="rgba(246,242,234,0.32)">Source: Pew Research Center</text>
+</svg>

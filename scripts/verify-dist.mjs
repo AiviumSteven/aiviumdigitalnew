@@ -14,9 +14,9 @@ import { parse } from 'node-html-parser';
 const DIST = path.resolve(process.cwd(), 'dist/client');
 const SITE = 'https://aiviumdigital.com';
 
-// Signals launched empty (fresh blog); flip to 1 when the first post
-// merges so a content-pipeline regression can never ship a postless site.
-const MIN_POSTS = 0;
+// Signals has published posts — a build that produces none is a content
+// pipeline regression and must not ship.
+const MIN_POSTS = 1;
 
 const ROUTES = ['/', '/ai-seo/', '/ai-automation/', '/discovery/', '/signals/'];
 

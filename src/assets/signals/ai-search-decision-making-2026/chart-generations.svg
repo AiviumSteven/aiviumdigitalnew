@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="558" viewBox="0 0 1200 558" role="img">
+<rect width="1200" height="558" fill="#0d1117"/>
+<text x="48" y="58" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="19" letter-spacing="3" fill="#e5391b">SIGNAL 01</text>
+<text x="48" y="92" font-family="Archivo, Helvetica Neue, Arial, sans-serif" font-weight="600" font-size="27" fill="#f6f2ea">Have used AI to inform a purchase decision, by generation</text>
+<line x1="250" y1="96" x2="250" y2="472" stroke="rgba(246,242,234,0.10)" stroke-width="1"/>,<text x="250" y="504" text-anchor="middle" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="19" fill="rgba(246,242,234,0.32)">0%</text>,<line x1="416" y1="96" x2="416" y2="472" stroke="rgba(246,242,234,0.10)" stroke-width="1"/>,<text x="416" y="504" text-anchor="middle" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="19" fill="rgba(246,242,234,0.32)">10%</text>,<line x1="582" y1="96" x2="582" y2="472" stroke="rgba(246,242,234,0.10)" stroke-width="1"/>,<text x="582" y="504" text-anchor="middle" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="19" fill="rgba(246,242,234,0.32)">20%</text>,<line x1="748" y1="96" x2="748" y2="472" stroke="rgba(246,242,234,0.10)" stroke-width="1"/>,<text x="748" y="504" text-anchor="middle" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="19" fill="rgba(246,242,234,0.32)">30%</text>,<line x1="914" y1="96" x2="914" y2="472" stroke="rgba(246,242,234,0.10)" stroke-width="1"/>,<text x="914" y="504" text-anchor="middle" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="19" fill="rgba(246,242,234,0.32)">40%</text>,<line x1="1080" y1="96" x2="1080" y2="472" stroke="rgba(246,242,234,0.10)" stroke-width="1"/>,<text x="1080" y="504" text-anchor="middle" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="19" fill="rgba(246,242,234,0.32)">50%</text>
+<text x="228" y="161" text-anchor="end" font-family="Archivo, Helvetica Neue, Arial, sans-serif" font-size="23" fill="rgba(246,242,234,0.72)">Millennials</text>
+<path d="M250 142 h693.1999999999999 a4 4 0 0 1 4 4 v16 a4 4 0 0 1 -4 4 h-693.1999999999999 z" fill="#e5391b"/>
+<text x="963.1999999999999" y="162" font-family="Archivo, Helvetica Neue, Arial, sans-serif" font-weight="600" font-size="25" fill="#f6f2ea">42%</text>
+<text x="228" y="249" text-anchor="end" font-family="Archivo, Helvetica Neue, Arial, sans-serif" font-size="23" fill="rgba(246,242,234,0.72)">Gen Z</text>
+<path d="M250 230 h660 a4 4 0 0 1 4 4 v16 a4 4 0 0 1 -4 4 h-660 z" fill="#e5391b"/>
+<text x="930" y="250" font-family="Archivo, Helvetica Neue, Arial, sans-serif" font-weight="600" font-size="25" fill="#f6f2ea">40%</text>
+<text x="228" y="337" text-anchor="end" font-family="Archivo, Helvetica Neue, Arial, sans-serif" font-size="23" fill="rgba(246,242,234,0.72)">Gen X</text>
+<path d="M250 318 h460.80000000000007 a4 4 0 0 1 4 4 v16 a4 4 0 0 1 -4 4 h-460.80000000000007 z" fill="#e5391b"/>
+<text x="730.8000000000001" y="338" font-family="Archivo, Helvetica Neue, Arial, sans-serif" font-weight="600" font-size="25" fill="#f6f2ea">28%</text>
+<text x="228" y="425" text-anchor="end" font-family="Archivo, Helvetica Neue, Arial, sans-serif" font-size="23" fill="rgba(246,242,234,0.72)">Baby Boomers</text>
+<path d="M250 406 h211.8 a4 4 0 0 1 4 4 v16 a4 4 0 0 1 -4 4 h-211.8 z" fill="#e5391b"/>
+<text x="481.8" y="426" font-family="Archivo, Helvetica Neue, Arial, sans-serif" font-weight="600" font-size="25" fill="#f6f2ea">13%</text>
+
+<text x="1152" y="532" text-anchor="end" font-family="IBM Plex Mono, SFMono-Regular, Consolas, monospace" font-size="17" fill="rgba(246,242,234,0.32)">Source: Capital One Shopping Research, 2026</text>
+</svg>
