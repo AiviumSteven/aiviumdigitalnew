@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --no-audit --no-fund
 COPY . .
-RUN npm run build
+RUN npm test && npm run build && npm run verify
 
 FROM node:22-alpine AS runner
 WORKDIR /app

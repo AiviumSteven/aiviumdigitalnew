@@ -53,6 +53,27 @@ git pull
 docker compose up -d --build
 ```
 
+The Docker build stage runs `npm test`, `astro build`, and
+`npm run verify` (scripts/verify-dist.mjs, the SEO/GEO gate) — a failing
+test or a machine-layer regression fails the build before the container
+swaps.
+
+After the new container is up, ping IndexNow from anywhere with network
+access (submits the live sitemap's URLs to Bing/Yandex; feeds
+ChatGPT/Copilot retrieval):
+
+```bash
+npm run indexnow
+```
+
+## Publishing a Field Note
+
+Posts are markdown in `src/content/field-notes/` (copy `_template.md`,
+fill the frontmatter, set `draft: false`). Publishing = merge + release
+as above; the sitemap, llms.txt, and index update automatically. When the
+first real post merges, flip `MIN_POSTS` to 1 in `scripts/verify-dist.mjs`
+so a postless build can never ship again.
+
 ## Smoke test after deploy
 
 ```bash

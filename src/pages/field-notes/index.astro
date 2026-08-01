@@ -1,0 +1,193 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import { getFieldNoteRefs } from "../../lib/fieldNotes";
+
+const posts = await getFieldNoteRefs();
+const site = "https://aiviumdigital.com";
+
+const fmtDate = (iso: string | null) =>
+  iso
+    ? new Date(iso).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        timeZone: "UTC",
+      })
+    : null;
+
+const blogJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Blog",
+      "@id": `${site}/field-notes/#blog`,
+      name: "Field Notes",
+      url: `${site}/field-notes/`,
+      description:
+        "Field notes from Aivium Digital on generative engine optimization, AI search visibility, and putting AI to work inside a business.",
+      publisher: { "@id": `${site}/#org` },
+      ...(posts.length > 0
+        ? {
+            blogPost: posts.map((p) => ({
+              "@type": "BlogPosting",
+              headline: p.title,
+              url: `${site}/field-notes/${p.slug}/`,
+              ...(p.publishedAt ? { datePublished: p.publishedAt } : {}),
+            })),
+          }
+        : {}),
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: `${site}/` },
+        { "@type": "ListItem", position: 2, name: "Field Notes", item: `${site}/field-notes/` },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Field Notes | Aivium Digital on GEO & AI Search"
+  description="Field notes from Aivium Digital: what we see working in generative engine optimization, AI search visibility, and AI automation for small and mid-size businesses."
+  canonical="/field-notes/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(blogJsonLd)} />
+  </Fragment>
+
+  <SiteNav active="notes" />
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__content">
+          <hgroup class="hero__title">
+            <h1 class="hero__eyebrow">Field Notes</h1>
+            <p class="hero__headline">What we're seeing from the&nbsp;frontier.</p>
+          </hgroup>
+          <p class="lede">
+            Working notes from the Aivium Digital team: how AI engines pick
+            the brands they cite, what moves share-of-answer, and what AI can
+            actually automate inside a business. Written to be useful whether
+            you hire us or not.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec">
+      <div class="container">
+        {
+          posts.length > 0 ? (
+            <ol class="notes" data-posts-state="loaded" reversed>
+              {posts.map((p) => (
+                <li class="notes__item">
+                  <a href={`/field-notes/${p.slug}/`} class="notes__link">
+                    {fmtDate(p.publishedAt) && (
+                      <time datetime={p.publishedAt} class="notes__date">
+                        {fmtDate(p.publishedAt)}
+                      </time>
+                    )}
+                    <h2 class="notes__title">{p.title}</h2>
+                    {p.excerpt && <p class="notes__excerpt">{p.excerpt}</p>}
+                    <span class="notes__cta">Read the note</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          ) : (
+            <div class="notes-empty" data-posts-state="empty">
+              <p class="notes-empty__label">Transmission pending</p>
+              <p class="notes-empty__body">
+                The first field notes are being written. Until they land, the
+                <a href="/ai-seo/">GEO service page</a> explains what we do and
+                the <a href="/#faq">FAQ</a> answers what businesses ask us most.
+              </p>
+            </div>
+          )
+        }
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .notes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+  }
+  .notes__item {
+    border-bottom: 1px solid var(--line);
+  }
+  .notes__link {
+    display: block;
+    padding: var(--space-8) 0;
+    text-decoration: none;
+    color: inherit;
+  }
+  .notes__date {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--cream-55);
+  }
+  .notes__title {
+    margin: var(--space-2) 0 0;
+    font-size: var(--text-h3);
+    line-height: 1.2;
+    color: var(--cream);
+    transition: color 0.2s ease;
+  }
+  .notes__link:hover .notes__title {
+    color: var(--accent);
+  }
+  .notes__excerpt {
+    margin: var(--space-3) 0 0;
+    max-width: 46rem;
+    color: var(--cream-72);
+    line-height: var(--leading-body);
+  }
+  .notes__cta {
+    display: inline-block;
+    margin-top: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--cream-55);
+    transition: color 0.2s ease;
+  }
+  .notes__link:hover .notes__cta {
+    color: var(--cream);
+  }
+  .notes-empty {
+    border: 1px solid var(--line);
+    padding: var(--space-8);
+    max-width: 46rem;
+  }
+  .notes-empty__label {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .notes-empty__body {
+    margin: var(--space-4) 0 0;
+    color: var(--cream-72);
+    line-height: var(--leading-body);
+  }
+  .notes-empty__body a {
+    color: var(--cream);
+  }
+</style>

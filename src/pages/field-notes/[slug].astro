@@ -1,0 +1,272 @@
+---
+import { render } from "astro:content";
+import { Image, getImage } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import { getFieldNotes, type FieldNoteEntry } from "../../lib/fieldNotes";
+
+export async function getStaticPaths() {
+  return (await getFieldNotes()).map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: FieldNoteEntry;
+}
+
+const { entry } = Astro.props;
+const site = "https://aiviumdigital.com";
+
+const title = entry.data.title;
+const excerpt = entry.data.excerpt;
+const publishedAt = entry.data.publishedAt.toISOString();
+const updatedAt = entry.data.updatedAt?.toISOString() ?? null;
+const slug = entry.id;
+
+const { Content } = await render(entry);
+
+// Optional hero: rendered above the body and reused as this post's
+// og:image + JSON-LD image (sitewide og-image.jpg is the fallback).
+const heroOg = entry.data.image
+  ? await getImage({ src: entry.data.image, width: 1200 })
+  : null;
+const ogImage = heroOg?.src ?? "/assets/og-image.jpg";
+
+const description = excerpt ?? `${title} — a field note from Aivium Digital.`;
+
+const fmtDate = (iso: string | null) =>
+  iso
+    ? new Date(iso).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        timeZone: "UTC",
+      })
+    : null;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      headline: title,
+      description,
+      url: `${site}/field-notes/${slug}/`,
+      mainEntityOfPage: `${site}/field-notes/${slug}/`,
+      image: new URL(ogImage, site).href,
+      datePublished: publishedAt,
+      ...(updatedAt ? { dateModified: updatedAt } : {}),
+      author: { "@id": `${site}/#org` },
+      publisher: { "@id": `${site}/#org` },
+      isPartOf: { "@id": `${site}/field-notes/#blog` },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: `${site}/` },
+        { "@type": "ListItem", position: 2, name: "Field Notes", item: `${site}/field-notes/` },
+        { "@type": "ListItem", position: 3, name: title, item: `${site}/field-notes/${slug}/` },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={`${title} | Aivium Digital Field Notes`}
+  description={description}
+  canonical={`/field-notes/${slug}/`}
+  ogImage={ogImage}
+  article={{ publishedTime: publishedAt, modifiedTime: updatedAt }}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <SiteNav active="notes" />
+
+  <main>
+    <article class="note">
+      <div class="container note__container">
+        <a href="/field-notes/" class="note__back">← All field notes</a>
+        <h1 class="note__title">{title}</h1>
+        {
+          fmtDate(publishedAt) && (
+            <time datetime={publishedAt} class="note__date">
+              {fmtDate(publishedAt)}
+            </time>
+          )
+        }
+        {
+          excerpt && (
+            <p class="note__lede">{excerpt}</p>
+          )
+        }
+        {
+          entry.data.image && (
+            <Image
+              src={entry.data.image}
+              alt={entry.data.imageAlt ?? ""}
+              widths={[640, 960, 1280]}
+              sizes="(max-width: 768px) 100vw, 736px"
+              class="note__hero"
+            />
+          )
+        }
+        <div class="note__body">
+          <Content />
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<style>
+  .note {
+    padding: calc(var(--space-24) + var(--space-12)) 0 var(--space-section);
+  }
+  .note__container {
+    max-width: 50rem;
+  }
+  .note__back {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--cream-55);
+    text-decoration: none;
+  }
+  .note__back:hover {
+    color: var(--cream);
+  }
+  .note__title {
+    margin: var(--space-6) 0 0;
+    font-size: var(--text-h2);
+    font-family: var(--font-display);
+    font-stretch: var(--stretch-display);
+    letter-spacing: var(--tracking-display);
+    line-height: 1.1;
+    color: var(--cream);
+  }
+  .note__date {
+    display: block;
+    margin-top: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--cream-55);
+  }
+  .note__lede {
+    margin: var(--space-6) 0 0;
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--accent);
+    font-size: 1.1875rem;
+    line-height: var(--leading-body);
+    color: var(--cream-72);
+  }
+  .note__hero {
+    margin-top: var(--space-8);
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+  }
+
+  /* Article body typography — content arrives via <Content />, so style
+     its children through :global(). */
+  .note__body {
+    margin-top: var(--space-8);
+  }
+  .note__body :global(p) {
+    margin: 1.1em 0 0;
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--cream-72);
+  }
+  .note__body :global(h2) {
+    margin: 2.2em 0 0;
+    font-size: var(--text-h3);
+    color: var(--cream);
+  }
+  .note__body :global(h3) {
+    margin: 1.8em 0 0;
+    font-size: 1.125rem;
+    color: var(--cream);
+  }
+  .note__body :global(ul),
+  .note__body :global(ol) {
+    margin: 1.1em 0 0;
+    padding-left: 1.4em;
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--cream-72);
+  }
+  .note__body :global(li) {
+    margin-top: 0.45em;
+  }
+  .note__body :global(strong) {
+    color: var(--cream);
+  }
+  .note__body :global(a) {
+    color: var(--cream);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .note__body :global(a:hover) {
+    color: var(--accent);
+  }
+  .note__body :global(blockquote) {
+    margin: 1.4em 0 0;
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--line-strong);
+    color: var(--cream-72);
+  }
+  .note__body :global(img) {
+    margin-top: 1.6em;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+  }
+  .note__body :global(pre) {
+    margin: 1.4em 0 0;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    background: var(--void-850);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+  }
+  .note__body :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+  }
+  .note__body :global(table) {
+    margin: 1.6em 0 0;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-small);
+  }
+  .note__body :global(th),
+  .note__body :global(td) {
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .note__body :global(th) {
+    color: var(--cream);
+  }
+  .note__body :global(td) {
+    color: var(--cream-72);
+  }
+  .note__body :global(hr) {
+    margin: 2.5em 0 0;
+    border: none;
+    border-top: 1px solid var(--line);
+  }
+</style>

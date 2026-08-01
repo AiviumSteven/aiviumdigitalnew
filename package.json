@@ -3,6 +3,10 @@
     "@astrojs/node": "^11.0.2",
     "astro": "^7.1.3"
   },
+  "devDependencies": {
+    "node-html-parser": "^7.0.1",
+    "vitest": "^3.0.0"
+  },
   "name": "aivium-digital",
   "type": "module",
   "version": "1.0.0",
@@ -11,6 +15,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "start": "node ./dist/server/entry.mjs"
+    "start": "node ./dist/server/entry.mjs",
+    "test": "vitest run",
+    "verify": "node scripts/verify-dist.mjs",
+    "indexnow": "node scripts/indexnow-ping.mjs"
   }
 }

@@ -5,6 +5,10 @@ interface Props {
   canonical: string; // path, e.g. "/" or "/ai-seo/"
   ogTitle?: string;
   ogDescription?: string;
+  /** Path or built-asset URL; defaults to the sitewide OG image. */
+  ogImage?: string;
+  /** Set on blog posts: switches og:type to article + emits article: metas. */
+  article?: { publishedTime: string; modifiedTime?: string | null };
   noindex?: boolean;
   styles?: string[]; // extra stylesheets loaded after main.css
   bodyClass?: string;
@@ -16,6 +20,8 @@ const {
   canonical,
   ogTitle = title,
   ogDescription = description,
+  ogImage = "/assets/og-image.jpg",
+  article,
   noindex = false,
   styles = [],
   bodyClass,
@@ -23,6 +29,7 @@ const {
 
 const site = "https://aiviumdigital.com";
 const url = site + canonical;
+const ogImageUrl = new URL(ogImage, site).href;
 ---
 
 <!doctype html>
@@ -36,18 +43,20 @@ const url = site + canonical;
     <link rel="canonical" href={url} />
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={article ? "article" : "website"} />
+    {article && <meta property="article:published_time" content={article.publishedTime} />}
+    {article?.modifiedTime && <meta property="article:modified_time" content={article.modifiedTime} />}
     <meta property="og:site_name" content="Aivium Digital" />
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={ogDescription} />
     <meta property="og:url" content={url} />
-    <meta property="og:image" content={`${site}/assets/og-image.jpg`} />
+    <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={ogTitle} />
     <meta name="twitter:description" content={ogDescription} />
-    <meta name="twitter:image" content={`${site}/assets/og-image.jpg`} />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     <link rel="stylesheet" href="/styles/fonts.css" />
     <link rel="stylesheet" href="/styles/tokens.css" />
