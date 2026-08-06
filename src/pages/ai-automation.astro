@@ -2,37 +2,35 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteNav from "../components/SiteNav.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { orgNode, breadcrumbNode, serviceNode, graph } from "../lib/schema";
+
+const trail: [string, string][] = [
+  ["Home", "/"],
+  ["AI Solutions", "/ai-automation/"],
+];
+
+const jsonLd = graph(
+  serviceNode({
+    path: "/ai-automation/",
+    name: "AI Automation & Custom AI Solutions",
+    serviceType: "AI automation, custom AI agents, AI assistants, generative AI consulting, AI integration services",
+    description:
+      "Custom AI agents, assistants, and workflow automations for established businesses, from local operators to enterprise, built on the client's own data.",
+  }),
+  breadcrumbNode(trail),
+  orgNode(),
+);
 ---
 
 <BaseLayout
   title="Aivium Digital | AI Automation Agency & Custom AI Solutions"
   description="Aivium Digital is an AI automation agency for established businesses, from local operators to enterprise: custom AI agents, assistants, and automations built on your own data."
-  ogDescription="Custom AI agents, assistants, and automations for established businesses, built on your own data. Book a free AI audit."
+  ogDescription="Custom AI agents, assistants, and automations for established businesses, built on your own data. Book a discovery call."
   canonical="/ai-automation/"
 >
   <Fragment slot="head">
-    <script type="application/ld+json" is:inline>
-    {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Service",
-        "name": "AI Automation & Custom AI Solutions",
-        "serviceType": "AI automation, custom AI agents, AI assistants, generative AI consulting, AI integration services",
-        "provider": { "@id": "https://aiviumdigital.com/#org" },
-        "areaServed": "US",
-        "description": "Custom AI agents, assistants, and workflow automations for established businesses, from local operators to enterprise, built on the client's own data."
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://aiviumdigital.com/" },
-          { "@type": "ListItem", "position": 2, "name": "AI Automation Agency", "item": "https://aiviumdigital.com/ai-automation/" }
-        ]
-      }
-    ]
-  }
-    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>
 
   <SiteNav active="solutions" />
@@ -41,6 +39,7 @@ import SiteFooter from "../components/SiteFooter.astro";
     <section class="page-hero">
       <div class="container">
         <div class="page-hero__content">
+          <Breadcrumbs trail={trail} />
           <hgroup class="hero__title">
             <h1 class="hero__eyebrow">AI automation agency for growing businesses</h1>
             <p class="hero__headline">Put AI to work<br />inside your&nbsp;business.</p>
@@ -52,7 +51,7 @@ import SiteFooter from "../components/SiteFooter.astro";
             operate, scoped so you know exactly what you're getting.
           </p>
           <div class="page-hero__actions">
-            <a class="btn btn--primary" href="/discovery/">Book a free AI audit</a>
+            <a class="btn btn--primary" href="/discovery/">Book a discovery call</a>
             <a class="btn btn--ghost" href="#process">See how it runs</a>
           </div>
         </div>
@@ -66,8 +65,11 @@ import SiteFooter from "../components/SiteFooter.astro";
     <nav class="jumpnav" aria-label="On this page">
       <div class="container jumpnav__inner">
         <a href="#what-we-build">What we build</a>
+        <a href="#use-cases">Use cases</a>
+        <a href="#guardrails">Guardrails</a>
         <a href="#smb">Who it's for</a>
         <a href="#process">How it runs</a>
+        <a href="#build-vs-buy">Build vs. buy</a>
         <a href="#faq">FAQ</a>
       </div>
     </nav>
@@ -124,6 +126,57 @@ import SiteFooter from "../components/SiteFooter.astro";
               for the team to ignore.
             </p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="use-cases">
+      <div class="container defblock">
+        <h2>Where automation earns its keep first</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Eight categories cover most of what we're asked to build. Your
+            audit ranks them by payback for your business.
+          </p>
+          <ul class="defblock__list">
+            <li><strong>Lead intake and qualification:</strong> every inquiry answered, scored, and routed in minutes.</li>
+            <li><strong>Follow-up and nurture:</strong> quotes and estimates chased politely until they resolve.</li>
+            <li><strong>Knowledge assistants:</strong> staff and customers get answers from your own docs and history.</li>
+            <li><strong>Reporting and synthesis:</strong> the weekly numbers assembled and summarized without a human copy-pasting.</li>
+            <li><strong>Proposal and quote assistance:</strong> drafts built from your pricing rules, reviewed by a person.</li>
+            <li><strong>Customer support triage:</strong> the routine answered instantly, the exceptions handed to your team with context.</li>
+            <li><strong>Content operations:</strong> drafting, repurposing, and publishing pipelines with human editorial control.</li>
+            <li><strong>Internal workflow orchestration:</strong> the handoffs between tools and departments that leak hours.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="guardrails">
+      <div class="container defblock">
+        <h2>What we will not automate</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Human-first guardrails are part of every build, not an
+            upgrade. Some work should stay human, and we'll tell you which.
+          </p>
+          <p>
+            We don't automate decisions that need judgment: hiring, firing,
+            pricing exceptions, legal commitments, or anything where a wrong
+            answer lands on a customer without a person seeing it first.
+            Systems that touch customers get human-in-the-loop checkpoints
+            and escape hatches by default.
+          </p>
+          <p>
+            On ownership and access: builds run in your accounts or transfer
+            to them at handoff, credentials stay yours, we document what
+            data each system reads and where it flows, and monitoring after
+            launch is part of the engagement. We're vendor-neutral on
+            models and platforms, and we design so components can be
+            swapped without rebuilding. The
+            <a href="/process/">process page</a> covers how review and
+            quality control work phase by phase.
+          </p>
         </div>
       </div>
     </section>
@@ -223,10 +276,36 @@ import SiteFooter from "../components/SiteFooter.astro";
             <h3>First, be found.</h3>
             <p>
               Automation multiplies demand you already have. Our GEO service
-              makes sure AI search keeps sending it.
+              makes sure AI search keeps sending it, and the
+              <a href="/services/">services page</a> shows how the two
+              systems compound.
             </p>
           </div>
           <a class="btn btn--ghost" href="/ai-seo/">Explore GEO services</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="build-vs-buy">
+      <div class="container defblock">
+        <h2>Build custom, or buy off the shelf?</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Sometimes the honest answer is a $30-a-month tool, and we'll
+            say so in the audit.
+          </p>
+          <p>
+            Off-the-shelf wins when your workflow is generic: standard
+            scheduling, simple chat widgets, one-tool automations. Custom
+            wins when the value lives in your specifics: your pricing
+            logic, your service history, your integrations, or a workflow
+            that crosses several systems. Most clients end up with a mix,
+            and the <a href="/ai-visibility-audit/">audit</a> is designed
+            to sort your list before money is spent. What we build and why
+            gets documented against results on our
+            <a href="/case-studies/">case studies</a> page as clients
+            approve publication.
+          </p>
         </div>
       </div>
     </section>
@@ -313,9 +392,9 @@ import SiteFooter from "../components/SiteFooter.astro";
         <div class="cta__content">
           <h2 class="cta__heading">
             <span class="cta__question">Wondering what AI could take off your plate?</span>
-            The audit will tell you.
+            The opportunity map starts with a call.
           </h2>
-          <a class="btn btn--primary cta__btn" href="/discovery/">Book a free AI audit</a>
+          <a class="btn btn--primary cta__btn" href="/discovery/">Book a discovery call</a>
           <ul class="cta__checklist" aria-label="What the audit involves">
             <li>30 minutes</li>
             <li>Free</li>

@@ -3,6 +3,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteNav from "../components/SiteNav.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import LatestSignals from "../components/LatestSignals.astro";
+import { orgNode, webSiteNode, graph } from "../lib/schema";
+
+const jsonLd = graph(webSiteNode(), orgNode());
 ---
 
 <BaseLayout
@@ -12,28 +15,7 @@ import LatestSignals from "../components/LatestSignals.astro";
   canonical="/"
 >
   <Fragment slot="head">
-    <script type="application/ld+json" is:inline>
-    {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "https://aiviumdigital.com/#website",
-        "url": "https://aiviumdigital.com/",
-        "name": "Aivium Digital",
-        "publisher": { "@id": "https://aiviumdigital.com/#org" }
-      },
-      {
-        "@type": "Organization",
-        "@id": "https://aiviumdigital.com/#org",
-        "name": "Aivium Digital",
-        "url": "https://aiviumdigital.com/",
-        "logo": "https://aiviumdigital.com/assets/aivium-digital-lockup-horizontal-dark.svg",
-        "description": "AI SEO agency offering generative engine optimization (GEO), answer engine optimization (AEO), and custom AI automation services."
-      }
-    ]
-  }
-    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>
 
   <SiteNav home={true} />
@@ -69,7 +51,7 @@ import LatestSignals from "../components/LatestSignals.astro";
             systems to do it.
           </p>
           <div class="hero__actions">
-            <a class="btn btn--primary" href="/discovery/">Book a free AI audit</a>
+            <a class="btn btn--primary" href="/discovery/">Book a discovery call</a>
             <a class="btn btn--ghost" href="#services">The Services</a>
           </div>
         </div>
@@ -119,9 +101,9 @@ import LatestSignals from "../components/LatestSignals.astro";
         </dl>
         <p class="mission__sources">
           Sources:
-          <a href="https://www.instantpress.co/ai-statistics" target="_blank" rel="noopener">OpenAI usage data, Feb 2026</a> ·
-          <a href="https://www.medianama.com/2026/02/223-google-ai-overviews-click-through-rates-58-study/" target="_blank" rel="noopener">Ahrefs CTR study, Dec 2025</a> ·
-          <a href="https://ppc.land/ai-search-visitors-worth-4-4x-more-than-traditional-organic-traffic/" target="_blank" rel="noopener">Semrush AI traffic study, 2025</a>
+          <a href="https://techcrunch.com/2026/02/27/chatgpt-reaches-900m-weekly-active-users" target="_blank" rel="noopener noreferrer">OpenAI announcement, Feb 2026</a> ·
+          <a href="https://ahrefs.com/blog/ai-overviews-reduce-clicks-update" target="_blank" rel="noopener noreferrer">Ahrefs CTR study, Dec 2025</a> ·
+          <a href="https://www.semrush.com/blog/ai-search-seo-traffic-study/" target="_blank" rel="noopener noreferrer">Semrush AI search traffic study, 2025</a>
         </p>
       </div>
 
@@ -168,6 +150,14 @@ import LatestSignals from "../components/LatestSignals.astro";
             </ul>
           </div>
         </div>
+        <div class="container">
+          <p class="mission__disclosure">
+            Experience includes work by members of the Aivium team across
+            prior roles and direct engagements. Client results publish on
+            <a href="/case-studies/">our case studies page</a> as
+            permissions allow.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -176,8 +166,10 @@ import LatestSignals from "../components/LatestSignals.astro";
         <div class="systems__head">
           <h2>Two engines.<br />One trajectory.</h2>
           <p class="lede systems__lede">
-            One AI SEO company, two proven systems: one makes you the answer
-            AI gives, the other puts AI to work inside your business.
+            One AI SEO company, two connected systems: one makes you the
+            answer AI gives, the other puts AI to work inside your business.
+            <a href="/services/">The full services catalog</a> shows how
+            they fit together.
           </p>
         </div>
 
@@ -200,6 +192,13 @@ import LatestSignals from "../components/LatestSignals.astro";
                 <li>Share&#8209;of&#8209;answer tracking across all six answer engines</li>
               </ol>
               <a class="system-card__link" href="/ai-seo/">See how AI Visibility works</a>
+              <p class="system-card__note">
+                AI visibility is built on search foundations. We strengthen
+                the <a href="/ai-seo/">technical SEO</a>, entity signals,
+                content, and third-party authority that help a brand rank in
+                Google and become trusted enough to be cited by AI answer
+                engines.
+              </p>
             </div>
           </article>
 
@@ -320,8 +319,33 @@ import LatestSignals from "../components/LatestSignals.astro";
 
         <p class="flow__loop-caption">
           Answers create demand. Delivery creates proof. Growth compounds
-          with every orbit.
+          with every orbit. <a href="/process/">Walk the full process</a>,
+          phase by phase.
         </p>
+      </div>
+    </section>
+
+    <section class="pagesec roots" id="maryland">
+      <div class="container defblock">
+        <h2>Based in Maryland. Built for businesses everywhere.</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Maryland roots, national reach: every engagement is
+            founder-led from our home in Western Maryland.
+          </p>
+          <p>
+            From Hagerstown, Maryland, Aivium Digital helps established
+            businesses across the United States become visible in AI search
+            and put practical AI systems to work. Local accountability,
+            national ambition, and a human expert involved at every stage,
+            from <a href="/industries/home-services/">home-services
+            contractors</a> to enterprise teams.
+          </p>
+          <p class="roots__links">
+            <a href="/locations/maryland/">AI services in Maryland</a>
+            <a href="/about-steven/">Meet Steven Mills</a>
+          </p>
+        </div>
       </div>
     </section>
 

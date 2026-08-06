@@ -1,0 +1,233 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { orgNode, webPageNode, breadcrumbNode, graph } from "../../lib/schema";
+import { COMPANY } from "../../data/company";
+
+const trail: [string, string][] = [
+  ["Home", "/"],
+  ["Maryland", "/locations/maryland/"],
+];
+
+const description =
+  "Maryland-based Aivium Digital helps established businesses get cited in AI search (ChatGPT, Gemini, Google AI Overviews) and build custom AI agents, automations, and business systems.";
+
+const faq = [
+  {
+    q: "Do you only work with Maryland businesses?",
+    a: "No. Aivium Digital is based in Maryland and serves clients across the United States. Maryland businesses get the practical advantages of a partner in their own market and time zone; national clients get the same system delivered remotely.",
+  },
+  {
+    q: "Do you meet in person?",
+    a: "For Maryland and nearby clients, in-person working sessions can be part of an engagement when they genuinely help. Most of the work (audits, builds, reporting) runs remotely either way, so distance never changes the deliverable.",
+  },
+  {
+    q: "What does an engagement look like for a Maryland company?",
+    a: "The same as anywhere: a free 30-minute discovery call, then a baseline of where AI and Google mention you today as the engagement's first deliverable, then a fixed-scope roadmap. For regional service businesses, the local layer (Google Business Profile, reviews, service-area content) usually comes first because it's what both Google and AI engines check for local trust.",
+  },
+];
+
+const jsonLd = graph(
+  webPageNode(
+    "/locations/maryland/",
+    "AI SEO & AI Automation Agency in Maryland",
+    description,
+  ),
+  breadcrumbNode(trail),
+  orgNode(),
+  {
+    "@type": "FAQPage",
+    "@id": `${COMPANY.url}/locations/maryland/#faq`,
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+);
+---
+
+<BaseLayout
+  title="Aivium Digital | AI SEO & AI Automation in Maryland"
+  description={description}
+  ogDescription="Maryland-based AI visibility and AI automation for established businesses: get cited in AI search, then put AI to work in your operations."
+  canonical="/locations/maryland/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <SiteNav />
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__content">
+          <Breadcrumbs trail={trail} />
+          <hgroup class="hero__title">
+            <h1 class="hero__eyebrow">AI visibility and AI automation for Maryland businesses.</h1>
+            <p class="hero__headline">Your market. Our&nbsp;home.</p>
+          </hgroup>
+          <p class="lede">
+            Aivium Digital is a Maryland-based AI visibility and AI
+            automation company. We help established businesses become easier
+            to find, understand, and recommend across Google, ChatGPT,
+            Claude, Gemini, Perplexity, Copilot, and Google AI Overviews,
+            and we build the AI systems that put the resulting demand to
+            work. We serve Maryland organizations and clients across the
+            United States.
+          </p>
+          <div class="page-hero__actions">
+            <a class="btn btn--primary" href="/discovery/">Book a discovery call</a>
+            <a class="btn btn--ghost" href="#services">What we do</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="context">
+      <div class="container defblock">
+        <h2>An AI partner inside the Maryland market</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Maryland businesses are competing in one of the country's most
+            search-saturated corridors. Being findable is no longer enough;
+            being the recommended answer is the new bar.
+          </p>
+          <p>
+            The market here is unforgiving in a specific way: a dense band
+            of businesses between the Washington and Baltimore metros
+            competes for the same buyers, while regional companies out along
+            the I-70 and I-81 corridors in Western Maryland serve customers
+            who compare them against firms from three neighboring states.
+            In both cases the buying decision increasingly starts with a
+            question to Google or an AI assistant, and the engines answer
+            with a shortlist, not a phone book.
+          </p>
+          <p>
+            We work from inside that market. Aivium Digital is based in
+            <a href="/locations/hagerstown-md/">Hagerstown</a>, our
+            founder <a href="/about-steven/">Steven Mills</a> is hands-on in
+            every engagement, and our earliest work was making Maryland
+            service companies visible to the buyers around them. That local
+            accountability, an owner you can actually reach, in your time
+            zone, still shapes how we run national engagements today.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="services">
+      <div class="container">
+        <div class="pagesec__head">
+          <h2>What we do for Maryland companies</h2>
+          <p class="lede">
+            The same two systems we run nationally, with the advantage of a
+            partner who knows the market.
+          </p>
+        </div>
+        <div class="dgrid">
+          <div class="dgrid__cell">
+            <h3>AI visibility (GEO &amp; AEO)</h3>
+            <p>
+              Answer audits, entity engineering, citable content, and
+              share-of-answer tracking that get your brand named when buyers
+              ask AI who to work with.
+              <a href="/ai-seo/">How AI Visibility works</a>.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Search foundations</h3>
+            <p>
+              The technical SEO, structured data, and local signals
+              (profiles, reviews, service-area content) that both Google
+              rankings and AI recommendations are built on.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>AI automation &amp; agents</h3>
+            <p>
+              Custom agents, assistants, and workflow automations built
+              around how your business actually runs, from lead intake to
+              reporting. <a href="/ai-automation/">How AI Solutions works</a>.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Enablement &amp; training</h3>
+            <p>
+              Plain-language training so your team runs the systems
+              themselves. Everything we build is documented and owned by
+              you.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="fit">
+      <div class="container defblock">
+        <h2>Who in Maryland this fits</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Established companies that live or die on being found and
+            chosen: service businesses, professional firms, and operators
+            ready to put AI to work.
+          </p>
+          <p>
+            Our deepest vertical is
+            <a href="/industries/home-services/">home services</a>: roofing,
+            HVAC, plumbing, electrical, landscaping, and fencing companies
+            whose buyers ask "who should I hire" and get an AI answer. The
+            same dynamics apply to professional services, healthcare
+            practices, and regional B2B firms across the state. If your
+            customers ask questions before they buy, the engines are
+            already answering them, and the
+            <a href="/ai-visibility-audit/">audit</a> shows what they say
+            about you.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq pagesec" id="faq">
+      <div class="container faq__inner">
+        <div class="faq__head">
+          <h2>Maryland questions, answered.</h2>
+          <p class="lede faq__lede">What businesses here ask us first.</p>
+        </div>
+        <div class="faq__list">
+          {
+            faq.map((f) => (
+              <details class="faq__item">
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container cta__inner">
+        <div class="cta__content">
+          <h2 class="cta__heading">
+            <span class="cta__question">Want to know what AI says about your Maryland business?</span>
+            Let&rsquo;s find out together.
+          </h2>
+          <a class="btn btn--primary cta__btn" href="/discovery/">Book a discovery call</a>
+          <ul class="cta__checklist" aria-label="What the audit involves">
+            <li>30 minutes</li>
+            <li>Free</li>
+            <li>No deck</li>
+            <li>No obligation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

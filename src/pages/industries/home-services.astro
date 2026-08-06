@@ -1,0 +1,304 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { orgNode, webPageNode, breadcrumbNode, serviceNode, graph } from "../../lib/schema";
+import { COMPANY } from "../../data/company";
+
+const trail: [string, string][] = [
+  ["Home", "/"],
+  ["Home Services", "/industries/home-services/"],
+];
+
+const description =
+  "AI visibility and AI automation for home-services companies: get found and recommended when homeowners ask Google and AI who to hire, then respond faster with automated intake, follow-up, and reporting.";
+
+const faq = [
+  {
+    q: "Does AI search actually matter for a local contractor?",
+    a: "Increasingly, yes. Homeowners now ask ChatGPT and Google's AI Overviews the same questions they used to type into search: who to hire, what a job should cost, whether a company is reputable. The engines answer from sources they trust: your site, your reviews, your local profiles. If those signals are inconsistent or thin, the answer names someone else.",
+  },
+  {
+    q: "How is this different from the local SEO we've already done?",
+    a: "It builds on it rather than replacing it. Classic local SEO (Google Business Profile, reviews, service pages, citations) is still the foundation. We keep that foundation strong, then add the layer AI engines read: consistent entity data, answer-shaped content, and tracking of what the engines actually say about you.",
+  },
+  {
+    q: "What gets automated in a home-services business?",
+    a: "The revenue leaks: new-inquiry response, estimate follow-up, scheduling reminders, job-complete review requests, and reporting. The automations run inside the tools you already use, and your team keeps final say wherever judgment matters.",
+  },
+  {
+    q: "Which trades do you work with?",
+    a: "Roofing, HVAC, plumbing, electrical, landscaping, and fencing companies, and regional service businesses with similar buying dynamics. The mechanics differ by trade (storm-driven roofing demand behaves nothing like maintenance-agreement HVAC), and the engagement is scoped around yours.",
+  },
+];
+
+const jsonLd = graph(
+  webPageNode(
+    "/industries/home-services/",
+    "AI Visibility & Automation for Home Services",
+    description,
+  ),
+  breadcrumbNode(trail),
+  serviceNode({
+    path: "/industries/home-services/",
+    name: "AI Visibility & Automation for Home Services",
+    serviceType: "AI search visibility and workflow automation for home-services companies",
+    description,
+  }),
+  orgNode(),
+  {
+    "@type": "FAQPage",
+    "@id": `${COMPANY.url}/industries/home-services/#faq`,
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+);
+---
+
+<BaseLayout
+  title="Aivium Digital | AI Visibility & Automation for Home Services"
+  description={description}
+  ogDescription="Help homeowners find and choose your company in Google and AI search, then use AI to improve lead response, follow-up, and operations."
+  canonical="/industries/home-services/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <SiteNav />
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__content">
+          <Breadcrumbs trail={trail} />
+          <hgroup class="hero__title">
+            <h1 class="hero__eyebrow">AI visibility and automation for home-services companies.</h1>
+            <p class="hero__headline">Get recommended.<br />Respond&nbsp;faster.</p>
+          </hgroup>
+          <p class="lede">
+            When a homeowner asks Google or ChatGPT who to call, the answer
+            should be your company. Aivium Digital builds the search and AI
+            visibility that gets you named, then automates the intake,
+            follow-up, and reporting that turn those inquiries into booked
+            work. Home services is where our team's roots are, and it
+            remains one of our deepest verticals.
+          </p>
+          <div class="page-hero__actions">
+            <a class="btn btn--primary" href="/discovery/">Book a discovery call</a>
+            <a class="btn btn--ghost" href="#visibility">See how it works</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <nav class="jumpnav" aria-label="On this page">
+      <div class="container jumpnav__inner">
+        <a href="#buyers">How homeowners choose</a>
+        <a href="#visibility">Visibility foundation</a>
+        <a href="#automation">Automation</a>
+        <a href="#trades">Trades</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </nav>
+
+    <section class="pagesec" id="buyers">
+      <div class="container defblock">
+        <h2>How homeowners choose a contractor now</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            The homeowner journey starts with a question, and Google and AI
+            engines answer it before your phone ever rings.
+          </p>
+          <p>
+            "Who's a good roofer near me." "Is this quote fair." "Can this
+            company be trusted." Those questions used to produce a list of
+            links; increasingly they produce a direct answer naming two or
+            three companies. The engines build that answer from what they
+            can verify: your website's clarity, your review record, the
+            consistency of your name, phone, and service area across the
+            local sources they trust.
+          </p>
+          <p>
+            That changes the job. It's no longer enough to rank; you have to
+            be the recommendation. And when the inquiry does arrive, speed
+            decides who wins it: the first credible response usually gets
+            the walkthrough.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="visibility">
+      <div class="container">
+        <div class="pagesec__head">
+          <h2>The visibility foundation</h2>
+          <p class="lede">
+            The same <a href="/ai-seo/">AI Visibility system</a> we run for
+            every client, tuned to how local trades get found.
+          </p>
+        </div>
+        <div class="dgrid">
+          <div class="dgrid__cell">
+            <h3>Local entity consistency</h3>
+            <p>
+              One name, one phone number, one service area, everywhere:
+              your site, Google Business Profile, and the directories both
+              Google and AI engines read. Inconsistency reads as risk.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Service-area content</h3>
+            <p>
+              Pages that prove you actually work where you say you work:
+              real projects, real constraints, real answers to what
+              homeowners in that area ask. No city-swapped filler.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Answer-shaped trade content</h3>
+            <p>
+              The questions homeowners ask before hiring your trade,
+              answered plainly on your site, structured so search and AI
+              engines can quote them.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Answer audit &amp; tracking</h3>
+            <p>
+              Where the engines mention you today, who they name instead,
+              and monthly share-of-answer tracking so you can see the
+              recommendation shift.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="automation">
+      <div class="container">
+        <div class="pagesec__head">
+          <h2>The delivery layer</h2>
+          <p class="lede">
+            Visibility fills the pipeline; <a href="/ai-automation/">automation</a>
+            keeps it from leaking.
+          </p>
+        </div>
+        <div class="dgrid">
+          <div class="dgrid__cell">
+            <h3>Lead intake &amp; response</h3>
+            <p>
+              Every inquiry answered in minutes, around the clock: captured,
+              qualified, logged in your CRM, and routed to the right person
+              with the context attached.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Estimate follow-up</h3>
+            <p>
+              Outstanding quotes chased automatically and politely until
+              they close or die, so high-value estimates stop going quiet in
+              a busy season.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Review &amp; reputation workflows</h3>
+            <p>
+              Job complete, review requested, every time. Review velocity is
+              both a sales asset and one of the strongest signals AI engines
+              weigh for local trust.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Attribution &amp; reporting</h3>
+            <p>
+              Which channel produced which booked job, in one report. You
+              see what the visibility work is actually worth, not just what
+              it ranks for.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="trades">
+      <div class="container defblock">
+        <h2>Built around your trade</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Roofing, HVAC, plumbing, electrical, landscaping, and fencing:
+            same system, different mechanics.
+          </p>
+          <p>
+            Storm-and-insurance roofing demand behaves nothing like
+            emergency plumbing calls or design-build landscaping inquiries,
+            and a maintenance-agreement HVAC book is a different business
+            from quote-stage fencing comparisons. The audit starts from how
+            your trade actually gets bought: seasonality, urgency, ticket
+            size, and what proof homeowners need before they'll commit.
+            The <a href="/discovery/">discovery call</a> covers your
+            trade's specifics directly.
+          </p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="xlink">
+          <div class="xlink__copy">
+            <h3>Regional roots, national system.</h3>
+            <p>
+              Our home-services experience started with
+              <a href="/locations/maryland/">Maryland</a> and
+              <a href="/locations/hagerstown-md/">Western Maryland</a>
+              contractors, and the same playbook now runs for service
+              companies nationally.
+            </p>
+          </div>
+          <a class="btn btn--ghost" href="/case-studies/">Our case-study standard</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq pagesec" id="faq">
+      <div class="container faq__inner">
+        <div class="faq__head">
+          <h2>Contractor questions, answered.</h2>
+          <p class="lede faq__lede">What owners ask us before they start.</p>
+        </div>
+        <div class="faq__list">
+          {
+            faq.map((f) => (
+              <details class="faq__item">
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container cta__inner">
+        <div class="cta__content">
+          <h2 class="cta__heading">
+            <span class="cta__question">Want to know who AI recommends in your service area?</span>
+            Let's find out together.
+          </h2>
+          <a class="btn btn--primary cta__btn" href="/discovery/">Book a discovery call</a>
+          <ul class="cta__checklist" aria-label="What the audit involves">
+            <li>30 minutes</li>
+            <li>Free</li>
+            <li>No deck</li>
+            <li>No obligation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

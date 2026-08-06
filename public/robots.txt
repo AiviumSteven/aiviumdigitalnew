@@ -3,4 +3,9 @@ User-agent: *
 Allow: /
 Disallow: /styleguide.html
 
+# ChatGPT search crawler (distinct from GPTBot training crawler) — explicitly
+# welcome so the brand stays eligible for ChatGPT search citations.
+User-agent: OAI-SearchBot
+Allow: /
+
 Sitemap: https://aiviumdigital.com/sitemap.xml

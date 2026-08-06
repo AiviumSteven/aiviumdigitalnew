@@ -1,0 +1,141 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteNav from "../components/SiteNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { orgNode, webPageNode, breadcrumbNode, graph } from "../lib/schema";
+import { COMPANY } from "../data/company";
+
+const trail: [string, string][] = [
+  ["Home", "/"],
+  ["Privacy", "/privacy/"],
+];
+
+const description =
+  "How Aivium Digital handles your information: what the discovery questionnaire collects, where it goes, what we never do with it, and how to reach us about it.";
+
+const jsonLd = graph(
+  webPageNode("/privacy/", "Privacy Policy", description),
+  breadcrumbNode(trail),
+  orgNode(),
+);
+---
+
+<BaseLayout
+  title="Aivium Digital | Privacy Policy"
+  description={description}
+  canonical="/privacy/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <SiteNav />
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__content">
+          <Breadcrumbs trail={trail} />
+          <hgroup class="hero__title">
+            <h1 class="hero__eyebrow">Privacy policy for aiviumdigital.com.</h1>
+            <p class="hero__headline">Your data,<br />plainly&nbsp;stated.</p>
+          </hgroup>
+          <p class="lede">
+            This page describes what information this site collects, where
+            it goes, and what we never do with it. Last updated August 5,
+            2026.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="collect">
+      <div class="container defblock">
+        <h2>What we collect, and why</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            We collect information you give us on purpose, plus standard
+            anonymous usage measurement. No advertising trackers.
+          </p>
+          <p>
+            <strong>The discovery questionnaire</strong> (at /discovery/)
+            asks about your growth goals, operations, and company, plus your
+            name, business email, company name, website, and optionally a
+            phone number and notes. We use it to prepare for your call and
+            to decide how we can help. Your answers are stored in our
+            customer relationship system (Attio) and are read only by the
+            Aivium Digital team.
+          </p>
+          <p>
+            <strong>Scheduling</strong> happens through Calendly, which
+            loads on the final questionnaire step and processes the booking
+            under
+            <a href="https://calendly.com/privacy" rel="noopener noreferrer" target="_blank">its own privacy policy</a>.
+            We receive the booking details you enter there.
+          </p>
+          <p>
+            <strong>Ordinary server logs</strong> (IP address, requested
+            page, browser signature, timestamp) exist for security and
+            uptime monitoring, as on virtually every website, and rotate
+            out automatically.
+          </p>
+          <p>
+            <strong>Usage measurement</strong> runs through Google
+            Analytics 4: which pages are visited and which buttons and
+            links are clicked (calls, emails, bookings). We never send
+            names, email addresses, or anything you type into a form to
+            analytics. Google sets its measurement cookies for this under
+            <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">its own privacy policy</a>.
+          </p>
+          <p>
+            <strong>In your browser</strong>, the questionnaire keeps your
+            in-progress answers in session storage on your device so a page
+            refresh doesn't erase them; it clears when the questionnaire is
+            submitted or the browser tab closes.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="never">
+      <div class="container defblock">
+        <h2>What we never do</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            We don't sell, rent, or trade your information, and we don't
+            add you to mailing lists you didn't ask for.
+          </p>
+          <p>
+            Your questionnaire answers are used to run your engagement and
+            nothing else. We share information only with the service
+            providers named above (our CRM and scheduling tools), or if the
+            law requires it. If we ever want to use your information for
+            anything beyond this policy, we ask first.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="rights">
+      <div class="container defblock">
+        <h2>Your choices and contact</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Ask us what we hold about you, ask us to correct it, or ask us
+            to delete it. One email does it.
+          </p>
+          <p>
+            Write to
+            <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a> or call
+            <a href={`tel:${COMPANY.phoneE164}`}>{COMPANY.phoneDisplay}</a>
+            and we'll handle the request directly. If this policy changes
+            materially, the date at the top changes with it.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

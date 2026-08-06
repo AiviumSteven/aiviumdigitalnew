@@ -183,6 +183,7 @@ h3 {
 .nav__logo {
   position: relative;
   z-index: 2; /* stays above the mobile overlay */
+  flex-shrink: 0; /* never let the link row squeeze the lockup */
 }
 
 .nav__logo img {
@@ -211,6 +212,7 @@ h3 {
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  white-space: nowrap; /* six links now — never wrap a label to two lines */
   color: var(--cream-55);
   transition: color var(--duration-fast) var(--ease-out);
 }
@@ -439,18 +441,23 @@ body.nav-locked {
   white-space: nowrap;
 }
 
-@media (max-width: 767px) {
+/* Six primary links since the services/about expansion: the full bar
+   needs ~1100px, so tablets get the overlay menu too. */
+@media (max-width: 1099px) {
   .nav__primary { display: none; }
   .nav__cta { display: none; }
   .nav__phone { display: none; }
   .nav__toggle { display: block; }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-  .nav__phone span { display: none; } /* icon-only when the bar tightens */
+/* Tight range: icon-only phone, compact lockup and link spacing */
+@media (min-width: 1100px) and (max-width: 1279px) {
+  .nav__phone span { display: none; }
+  .nav__logo img { height: 22px; }
+  .nav__links { gap: var(--space-4); }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1100px) {
   .nav__overlay { display: none; }
 }
 
@@ -780,6 +787,27 @@ body.nav-locked {
 }
 
 .mission__sources a:hover {
+  color: var(--cream-72);
+}
+
+/* Honesty line under the brand marquee */
+.mission__disclosure {
+  margin-top: var(--space-8);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--cream-32);
+}
+
+.mission__disclosure a {
+  color: var(--cream-32);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line-strong);
+}
+
+.mission__disclosure a:hover {
   color: var(--cream-72);
 }
 
@@ -1825,6 +1853,16 @@ body.nav-locked {
   font-size: var(--text-small);
 }
 
+.footer__bottom a {
+  color: var(--cream-55);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.footer__bottom a:hover {
+  color: var(--cream);
+}
+
 @media (max-width: 760px) {
   .footer__inner {
     grid-template-columns: 1fr;
@@ -1833,6 +1871,104 @@ body.nav-locked {
   .footer__nav {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* Definition-block lists (use-case categories etc.) */
+.defblock__list {
+  margin: 0;
+  padding-left: 1.2em;
+  display: grid;
+  gap: var(--space-3);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--cream-72);
+}
+
+.defblock__list strong {
+  color: var(--cream);
+}
+
+/* Reviewed-by line under educational sections */
+.defblock__reviewed {
+  margin-top: var(--space-6);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cream-32);
+}
+
+/* In-copy links: body text on sections, cards, steps, and FAQs.
+   Base anchors inherit color with no underline, so every contextual
+   link inside prose needs this to be visible and crawl-obvious. */
+.defblock__body a,
+.dgrid__cell a,
+.step__body a,
+.faq__item p a,
+.systems__lede a,
+.pagesec__head .lede a,
+.page-hero .lede a,
+.flow__loop-caption a {
+  color: var(--cream);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line-strong);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.defblock__body a:hover,
+.dgrid__cell a:hover,
+.step__body a:hover,
+.faq__item p a:hover,
+.systems__lede a:hover,
+.pagesec__head .lede a:hover,
+.page-hero .lede a:hover,
+.flow__loop-caption a:hover {
+  color: var(--accent);
+}
+
+/* Homepage: search-foundations note inside the AI Visibility card */
+.system-card__note {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+  font-size: var(--text-small);
+  line-height: var(--leading-body);
+  color: var(--cream-55);
+}
+
+.system-card__note a {
+  color: var(--cream-72);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line-strong);
+}
+
+.system-card__note a:hover {
+  color: var(--cream);
+}
+
+/* Homepage: Maryland trust block links */
+.roots__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  margin-top: var(--space-6);
+}
+
+.roots__links a {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--cream);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--accent);
+}
+
+.roots__links a:hover {
+  color: var(--accent);
 }
 
 /* ---- Service subpages ---- */

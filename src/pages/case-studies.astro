@@ -1,0 +1,173 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteNav from "../components/SiteNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { orgNode, webPageNode, breadcrumbNode, graph } from "../lib/schema";
+
+const trail: [string, string][] = [
+  ["Home", "/"],
+  ["Case Studies", "/case-studies/"],
+];
+
+const description =
+  "How Aivium Digital documents client work: verifiable baselines, real timelines, named constraints, and no reconstructed numbers. Case studies publish here as clients approve them.";
+
+const jsonLd = graph(
+  webPageNode("/case-studies/", "AI Visibility & Automation Case Studies", description),
+  breadcrumbNode(trail),
+  orgNode(),
+);
+
+/*
+ * PUBLISHING CHECKLIST (the visible standard below is the template):
+ * a case study ships only when it has client approval (named or
+ * anonymized descriptor), a preserved baseline, verifiable results,
+ * and its limitations section. Add each study as its own page under
+ * /case-studies/<slug>/ and list it here; never publish estimates or
+ * reconstructed numbers. See docs/seo-implementation-report.md.
+ */
+---
+
+<BaseLayout
+  title="Aivium Digital | Case Studies"
+  description={description}
+  ogDescription="Verifiable baselines, real timelines, named constraints: the standard every Aivium Digital case study has to meet before it publishes."
+  canonical="/case-studies/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <SiteNav />
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__content">
+          <Breadcrumbs trail={trail} />
+          <hgroup class="hero__title">
+            <h1 class="hero__eyebrow">Case studies, held to the same standard we sell.</h1>
+            <p class="hero__headline">Proof over<br />promises.</p>
+          </hgroup>
+          <p class="lede">
+            We tell clients that AI engines cite evidence, not adjectives.
+            The same rule applies to us. This page holds our client work as
+            it clears the publication bar below; nothing here will ever be
+            estimated, reconstructed, or borrowed.
+          </p>
+          <div class="page-hero__actions">
+            <a class="btn btn--primary" href="/discovery/">Book a discovery call</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="status">
+      <div class="container defblock">
+        <h2>Where the case studies are</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            None are published yet. That's the standard working, not the
+            absence of work.
+          </p>
+          <p>
+            Aivium Digital launched in 2026, and a case study worth reading
+            needs three things that only time and permission produce: a
+            preserved baseline, a measured result, and a client's approval
+            to publish both. Engagements are underway; their studies appear
+            here when the numbers are real and released. In the meantime,
+            our approach is documented in the open on the
+            <a href="/process/">process page</a> and in
+            <a href="/signals/">Signals</a>, where every claim carries a
+            source.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="standard">
+      <div class="container">
+        <div class="pagesec__head">
+          <h2>The publication bar</h2>
+          <p class="lede">
+            Every study that appears on this page will include all of the
+            following. If a section can't be filled honestly, the study
+            waits.
+          </p>
+        </div>
+        <div class="dgrid">
+          <div class="dgrid__cell">
+            <h3>The situation, verifiably</h3>
+            <p>
+              Client name or an approved anonymized descriptor, industry,
+              company stage, the problem in their words, and the baseline
+              metrics recorded before we changed anything.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>The work, specifically</h3>
+            <p>
+              Strategy, what was actually built or published, the timeline
+              it happened on, and the constraints we worked inside. No
+              "proprietary methodology" hand-waving.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>The results, with receipts</h3>
+            <p>
+              Measured outcomes against the baseline, screenshots or
+              artifacts where permissions allow, and a client quote only
+              when the client approved it.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>The limitations, honestly</h3>
+            <p>
+              Confounding factors, seasonality, what didn't work, and what
+              we'd do differently. A case study without a limitations
+              section is an ad.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="meanwhile">
+      <div class="container">
+        <div class="xlink">
+          <div class="xlink__copy">
+            <h3>Want evidence in the meantime?</h3>
+            <p>
+              Start with a discovery call: if we work together, the first
+              deliverable is a real baseline of where AI engines mention
+              you today, the "before" that every published result gets
+              measured against.
+            </p>
+          </div>
+          <a class="btn btn--ghost" href="/ai-visibility-audit/">See what the audit measures</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container cta__inner">
+        <div class="cta__content">
+          <h2 class="cta__heading">
+            <span class="cta__question">Want to be the first study on this page?</span>
+            Start with the baseline.
+          </h2>
+          <a class="btn btn--primary cta__btn" href="/discovery/">Book a discovery call</a>
+          <ul class="cta__checklist" aria-label="What the audit involves">
+            <li>30 minutes</li>
+            <li>Free</li>
+            <li>No deck</li>
+            <li>No obligation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

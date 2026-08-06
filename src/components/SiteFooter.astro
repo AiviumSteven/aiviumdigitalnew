@@ -1,7 +1,11 @@
+---
+import { COMPANY } from "../data/company";
+---
+
 <footer class="footer">
   <div class="container footer__inner">
     <div class="footer__brand">
-      <img src="/assets/aivium-digital-lockup-horizontal-dark.svg" alt="Aivium Digital" />
+      <img src={COMPANY.logoPath} alt="Aivium Digital" />
       <p class="footer__tagline">
         The AI SEO agency for getting cited, not just ranked. Custom AI
         systems for putting the answers to work.
@@ -11,31 +15,37 @@
       <div class="footer__col">
         <p class="footer__col-title">Services</p>
         <ul>
+          <li><a href="/services/">All services</a></li>
           <li><a href="/ai-seo/">AI Visibility (GEO &amp; AEO)</a></li>
           <li><a href="/ai-automation/">AI Solutions &amp; Automation</a></li>
-          <li><a href="/discovery/">Free AI audit</a></li>
+          <li><a href="/ai-visibility-audit/">AI Visibility Audit</a></li>
+          <li><a href="/industries/home-services/">Home Services</a></li>
         </ul>
       </div>
       <div class="footer__col">
         <p class="footer__col-title">Company</p>
         <ul>
-          <li><a href="/#process">Process</a></li>
-          <li><a href="/signals/">Signals</a></li>
+          <li><a href="/about/">About Aivium Digital</a></li>
           <li><a href="/about-steven/">About Steven</a></li>
-          <li><a href="#faq">FAQ</a></li>
+          <li><a href="/process/">Process</a></li>
+          <li><a href="/case-studies/">Case Studies</a></li>
+          <li><a href="/signals/">Signals</a></li>
         </ul>
       </div>
       <div class="footer__col">
         <p class="footer__col-title">Contact</p>
         <ul>
-          <li><a href="tel:+12407304333">240-730-4333</a></li>
+          <li><a href={`tel:${COMPANY.phoneE164}`}>{COMPANY.phoneDisplay}</a></li>
+          <li><a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a></li>
           <li><a href="/discovery/">Book a discovery call</a></li>
+          <li><a href="/locations/maryland/">Maryland</a></li>
+          <li><a href="/locations/hagerstown-md/">Hagerstown, MD</a></li>
         </ul>
       </div>
     </nav>
   </div>
   <div class="container footer__bottom">
-    <p>&copy; 2026 Aivium Digital. All rights reserved.</p>
+    <p>&copy; 2026 Aivium Digital. All rights reserved. · <a href="/privacy/">Privacy</a></p>
     <p>Be the answer AI gives.</p>
   </div>
 </footer>

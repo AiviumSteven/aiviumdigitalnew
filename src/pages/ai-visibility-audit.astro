@@ -1,0 +1,295 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteNav from "../components/SiteNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { orgNode, webPageNode, breadcrumbNode, serviceNode, graph } from "../lib/schema";
+import { COMPANY } from "../data/company";
+
+const trail: [string, string][] = [
+  ["Home", "/"],
+  ["AI Visibility Audit", "/ai-visibility-audit/"],
+];
+
+const description =
+  "See where your brand appears in ChatGPT, Claude, Gemini, Perplexity, Copilot, and Google AI Overviews, what the engines cite to get there, and what is keeping competitors ahead.";
+
+const faq = [
+  {
+    q: "What does the audit cost?",
+    a: "The 30-minute discovery call is free, with no obligation. The full engine baseline runs as the first phase of a scoped engagement; the call is where we agree what that scope should be, and whether the work is worth doing at all.",
+  },
+  {
+    q: "What do you need from us to run it?",
+    a: "About two minutes: the discovery questionnaire covers your company, market, and goals. No logins, no installs, and no access to your systems are needed for the baseline.",
+  },
+  {
+    q: "What happens after the audit?",
+    a: "If the findings point to work worth doing, the roadmap gets scoped against them and you decide. If they don't, we tell you so. Nobody gets a hard sell on a measurement.",
+  },
+];
+
+const jsonLd = graph(
+  webPageNode("/ai-visibility-audit/", "AI Visibility Audit for ChatGPT & AI Search", description),
+  breadcrumbNode(trail),
+  serviceNode({
+    path: "/ai-visibility-audit/",
+    name: "AI Visibility Audit",
+    serviceType: "AI search visibility audit across ChatGPT, Claude, Gemini, Perplexity, Copilot, and Google AI Overviews",
+    description,
+  }),
+  orgNode(),
+  {
+    "@type": "FAQPage",
+    "@id": `${COMPANY.url}/ai-visibility-audit/#faq`,
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+);
+---
+
+<BaseLayout
+  title="Aivium Digital | AI Visibility Audit"
+  description={description}
+  ogDescription="See where your brand appears in ChatGPT, Claude, Gemini, Perplexity, Copilot, and Google AI Overviews, and what is keeping competitors ahead."
+  canonical="/ai-visibility-audit/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <SiteNav active="visibility" />
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__content">
+          <Breadcrumbs trail={trail} />
+          <hgroup class="hero__title">
+            <h1 class="hero__eyebrow">See exactly where your brand appears in AI search, and where it disappears.</h1>
+            <p class="hero__headline">Your AI visibility,<br />measured.</p>
+          </hgroup>
+          <p class="lede">
+            The AI visibility audit asks the six major answer engines the
+            questions your buyers actually ask, then records what comes
+            back: where you're mentioned, who gets recommended instead, and
+            which sources the engines trusted to decide. It starts with a
+            free 30-minute discovery call and runs as the first phase of
+            every engagement.
+          </p>
+          <div class="page-hero__actions">
+            <a class="btn btn--primary" href="/discovery/">Book a discovery call</a>
+            <a class="btn btn--ghost" href="#measured">What gets measured</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="engines" aria-label="Answer engines the audit covers">
+      <div class="container engines__inner">
+        <p class="engines__caption">Six engines, one baseline</p>
+        <ul class="engines__list">
+          <li><img src="/assets/engines/openai.svg" alt="" /><span>ChatGPT</span></li>
+          <li><img src="/assets/engines/claude.svg" alt="" /><span>Claude</span></li>
+          <li><img src="/assets/engines/googlegemini.svg" alt="" /><span>Gemini</span></li>
+          <li><img src="/assets/engines/perplexity.svg" alt="" /><span>Perplexity</span></li>
+          <li><img src="/assets/engines/copilot.svg" alt="" /><span>Copilot</span></li>
+          <li><img src="/assets/engines/grok.svg" alt="" /><span>Grok</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="pagesec" id="measured">
+      <div class="container">
+        <div class="pagesec__head">
+          <h2>What the audit measures</h2>
+          <p class="lede">
+            Four readings, taken against the questions your buyers ask.
+          </p>
+        </div>
+        <div class="dgrid">
+          <div class="dgrid__cell">
+            <h3>Brand mentions</h3>
+            <p>
+              Whether each engine names you at all for your buyers'
+              questions, and how it frames you when it does: recommended,
+              listed, or footnoted.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Competitor share</h3>
+            <p>
+              Who the engines recommend instead, question by question. The
+              gap between their share of answer and yours is the roadmap.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Source citations</h3>
+            <p>
+              Which sites, directories, and reviews each engine cited to
+              build its answer. These sources are where visibility is won,
+              and the audit maps them.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Foundation check</h3>
+            <p>
+              A pass over your site's technical and entity signals: can
+              engines crawl it, parse it, and resolve your brand without
+              ambiguity.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="questions">
+      <div class="container defblock">
+        <h2>The questions we test</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Not vanity prompts. The audit uses the questions that sit in
+            front of a buying decision in your market.
+          </p>
+          <p>
+            For a home-services company that means questions like "who
+            should I hire for a roof replacement near me" and "is this
+            quote fair." For a B2B firm it's "best <em>[category]</em> for
+            <em>[situation]</em>" and "alternatives to <em>[incumbent]</em>."
+            For every client it includes the reputation checks buyers run
+            last: "is <em>[your brand]</em> legit." We build the question
+            set from your market before anything is measured.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="receive">
+      <div class="container">
+        <div class="pagesec__head">
+          <h2>How the audit runs</h2>
+          <p class="lede">A free call first; the baseline is the engagement's first deliverable.</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <p class="step__num">01</p>
+            <div class="step__body">
+              <h3>The discovery call</h3>
+              <p>
+                Free, 30 minutes, no deck, no obligation: your market, the
+                questions your buyers ask, and an honest first read of
+                where your AI visibility stands.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <p class="step__num">02</p>
+            <div class="step__body">
+              <h3>The baseline</h3>
+              <p>
+                If we go forward, the full engine baseline is the first
+                thing the engagement produces: your mention record across
+                the tested questions, who won instead, and which sources
+                decided it.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <p class="step__num">03</p>
+            <div class="step__body">
+              <h3>The roadmap</h3>
+              <p>
+                Findings ranked into a scoped plan, and every later claim
+                of progress measured against that baseline. If the
+                findings don't justify work, we say that instead.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="honesty">
+      <div class="container defblock">
+        <h2>What the audit doesn't promise</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            A measurement, honestly taken, is the deliverable. Everything
+            else depends on the work that follows.
+          </p>
+          <p>
+            AI engines vary their answers across sessions and re-read their
+            sources on their own schedules, so an audit is a snapshot, not
+            a prophecy. It won't guarantee rankings, citations, or
+            timelines, and we won't pretend otherwise. What it gives you is
+            the honest starting position: the thing every claim of progress
+            should be measured against. That's also why it's the mandatory
+            first phase of <a href="/process/">our process</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="privacy-note">
+      <div class="container defblock">
+        <h2>Who it's for, and what we do with your answers</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Established businesses with a market to defend: from
+            <a href="/industries/home-services/">home-services companies</a>
+            to professional firms and B2B teams.
+          </p>
+          <p>
+            The discovery questionnaire asks about your goals, market, and
+            operations so the call starts at the real problem. Your answers
+            go to our CRM and nowhere else: no lists, no resale, and no
+            follow-up barrage. The details are in our
+            <a href="/privacy/">privacy policy</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container cta__inner">
+        <div class="cta__content">
+          <h2 class="cta__heading">
+            <span class="cta__question">Ready to find out where you stand?</span>
+            It starts with a call.
+          </h2>
+          <a class="btn btn--primary cta__btn" href="/discovery/">Book a discovery call</a>
+          <ul class="cta__checklist" aria-label="What the audit involves">
+            <li>30 minutes</li>
+            <li>Free</li>
+            <li>No deck</li>
+            <li>No obligation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq pagesec" id="faq">
+      <div class="container faq__inner">
+        <div class="faq__head">
+          <h2>Audit questions, answered.</h2>
+          <p class="lede faq__lede">The three everyone asks.</p>
+        </div>
+        <div class="faq__list">
+          {
+            faq.map((f) => (
+              <details class="faq__item">
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

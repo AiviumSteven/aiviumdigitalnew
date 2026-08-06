@@ -1,0 +1,210 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteNav from "../components/SiteNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { orgNode, breadcrumbNode, graph, ORG_ID } from "../lib/schema";
+import { COMPANY } from "../data/company";
+
+const trail: [string, string][] = [
+  ["Home", "/"],
+  ["About", "/about/"],
+];
+
+const description =
+  "Aivium Digital is the AI visibility and AI solutions division of Aivium, helping established businesses get found in AI search and put AI to work responsibly.";
+
+const jsonLd = graph(
+  {
+    "@type": "AboutPage",
+    "@id": `${COMPANY.url}/about/#page`,
+    url: `${COMPANY.url}/about/`,
+    name: "About Aivium Digital",
+    description,
+    mainEntity: { "@id": ORG_ID },
+  },
+  breadcrumbNode(trail),
+  orgNode(),
+);
+---
+
+<BaseLayout
+  title="Aivium Digital | About the Company"
+  description={description}
+  ogDescription="The AI visibility and AI solutions division of Aivium: Maryland-based, founder-led, serving established businesses across the United States."
+  canonical="/about/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <SiteNav active="about" />
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__content">
+          <Breadcrumbs trail={trail} />
+          <hgroup class="hero__title">
+            <h1 class="hero__eyebrow">An AI company built for the frontier, accountable to the people using it.</h1>
+            <p class="hero__headline">This is<br />Aivium&nbsp;Digital.</p>
+          </hgroup>
+          <p class="lede">
+            Aivium Digital is an AI visibility and AI solutions company. We
+            help established businesses get found, cited, and recommended in
+            AI-generated answers, and we build practical AI systems that
+            improve how those businesses operate.
+          </p>
+          <div class="page-hero__actions">
+            <a class="btn btn--primary" href="/discovery/">Book a discovery call</a>
+            <a class="btn btn--ghost" href="/services/">What we do</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="what">
+      <div class="container defblock">
+        <h2>What we do, and for whom</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Two systems, one loop:
+            <a href="/ai-seo/">AI Visibility</a> makes a brand the answer AI
+            engines give, and <a href="/ai-automation/">AI Solutions</a>
+            puts AI to work inside the business.
+          </p>
+          <p>
+            Our clients are established businesses, from local operators to
+            enterprise teams: companies with something real to lose as
+            buying decisions move into ChatGPT, Claude, Gemini, Perplexity,
+            Copilot, and Google AI Overviews, and something real to gain
+            from systems that respond faster than their competitors. One
+            deep vertical, <a href="/industries/home-services/">home
+            services</a>, sits alongside professional services, healthcare,
+            and B2B firms. The full catalog lives on the
+            <a href="/services/">services page</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="where">
+      <div class="container defblock">
+        <h2>Maryland base, national reach</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            We work from Hagerstown, in Western Maryland, and serve
+            clients across the United States.
+          </p>
+          <p>
+            The location is not incidental. Our earliest work made
+            <a href="/locations/maryland/">Maryland</a> and
+            <a href="/locations/hagerstown-md/">Western Maryland</a> service
+            companies visible to the buyers around them, and that habit of
+            local accountability (an owner you can reach, results you can
+            audit) still runs every national engagement.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="family">
+      <div class="container defblock">
+        <h2>Part of the Aivium family</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Aivium Digital is the AI visibility and AI solutions division of
+            <a href="https://aivium.com/" rel="noopener">Aivium</a>, founded
+            in 2026.
+          </p>
+          <p>
+            Aivium is the parent company; Aivium Digital is the division
+            doing the work described on this site. Both are founded and led
+            by <a href="/about-steven/">Steven Mills</a>, who works hands-on
+            in every engagement: answer audits, entity engineering, content
+            review, and automation builds. Founder-led is not a slogan here;
+            it's the org chart.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="pillars">
+      <div class="container">
+        <div class="pagesec__head">
+          <h2>The three pillars</h2>
+          <p class="lede">
+            The operating principles under every engagement, spelled out in
+            full on the <a href="/process/">process page</a>.
+          </p>
+        </div>
+        <div class="dgrid">
+          <div class="dgrid__cell">
+            <h3>Safety</h3>
+            <p>
+              Guardrails before capability. We don't automate decisions
+              that need human judgment, and we don't publish claims we
+              can't source.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Education &amp; enablement</h3>
+            <p>
+              Clients learn to run what we build. Plain-language training
+              and documentation are deliverables, not extras.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Human-first quality control</h3>
+            <p>
+              A person reviews everything that ships under your name. AI
+              drafts, humans decide.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="why">
+      <div class="container defblock">
+        <h2>Why this company exists</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            The routes to customers are being redrawn. Most businesses
+            can't see the new map, and most AI vendors sell them hype
+            instead of a working system.
+          </p>
+          <p>
+            Aivium Digital exists to be the practical answer: a decade-plus
+            of digital marketing craft, specialized in AI since 2022,
+            applied to two concrete problems: be the answer buyers get, and
+            run the business that delivers on it. Our proof standard is on
+            the <a href="/case-studies/">case studies page</a>, our working
+            notes are in <a href="/signals/">Signals</a>, and if a claim
+            anywhere on this site carries a number, it carries a source.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container cta__inner">
+        <div class="cta__content">
+          <h2 class="cta__heading">
+            <span class="cta__question">Want to see how we'd approach your business?</span>
+            Start with the audit.
+          </h2>
+          <a class="btn btn--primary cta__btn" href="/discovery/">Book a discovery call</a>
+          <ul class="cta__checklist" aria-label="What the audit involves">
+            <li>30 minutes</li>
+            <li>Free</li>
+            <li>No deck</li>
+            <li>No obligation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

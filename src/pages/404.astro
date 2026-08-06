@@ -24,6 +24,25 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       }
       .notfound h1 { margin-bottom: 1rem; }
       .notfound p { margin-bottom: 2rem; }
+      .notfound__links {
+        list-style: none;
+        margin: 2rem 0 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem 1.5rem;
+        font-family: var(--font-mono, monospace);
+        font-size: 0.8125rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .notfound__links a {
+        color: var(--cream-72, #ccc);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+      .notfound__links a:hover { color: var(--cream, #fff); }
     </style>
   </Fragment>
 
@@ -33,6 +52,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <h1>Lost in space.</h1>
       <p class="lede">This page doesn&rsquo;t exist, or it moved to a new orbit.</p>
       <a class="btn btn--primary" href="/">Back to the homepage</a>
+      <ul class="notfound__links" aria-label="Popular destinations">
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/ai-seo/">AI Visibility</a></li>
+        <li><a href="/ai-automation/">AI Solutions</a></li>
+        <li><a href="/signals/">Signals</a></li>
+        <li><a href="/discovery/">Book a discovery call</a></li>
+      </ul>
     </div>
   </main>
 </BaseLayout>

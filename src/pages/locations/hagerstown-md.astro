@@ -1,0 +1,235 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { orgNode, webPageNode, breadcrumbNode, graph } from "../../lib/schema";
+import { COMPANY } from "../../data/company";
+
+const trail: [string, string][] = [
+  ["Home", "/"],
+  ["Maryland", "/locations/maryland/"],
+  ["Hagerstown, MD", "/locations/hagerstown-md/"],
+];
+
+const description =
+  "Hagerstown-based Aivium Digital helps Western Maryland businesses improve Google and AI-search visibility and implement custom AI agents, automations, and workflows.";
+
+const faq = [
+  {
+    q: "Why does working with a Hagerstown-area partner matter?",
+    a: "Accountability and context. You are working with a company from your own market: an owner you can call, in your time zone, who understands how Western Maryland businesses actually compete, including against firms from Pennsylvania, West Virginia, and Virginia. The deliverables are the same as a national engagement; the access is closer.",
+  },
+  {
+    q: "We serve customers beyond Hagerstown. Does local optimization limit us?",
+    a: "No, and this is the point most regional companies miss: local and national visibility reinforce each other. The trust signals that win your home market (reviews, consistent profiles, real service-area content) are the same signals AI engines weigh when they recommend you to buyers further out. We build both layers as one system.",
+  },
+  {
+    q: "What kinds of Hagerstown-area businesses do you work with?",
+    a: "Regional service companies are the deepest fit: home-services trades, professional firms, and operators serving the tri-state area. If your buyers ask Google or ChatGPT who to hire before they call anyone, the engagement applies.",
+  },
+];
+
+const jsonLd = graph(
+  webPageNode(
+    "/locations/hagerstown-md/",
+    "AI Consulting, AI SEO & Automation in Hagerstown, MD",
+    description,
+  ),
+  breadcrumbNode(trail),
+  orgNode(),
+  {
+    "@type": "FAQPage",
+    "@id": `${COMPANY.url}/locations/hagerstown-md/#faq`,
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+);
+---
+
+<BaseLayout
+  title="Aivium Digital | AI Consulting in Hagerstown, MD"
+  description={description}
+  ogDescription="AI strategy and implementation for Hagerstown and Western Maryland businesses: AI-search visibility plus custom agents, automations, and workflows."
+  canonical="/locations/hagerstown-md/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <SiteNav />
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__content">
+          <Breadcrumbs trail={trail} />
+          <hgroup class="hero__title">
+            <h1 class="hero__eyebrow">AI strategy and implementation for businesses in Hagerstown, Maryland.</h1>
+            <p class="hero__headline">Local partner.<br />National&nbsp;capability.</p>
+          </hgroup>
+          <p class="lede">
+            Aivium Digital is based in Hagerstown, Maryland, but we are not
+            a local-marketing shop. We help regional companies strengthen the
+            search visibility they need today while building the AI
+            visibility and AI systems they will need next. For businesses
+            that want a nearby strategic partner with national capability,
+            that combination is the offer.
+          </p>
+          <div class="page-hero__actions">
+            <a class="btn btn--primary" href="/discovery/">Book a discovery call</a>
+            <a class="btn btn--ghost" href="#problems">Why it matters here</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="roots">
+      <div class="container defblock">
+        <h2>Western Maryland roots</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Our home is Hagerstown, and our home market is the Western
+            Maryland corridor around it, where our earliest work made
+            regional service companies visible to the buyers around them.
+          </p>
+          <p>
+            Businesses here operate in a genuinely tri-state market: a
+            company in Washington County competes with firms across the
+            Pennsylvania and West Virginia lines for the same customers,
+            and increasingly that competition is settled by whichever name
+            Google or an AI assistant serves up first. Working from inside
+            this market, rather than from a downtown office three states
+            away, is why the local layer of our work is grounded in how
+            these businesses actually win jobs.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="problems">
+      <div class="container">
+        <div class="pagesec__head">
+          <h2>The problems regional businesses bring us</h2>
+          <p class="lede">
+            Four patterns come up in nearly every first call.
+          </p>
+        </div>
+        <div class="dgrid">
+          <div class="dgrid__cell">
+            <h3>No AI expertise in-house</h3>
+            <p>
+              Owners know AI matters and don't have a hire who owns it. We
+              carry the expertise, and every engagement includes training so
+              the capability stays after we leave.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Fragmented marketing and operations</h3>
+            <p>
+              A website from one vendor, ads from another, a CRM nobody
+              updates. We consolidate the signals engines read, and automate
+              the handoffs your team loses hours to.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Competing beyond the home market</h3>
+            <p>
+              Growth means winning buyers who have never heard of you. AI
+              visibility work makes the engines introduce you: to customers
+              regionally, and nationally when you're ready.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>No accountable implementation partner</h3>
+            <p>
+              Reports without changes, strategies without shipping. Our
+              engagements are fixed-scope, and what we build is documented,
+              measured, and yours.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="together">
+      <div class="container defblock">
+        <h2>Local search and AI search, one system</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            The signals that win Hagerstown are the signals that win
+            ChatGPT: consistent identity, real reviews, and content that
+            answers what buyers actually ask.
+          </p>
+          <p>
+            That is why we never split "local SEO" and "AI visibility" into
+            separate projects. The
+            <a href="/ai-seo/">visibility system</a> strengthens your
+            foundations once, and every surface that reads them (Google's
+            local results, AI Overviews, the chat engines) gets the same
+            consistent story. Then the
+            <a href="/ai-automation/">automation layer</a> makes sure the
+            calls that follow get answered first and followed up on, which
+            for <a href="/industries/home-services/">home-services
+            companies</a> in particular is where jobs are won and lost.
+          </p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="xlink">
+          <div class="xlink__copy">
+            <h3>Meet the founder.</h3>
+            <p>
+              Aivium Digital is founder-led from right here:
+              <a href="/about-steven/">Steven Mills</a> works hands-on in
+              every engagement, from the audit to the build.
+            </p>
+          </div>
+          <a class="btn btn--ghost" href="/locations/maryland/">Our Maryland page</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq pagesec" id="faq">
+      <div class="container faq__inner">
+        <div class="faq__head">
+          <h2>Hagerstown questions, answered.</h2>
+          <p class="lede faq__lede">What neighbors ask us before they start.</p>
+        </div>
+        <div class="faq__list">
+          {
+            faq.map((f) => (
+              <details class="faq__item">
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container cta__inner">
+        <div class="cta__content">
+          <h2 class="cta__heading">
+            <span class="cta__question">Ready to be the answer in your own backyard first?</span>
+            Let&rsquo;s talk.
+          </h2>
+          <a class="btn btn--primary cta__btn" href="/discovery/">Book a discovery call</a>
+          <ul class="cta__checklist" aria-label="What the audit involves">
+            <li>30 minutes</li>
+            <li>Free</li>
+            <li>No deck</li>
+            <li>No obligation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

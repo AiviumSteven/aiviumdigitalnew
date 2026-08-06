@@ -9,12 +9,22 @@ const SITE = 'https://aiviumdigital.com';
 
 // Static routes with their last substantive-edit dates; bump by hand on
 // meaningful page changes, exactly as the old static sitemap was.
+// /discovery/ is noindex (conversion funnel) and stays out on purpose.
 const STATIC_PAGES: { loc: string; lastmod: string }[] = [
-  { loc: '/', lastmod: '2026-07-27' },
-  { loc: '/ai-seo/', lastmod: '2026-07-27' },
-  { loc: '/ai-automation/', lastmod: '2026-07-27' },
+  { loc: '/', lastmod: '2026-08-05' },
+  { loc: '/services/', lastmod: '2026-08-05' },
+  { loc: '/ai-seo/', lastmod: '2026-08-05' },
+  { loc: '/ai-automation/', lastmod: '2026-08-05' },
+  { loc: '/ai-visibility-audit/', lastmod: '2026-08-05' },
+  { loc: '/process/', lastmod: '2026-08-05' },
+  { loc: '/case-studies/', lastmod: '2026-08-05' },
+  { loc: '/industries/home-services/', lastmod: '2026-08-05' },
+  { loc: '/locations/maryland/', lastmod: '2026-08-05' },
+  { loc: '/locations/hagerstown-md/', lastmod: '2026-08-05' },
+  { loc: '/about/', lastmod: '2026-08-05' },
+  { loc: '/about-steven/', lastmod: '2026-08-05' },
+  { loc: '/privacy/', lastmod: '2026-08-05' },
   { loc: '/signals/', lastmod: '2026-08-01' },
-  { loc: '/about-steven/', lastmod: '2026-08-01' },
 ];
 
 const day = (iso: string) => iso.slice(0, 10);

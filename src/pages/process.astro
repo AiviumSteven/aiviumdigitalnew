@@ -1,0 +1,210 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteNav from "../components/SiteNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { orgNode, webPageNode, breadcrumbNode, graph } from "../lib/schema";
+
+const trail: [string, string][] = [
+  ["Home", "/"],
+  ["Process", "/process/"],
+];
+
+const description =
+  "See Aivium Digital's process for auditing AI visibility, engineering authority, publishing citable content, building AI systems, and measuring results.";
+
+const jsonLd = graph(
+  webPageNode("/process/", "How Aivium Digital Builds AI Visibility & AI Systems", description),
+  breadcrumbNode(trail),
+  orgNode(),
+);
+
+const phases = [
+  {
+    n: "01",
+    h: "Discovery",
+    p: "A free 30-minute call about your business, not our deck: what you sell, how buyers find you today, and where the hours leak. If we're not the right fit, we say so on this call.",
+  },
+  {
+    n: "02",
+    h: "Baseline & audit",
+    p: "We record where the six answer engines and Google mention you before we touch anything: the questions your buyers ask, who gets named, which sources the engines cited, and the state of your technical and entity foundations. No baseline, no honest measurement.",
+  },
+  {
+    n: "03",
+    h: "Roadmap & prioritization",
+    p: "Findings ranked by impact and payback, scoped into a fixed plan. You know what gets built, in what order, and why, before anything starts. We don't promise a fixed ranking timeline; we promise you'll always know what's next and what it's for.",
+  },
+  {
+    n: "04",
+    h: "Engineering & build",
+    p: "The unglamorous work that moves engines: technical SEO and structured data, entity consistency across the sources engines trust, citable content, and on the solutions side, agents and automations built on your own data inside your own tools.",
+  },
+  {
+    n: "05",
+    h: "Publish & deploy",
+    p: "Content ships on a steady cadence; systems deploy into your stack with plain-language training for the people who run them. Adoption is the deliverable, not the software.",
+  },
+  {
+    n: "06",
+    h: "Measure",
+    p: "Share of answer across the engines, organic performance, and lead flow on the visibility side; hours saved, response times, and throughput on the systems side. Reported monthly against the phase-two baseline.",
+  },
+  {
+    n: "07",
+    h: "Iterate",
+    p: "What moved feeds the next cycle: engines re-read their sources on different schedules, so the work compounds in loops, not lines. Each iteration starts from evidence, not enthusiasm.",
+  },
+];
+---
+
+<BaseLayout
+  title="Aivium Digital | How We Build AI Visibility & AI Systems"
+  description={description}
+  ogDescription="From discovery to orbit: the seven-phase process Aivium Digital runs to build AI visibility and working AI systems."
+  canonical="/process/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <SiteNav active="process" />
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__content">
+          <Breadcrumbs trail={trail} />
+          <hgroup class="hero__title">
+            <h1 class="hero__eyebrow">How Aivium turns AI into a working growth system.</h1>
+            <p class="hero__headline">From discovery<br />to&nbsp;orbit.</p>
+          </hgroup>
+          <p class="lede">
+            The same seven phases run every engagement, whether the mission
+            is <a href="/ai-seo/">AI visibility</a>,
+            <a href="/ai-automation/">AI systems</a>, or both. What changes
+            is what we find in your audit.
+          </p>
+          <div class="page-hero__actions">
+            <a class="btn btn--primary" href="/discovery/">Book a discovery call</a>
+            <a class="btn btn--ghost" href="#phases">Walk the phases</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="phases">
+      <div class="container">
+        <div class="pagesec__head">
+          <h2>The seven phases</h2>
+          <p class="lede">
+            Discovery through iteration, with a baseline recorded before
+            anything changes.
+          </p>
+        </div>
+        <div class="steps">
+          {
+            phases.map((ph) => (
+              <div class="step">
+                <p class="step__num">{ph.n}</p>
+                <div class="step__body">
+                  <h3>{ph.h}</h3>
+                  <p>{ph.p}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="pillars">
+      <div class="container defblock">
+        <h2>The rules the process runs on</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Three operating pillars sit under every phase: safety, education
+            and enablement, and human-first quality control.
+          </p>
+          <p>
+            <strong>Safety</strong> means guardrails before capability: we
+            don't automate decisions that need judgment, and human review
+            stays in the loop wherever a mistake would touch a customer.
+            <strong>Education and enablement</strong> means your team learns
+            to run what we build, in their own vocabulary, with
+            documentation that outlives the engagement.
+            <strong>Human-first quality control</strong> means a person
+            (usually <a href="/about-steven/">Steven</a>) reviews everything
+            that ships under your name, from a page of content to an
+            automation's edge cases.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="working">
+      <div class="container">
+        <div class="pagesec__head">
+          <h2>What working together looks like</h2>
+          <p class="lede">The practical mechanics, stated up front.</p>
+        </div>
+        <div class="dgrid">
+          <div class="dgrid__cell">
+            <h3>What you provide</h3>
+            <p>
+              Access (site, analytics, profiles, and the tools we're
+              automating), a subject-matter voice for content review, and
+              decisions when the roadmap needs them. Typically a few hours a
+              month, front-loaded at kickoff.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>What you own</h3>
+            <p>
+              Everything. Content, entity data, dashboards, agents, and
+              automations live in your accounts or transfer with
+              documentation at handoff. Nothing is held hostage to a
+              retainer.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>How we communicate</h3>
+            <p>
+              A monthly report against the baseline, working check-ins as
+              phases need them, and direct access in between. No account
+              managers between you and the person doing the work.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>What we won't promise</h3>
+            <p>
+              Fixed ranking timelines, guaranteed placements, or results we
+              can't measure. Engines move on their own schedules; the
+              process controls the inputs and proves the movement.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container cta__inner">
+        <div class="cta__content">
+          <h2 class="cta__heading">
+            <span class="cta__question">Ready for phase one?</span>
+            It&rsquo;s a 30-minute call.
+          </h2>
+          <a class="btn btn--primary cta__btn" href="/discovery/">Book a discovery call</a>
+          <ul class="cta__checklist" aria-label="What the discovery call involves">
+            <li>30 minutes</li>
+            <li>Free</li>
+            <li>No deck</li>
+            <li>No obligation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

@@ -1,0 +1,452 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { orgNode, webPageNode, breadcrumbNode, graph } from "../../lib/schema";
+import { COMPANY } from "../../data/company";
+
+const trail: [string, string][] = [
+  ["Home", "/"],
+  ["Services", "/services/"],
+];
+
+const description =
+  "Explore Aivium Digital's AI visibility services (GEO, AEO, AI Overviews optimization, share-of-answer tracking) and AI solutions services (agents, assistants, automations, integrations) for established businesses.";
+
+const faq = [
+  {
+    q: "What does an AI agency do?",
+    a: "An AI agency does two jobs: it gets a brand found and recommended where buyers now ask questions (Google and AI answer engines like ChatGPT), and it builds AI systems inside the business (agents, assistants, and automations) so the demand that arrives gets handled faster. Aivium Digital runs both as one system.",
+  },
+  {
+    q: "Do you also handle traditional SEO?",
+    a: "Yes. AI visibility is built on search foundations: crawlable pages, clean information architecture, entity data, and authoritative content. Our GEO work strengthens classic technical SEO first, then adds the answer audits, citations, and share-of-answer tracking that AI engines respond to.",
+  },
+  {
+    q: "What is the difference between AI visibility and AI automation?",
+    a: "AI visibility is outward-facing: getting your brand cited and recommended in AI-generated answers and organic search. AI automation is inward-facing: custom agents, assistants, and workflow automations that take busywork off your team. One creates demand, the other delivers on it.",
+  },
+  {
+    q: "Can you work with our existing marketing or IT team?",
+    a: "Yes. We slot in around what already works: your team keeps what they run well, we take the AI-specific layer, and everything we ship is documented so your people can operate it. Handovers are part of the engagement, not an extra.",
+  },
+  {
+    q: "Do we own the systems you build?",
+    a: "Yes. Content, entity data, dashboards, agents, and automations are built in your accounts or handed over with documentation. Nothing we ship is held hostage to a retainer.",
+  },
+  {
+    q: "How do engagements begin?",
+    a: "With a free 30-minute discovery call about where AI mentions you today, or where your operations leak hours. If there is a fit worth pursuing, the engagement opens with a measured baseline and a fixed-scope roadmap.",
+  },
+];
+
+const jsonLd = graph(
+  webPageNode(
+    "/services/",
+    "AI Visibility & AI Automation Services",
+    description,
+  ),
+  breadcrumbNode(trail),
+  orgNode(),
+  {
+    "@type": "FAQPage",
+    "@id": `${COMPANY.url}/services/#faq`,
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+);
+---
+
+<BaseLayout
+  title="Aivium Digital | AI Visibility & AI Automation Services"
+  description={description}
+  ogDescription="AI visibility (GEO & AEO) and custom AI automation services for established businesses. One system: get found in AI search, then put AI to work."
+  canonical="/services/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <SiteNav active="services" />
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__content">
+          <Breadcrumbs trail={trail} />
+          <hgroup class="hero__title">
+            <h1 class="hero__eyebrow">AI visibility and AI solutions, built as one growth system.</h1>
+            <p class="hero__headline">Every service,<br />one trajectory.</p>
+          </hgroup>
+          <p class="lede">
+            Aivium Digital helps established businesses get cited and
+            recommended in AI-generated answers, then builds the custom AI
+            systems that turn that demand into delivered work. Based in
+            Maryland, serving clients across the United States: from local
+            operators to enterprise teams, every engagement runs through the
+            two systems below.
+          </p>
+          <div class="page-hero__actions">
+            <a class="btn btn--primary" href="/discovery/">Book a discovery call</a>
+            <a class="btn btn--ghost" href="#visibility">Explore the services</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <nav class="jumpnav" aria-label="On this page">
+      <div class="container jumpnav__inner">
+        <a href="#visibility">AI Visibility</a>
+        <a href="#solutions">AI Solutions</a>
+        <a href="#fit">Who it&rsquo;s for</a>
+        <a href="#engagement">How engagements run</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </nav>
+
+    <section class="pagesec" id="visibility">
+      <div class="container defblock">
+        <h2>AI Visibility services</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Everything it takes to make your brand the answer AI gives:
+            search foundations, entity engineering, citable content, and
+            measurement that proves the movement.
+          </p>
+          <p>
+            AI visibility is built on search fundamentals, not instead of
+            them. We strengthen the technical SEO, entity signals, content,
+            and third-party authority that help a brand rank in Google and
+            become trusted enough to be cited by AI answer engines.
+          </p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="dgrid">
+          <div class="dgrid__cell">
+            <h3>Answer audit</h3>
+            <p>
+              Where ChatGPT, Claude, Gemini, Perplexity, Copilot, and Google
+              AI Overviews mention you today, where competitors sit, and
+              which sources each engine cited to get there.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Technical SEO foundation</h3>
+            <p>
+              Crawlable structure, clean canonicals, structured data, and
+              performance. The classic signals still gate everything an AI
+              engine can read.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Entity &amp; source engineering</h3>
+            <p>
+              Consistent entity data across your site, profiles, and the
+              third-party sources each engine trusts, plus the citations
+              earned on them.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>GEO, AEO &amp; AI Overviews</h3>
+            <p>
+              Generative engine optimization for the chat engines, answer
+              engine optimization for Google's AI surfaces: quotable
+              structure, question-matched content, and schema.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Citable content strategy</h3>
+            <p>
+              Pages and articles built to be quoted: direct answers, real
+              expertise, sources on every claim. Written for buyers first so
+              the traffic converts.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Share-of-answer tracking</h3>
+            <p>
+              Monthly measurement of how often you appear in AI answers for
+              your buyers' questions, across six engines, against named
+              competitors, alongside classic organic tracking.
+            </p>
+          </div>
+        </div>
+        <div class="xlink">
+          <div class="xlink__copy">
+            <h3>The full AI Visibility system</h3>
+            <p>
+              How the audit, engineering, content, and tracking fit
+              together, and what moves first.
+            </p>
+          </div>
+          <a class="btn btn--ghost" href="/ai-seo/">See AI Visibility services</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="solutions">
+      <div class="container defblock">
+        <h2>AI Solutions services</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Custom AI built around how your business actually operates:
+            agents that work a queue, assistants that answer from your data,
+            and automations that connect the tools you already run.
+          </p>
+          <p>
+            Every build starts from your operations, not the technology. We
+            map where hours leak, rank the opportunities by payback, and
+            ship the smallest system that stops the leak. Human review stays
+            in the loop wherever judgment matters.
+          </p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="dgrid">
+          <div class="dgrid__cell">
+            <h3>Opportunity mapping</h3>
+            <p>
+              An audit of your workflows that ends in a ranked automation
+              map: what to build first, what it replaces, and what the
+              payback looks like.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>AI agents &amp; assistants</h3>
+            <p>
+              Agents that handle work start to finish (lead intake,
+              follow-up, triage) and assistants trained on your own
+              services, prices, policies, and history.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Workflow automation &amp; integrations</h3>
+            <p>
+              The busywork between systems, automated inside the tools you
+              already use: CRM, field software, books. No rip-and-replace.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Training, monitoring &amp; guardrails</h3>
+            <p>
+              Team enablement in plain language, documentation, human-in-the-loop
+              checkpoints, and monitoring after launch so systems keep
+              earning their keep.
+            </p>
+          </div>
+        </div>
+        <div class="xlink">
+          <div class="xlink__copy">
+            <h3>The full AI Solutions practice</h3>
+            <p>
+              What we build, what we refuse to automate, and how a pilot
+              proves itself before anything scales.
+            </p>
+          </div>
+          <a class="btn btn--ghost" href="/ai-automation/">See AI Solutions services</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="channels">
+      <div class="container defblock">
+        <h2>The classic channels, inside the scope</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            AI visibility and AI solutions lead every engagement, but our
+            digital marketing roots come with them.
+          </p>
+          <p>
+            Paid search and social, website builds and landing pages,
+            reputation management, and lead generation are still part of
+            our work when the roadmap calls for them, delivered inside a
+            broader digital marketing scope rather than as separate
+            retainers. If you arrived here looking for one of those
+            services, the <a href="/discovery/">discovery call</a> is where
+            we scope it against what will actually move your numbers.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="fit">
+      <div class="container defblock">
+        <h2>Who this is for</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Established businesses that want practical implementation, not
+            another strategy deck.
+          </p>
+          <p>
+            Our clients are SMB and mid-market teams: brands losing
+            visibility as buyers move to AI answers, operators whose
+            processes leak hours between disconnected tools, and companies
+            that need a partner who ships. We work nationally from our
+            Maryland base, with a deep bench in
+            <a href="/industries/home-services/">home services</a> as one
+            vertical among many, and
+            <a href="/locations/maryland/">Maryland businesses</a> get the
+            added advantage of a partner in their time zone and market.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="compound">
+      <div class="container defblock">
+        <h2>How the two systems compound</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Visibility creates demand. Solutions deliver on it. Delivery
+            creates the proof that sharpens the answers.
+          </p>
+          <p>
+            A brand that AI engines recommend gets more of the right
+            inquiries. A business that responds in minutes instead of days
+            wins more of them. And the case studies, reviews, and evidence
+            that great delivery produces are exactly the third-party signals
+            AI engines cite. That loop is the whole strategy, and it's why
+            we run both systems as <a href="/process/">one process</a>
+            instead of two departments.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="engagement">
+      <div class="container">
+        <div class="pagesec__head">
+          <h2>How engagements run</h2>
+          <p class="lede">
+            Five moves, in order. No phase lasts longer than it earns, and
+            you see the findings at every step.
+          </p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <p class="step__num">01</p>
+            <div class="step__body">
+              <h3>Audit</h3>
+              <p>
+                A free 30-minute discovery call first; if we go forward,
+                the baseline (where AI mentions you, or where your
+                operations leak hours) is the engagement's first
+                deliverable.
+                <a href="/ai-visibility-audit/">The AI visibility audit</a>
+                shows exactly what gets measured.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <p class="step__num">02</p>
+            <div class="step__body">
+              <h3>Roadmap</h3>
+              <p>
+                Findings ranked by impact and payback, scoped into a
+                fixed-price plan. You know what gets built and why before
+                anything starts.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <p class="step__num">03</p>
+            <div class="step__body">
+              <h3>Build</h3>
+              <p>
+                Entity engineering, content, and citations on the visibility
+                side; agents, assistants, and automations on the solutions
+                side. Shipped in weeks, not quarters.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <p class="step__num">04</p>
+            <div class="step__body">
+              <h3>Deploy</h3>
+              <p>
+                Publishing, integration into your stack, and plain-language
+                training for the team that runs it day to day.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <p class="step__num">05</p>
+            <div class="step__body">
+              <h3>Measure</h3>
+              <p>
+                Share-of-answer and organic tracking on visibility; hours
+                saved and response times on solutions. What moved feeds the
+                next cycle.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="proof">
+      <div class="container defblock">
+        <h2>Proof, on our terms</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            We publish case studies only with client approval and verifiable
+            numbers, and we don't dress up logos as client lists.
+          </p>
+          <p>
+            Our team's experience spans national brands and local operators
+            across a decade of digital marketing, with AI specialization
+            since 2022. The standard every published result has to meet
+            lives on our <a href="/case-studies/">case studies</a> page, and
+            the founder behind the work is on
+            <a href="/about-steven/">the Steven Mills page</a>. If a claim
+            carries a number, it carries a source.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq pagesec" id="faq">
+      <div class="container faq__inner">
+        <div class="faq__head">
+          <h2>Services, explained.</h2>
+          <p class="lede faq__lede">What buyers ask before they book the call.</p>
+        </div>
+        <div class="faq__list">
+          {
+            faq.map((f) => (
+              <details class="faq__item">
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container cta__inner">
+        <div class="cta__content">
+          <h2 class="cta__heading">
+            <span class="cta__question">Not sure which system you need first?</span>
+            The discovery call sorts it out.
+          </h2>
+          <a class="btn btn--primary cta__btn" href="/discovery/">Book a discovery call</a>
+          <ul class="cta__checklist" aria-label="What the audit involves">
+            <li>30 minutes</li>
+            <li>Free</li>
+            <li>No deck</li>
+            <li>No obligation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

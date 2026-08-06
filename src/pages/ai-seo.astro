@@ -2,37 +2,35 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteNav from "../components/SiteNav.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { orgNode, breadcrumbNode, serviceNode, graph } from "../lib/schema";
+
+const trail: [string, string][] = [
+  ["Home", "/"],
+  ["AI Visibility", "/ai-seo/"],
+];
+
+const jsonLd = graph(
+  serviceNode({
+    path: "/ai-seo/",
+    name: "Generative Engine Optimization Services",
+    serviceType: "Generative engine optimization (GEO), answer engine optimization (AEO), AI SEO",
+    description:
+      "GEO and AEO services that get brands cited and recommended in AI-generated answers across ChatGPT, Claude, Gemini, Perplexity, Copilot, and Google AI Overviews.",
+  }),
+  breadcrumbNode(trail),
+  orgNode(),
+);
 ---
 
 <BaseLayout
   title="Aivium Digital | Generative Engine Optimization Services"
-  description="Generative engine optimization (GEO) and AEO services that get your brand cited by ChatGPT, Perplexity, Claude, and Google AI Overviews. Book a free AI audit."
-  ogDescription="GEO and AEO services that get your brand cited by ChatGPT, Perplexity, Claude, and Google AI Overviews. Book a free AI audit."
+  description="Generative engine optimization (GEO) and AEO services that get your brand cited by ChatGPT, Perplexity, Claude, and Google AI Overviews. Book a discovery call."
+  ogDescription="GEO and AEO services that get your brand cited by ChatGPT, Perplexity, Claude, and Google AI Overviews. Book a discovery call."
   canonical="/ai-seo/"
 >
   <Fragment slot="head">
-    <script type="application/ld+json" is:inline>
-    {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Service",
-        "name": "Generative Engine Optimization Services",
-        "serviceType": "Generative engine optimization (GEO), answer engine optimization (AEO), AI SEO",
-        "provider": { "@id": "https://aiviumdigital.com/#org" },
-        "areaServed": "US",
-        "description": "GEO and AEO services that get brands cited and recommended in AI-generated answers across ChatGPT, Claude, Gemini, Perplexity, Copilot, and Google AI Overviews."
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://aiviumdigital.com/" },
-          { "@type": "ListItem", "position": 2, "name": "Generative Engine Optimization Services", "item": "https://aiviumdigital.com/ai-seo/" }
-        ]
-      }
-    ]
-  }
-    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>
 
   <SiteNav active="visibility" />
@@ -41,6 +39,7 @@ import SiteFooter from "../components/SiteFooter.astro";
     <section class="page-hero">
       <div class="container">
         <div class="page-hero__content">
+          <Breadcrumbs trail={trail} />
           <hgroup class="hero__title">
             <h1 class="hero__eyebrow">Generative engine optimization services</h1>
             <p class="hero__headline">Get cited by the AI your buyers&nbsp;trust.</p>
@@ -52,7 +51,7 @@ import SiteFooter from "../components/SiteFooter.astro";
             share-of-answer tracking.
           </p>
           <div class="page-hero__actions">
-            <a class="btn btn--primary" href="/discovery/">Book a free AI audit</a>
+            <a class="btn btn--primary" href="/discovery/">Book a discovery call</a>
             <a class="btn btn--ghost" href="#system">See the system</a>
           </div>
         </div>
@@ -66,8 +65,10 @@ import SiteFooter from "../components/SiteFooter.astro";
     <nav class="jumpnav" aria-label="On this page">
       <div class="container jumpnav__inner">
         <a href="#what-is-geo">What is GEO?</a>
+        <a href="#geo-and-seo">GEO &amp; SEO</a>
         <a href="#what-we-do">What a GEO agency does</a>
         <a href="#system">Our GEO system</a>
+        <a href="#first-30">First 30 days</a>
         <a href="#aeo">AEO &amp; AI Overviews</a>
         <a href="#faq">FAQ</a>
       </div>
@@ -95,6 +96,34 @@ import SiteFooter from "../components/SiteFooter.astro";
             answers a buying question with three brand names, those three
             win. GEO is how you become one of them, before your competitors
             fill the seat.
+          </p>
+          <p class="defblock__reviewed">
+            Reviewed by <a href="/about-steven/">Steven Mills</a>, Founder
+            &amp; CEO.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="geo-and-seo">
+      <div class="container defblock">
+        <h2>GEO does not replace SEO</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            AI answer engines lean on many of the same trust signals that
+            support organic search. GEO strengthens those foundations, then
+            builds on top of them.
+          </p>
+          <p>
+            Crawlable pages, clear information architecture, authoritative
+            content, consistent entity data, links, and credible third-party
+            references: engines old and new read the same evidence. Aivium's
+            GEO work hardens that foundation first, then adds the layer AI
+            engines specifically respond to: prompt research, answer audits,
+            source analysis, citable content, and share-of-answer
+            measurement. If you already have SEO that works, we build on it
+            rather than replacing it; the
+            <a href="/services/">services page</a> shows how the pieces fit.
           </p>
         </div>
       </div>
@@ -153,8 +182,9 @@ import SiteFooter from "../components/SiteFooter.astro";
         <div class="pagesec__head">
           <h2>Our GEO system</h2>
           <p class="lede">
-            The same four moves, every engagement. What changes is what we
-            find in your audit.
+            The same four moves, every engagement. What changes is what
+            <a href="/ai-visibility-audit/">your audit</a> finds; the
+            <a href="/process/">full process</a> shows how the phases run.
           </p>
         </div>
         <div class="steps">
@@ -206,6 +236,56 @@ import SiteFooter from "../components/SiteFooter.astro";
       </div>
     </section>
 
+    <section class="pagesec" id="first-30">
+      <div class="container defblock">
+        <h2>What the first 30 days typically produce</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            The opening month is about evidence: a baseline you can hold
+            every later claim against.
+          </p>
+          <p>
+            The exact shape depends on your audit, but early deliverables
+            typically include a baseline prompt set built from your buyers'
+            real questions, a competitor answer analysis across the six
+            engines, a map of the sources and citations each engine used, a
+            technical and entity audit of your site, a prioritized roadmap,
+            and the specification for your share-of-answer measurement.
+            It's the same standard we hold
+            <a href="/case-studies/">published results</a> to: numbers
+            first, narrative second.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="industries">
+      <div class="container defblock">
+        <h2>Where this works</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Any market where buyers ask questions before they buy, which by
+            now is most of them.
+          </p>
+          <p>
+            For <a href="/industries/home-services/">home-services
+            companies</a>, GEO decides which contractor an AI names when a
+            homeowner asks who to hire. For B2B and professional firms, it
+            decides whose product makes the AI's shortlist and whose
+            expertise gets quoted. For
+            <a href="/locations/maryland/">regional businesses</a>, it
+            compounds with the local trust signals engines already read.
+            Our working notes on how the engines behave, including
+            <a href="/signals/best-ai-visibility-tools/">how we evaluate AI
+            visibility tools</a> and
+            <a href="/signals/ai-search-decision-making-2026/">how AI
+            search is changing buying decisions</a>, are published in
+            Signals.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <section class="pagesec" id="aeo">
       <div class="container defblock">
         <h2>Answer engine optimization &amp; AI Overviews</h2>
@@ -216,11 +296,14 @@ import SiteFooter from "../components/SiteFooter.astro";
             pull from you instead of around you.
           </p>
           <p>
-            Nearly every search in this market now shows an AI Overview, and
-            the sites it cites take the click. Our AEO services cover the
-            mechanics that earn those citations: question-matched headings,
-            quotable openers, FAQ and schema markup, and the internal
-            structure that makes a page easy to lift an answer from.
+            AI Overviews now sit on top of the commercial searches that
+            matter in most markets, and the sites they cite keep the click
+            (<a href="https://ahrefs.com/blog/ai-overviews-reduce-clicks-update" rel="noopener noreferrer" target="_blank">Ahrefs
+            measured a 58% click drop</a> for top results under an AI
+            Overview, Dec 2025). Our AEO services cover the mechanics that
+            earn those citations: question-matched headings, quotable
+            openers, FAQ and schema markup, and the internal structure that
+            makes a page easy to lift an answer from.
           </p>
           <p>
             If you want to rank in AI Overviews rather than watch them
@@ -265,10 +348,12 @@ import SiteFooter from "../components/SiteFooter.astro";
           <details class="faq__item">
             <summary>How long until we show up in AI answers?</summary>
             <p>
-              Expect first movement in 60 to 90 days: AI engines re-read
-              their sources on different cycles, so citations land
-              progressively. The audit tells us which engines will move
-              fastest for your market.
+              There is no fixed timeline, and we won't invent one: AI
+              engines re-read their sources on different cycles, so
+              citations land progressively. The audit tells us which
+              engines are likely to move fastest for your market, and
+              share-of-answer tracking shows the movement monthly from the
+              baseline on.
             </p>
           </details>
           <details class="faq__item">
@@ -303,7 +388,7 @@ import SiteFooter from "../components/SiteFooter.astro";
           {
             "@type": "Question",
             "name": "How long until we show up in AI answers?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Expect first movement in 60 to 90 days. AI engines re-read their sources on different cycles, so citations land progressively." }
+            "acceptedAnswer": { "@type": "Answer", "text": "There is no fixed timeline: AI engines re-read their sources on different cycles, so citations land progressively. The audit identifies which engines are likely to move fastest for your market, and share-of-answer tracking shows movement monthly from the baseline on." }
           },
           {
             "@type": "Question",
@@ -325,9 +410,9 @@ import SiteFooter from "../components/SiteFooter.astro";
         <div class="cta__content">
           <h2 class="cta__heading">
             <span class="cta__question">Ready to see where AI mentions you today?</span>
-            The audit answers it.
+            The audit answers it, starting with a call.
           </h2>
-          <a class="btn btn--primary cta__btn" href="/discovery/">Book a free AI audit</a>
+          <a class="btn btn--primary cta__btn" href="/discovery/">Book a discovery call</a>
           <ul class="cta__checklist" aria-label="What the audit involves">
             <li>30 minutes</li>
             <li>Free</li>
