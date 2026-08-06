@@ -14,9 +14,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "start": "node ./dist/server/entry.mjs",
+    "start": "node ./server.mjs",
     "test": "node --test src/test/*.test.mjs",
-    "verify": "node scripts/verify-dist.mjs",
+    "verify": "node scripts/verify-dist.mjs && node scripts/verify-http.mjs",
     "indexnow": "node scripts/indexnow-ping.mjs"
   }
 }

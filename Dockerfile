@@ -12,7 +12,9 @@ WORKDIR /app
 ENV NODE_ENV=production HOST=0.0.0.0 PORT=3000
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
+COPY --from=build /app/server.mjs ./server.mjs
+COPY --from=build /app/src/seo ./src/seo
 COPY package.json ./
 EXPOSE 3000
 USER node
-CMD ["node", "./dist/server/entry.mjs"]
+CMD ["node", "./server.mjs"]

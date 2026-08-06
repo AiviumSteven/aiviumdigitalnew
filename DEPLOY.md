@@ -4,6 +4,14 @@ Astro site with one server-rendered endpoint (`/api/lead`, the Attio lead
 relay). Runs as a Docker container on the VPS, on the shared `web` network,
 behind the existing Caddy container (`/opt/caddy`).
 
+The container entrypoint is `server.mjs` (not `dist/server/entry.mjs`): a
+thin route-control layer that serves the migration-recovery redirect map
+(one-hop 301s), the 410s for retired pages, and trailing-slash
+canonicalization (`/ai-seo` → `/ai-seo/`) before handing requests to the
+Astro handler. The map lives in `src/seo/redirects.mjs`; edit it there and
+the Astro-config dev redirects, the tests, and production all follow.
+Hostname/HTTPS canonicalization (www → apex, http → https) stays in Caddy.
+
 ## First deploy
 
 ```bash
@@ -54,9 +62,11 @@ docker compose up -d --build
 ```
 
 The Docker build stage runs `npm test`, `astro build`, and
-`npm run verify` (scripts/verify-dist.mjs, the SEO/GEO gate) — a failing
-test or a machine-layer regression fails the build before the container
-swaps.
+`npm run verify` (scripts/verify-dist.mjs + scripts/verify-http.mjs: the
+SEO/GEO machine-layer gate plus the full HTTP matrix — priority routes 200,
+legacy routes one-hop 301, retired routes 410, sitemap/robots/canonicals) —
+a failing test or a machine-layer regression fails the build before the
+container swaps.
 
 After the new container is up, ping IndexNow from anywhere with network
 access (submits the live sitemap's URLs to Bing/Yandex; feeds
