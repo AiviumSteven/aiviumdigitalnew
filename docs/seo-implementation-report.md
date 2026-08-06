@@ -194,3 +194,70 @@ Not run (require production deploy or external tools): Lighthouse/CWV on product
 ## 12. Deferred (P2, per brief + owner Q&A)
 
 First approved case study (one engagement in progress) · Priority 1–3 Signal articles (topics + slugs in brief §38) · `/research/ai-recommendation-study-2026/` template (playbook §3 has the methodology) · AEO standalone page · external profile/citation work (AUTHORITY-PLAYBOOK). Per-trade child pages are **off the roadmap** — owner targets home services as one category, so all trade URLs permanently resolve to the hub.
+
+## 13. Production redirect audit + engine-roster standardization (2026-08-06)
+
+### Production redirect audit, both slash forms of every mapped legacy URL
+
+Run with the new permanent tool `scripts/redirect-audit.mjs` (`node scripts/redirect-audit.mjs [base]`; audits production by default, exits non-zero on any contract break). 41 URL forms audited against `https://aiviumdigital.com` on 2026-08-06: every legacy URL with an intended replacement returns a one-hop 301 to a 200 destination whose self-canonical matches; both retired routes return a direct 410 in both forms; zero 404s, zero redirect chains.
+
+A reported bug (trailing-slash forms of legacy URLs returning 404 while bare forms redirect) **did not reproduce** in production or against the local build. Both-form support is already explicit: `src/seo/redirects.mjs` expands every legacy path into slashed and unslashed exact-match variants before the canonical trailing-slash normalization runs, and production (`server.mjs`) serves that table.
+
+| Source URL | Initial status | Destination | Final status | Hops | Canonical of final page |
+|---|---|---|---|---|---|
+| `/services/search-visibility` | 301 | `/ai-seo/` | 200 | 1 | `https://aiviumdigital.com/ai-seo/` |
+| `/services/search-visibility/` | 301 | `/ai-seo/` | 200 | 1 | `https://aiviumdigital.com/ai-seo/` |
+| `/services/google-business-profile` | 301 | `/industries/home-services/` | 200 | 1 | `https://aiviumdigital.com/industries/home-services/` |
+| `/services/google-business-profile/` | 301 | `/industries/home-services/` | 200 | 1 | `https://aiviumdigital.com/industries/home-services/` |
+| `/services/paid-ads` | 301 | `/services/` | 200 | 1 | `https://aiviumdigital.com/services/` |
+| `/services/paid-ads/` | 301 | `/services/` | 200 | 1 | `https://aiviumdigital.com/services/` |
+| `/services/websites` | 301 | `/services/` | 200 | 1 | `https://aiviumdigital.com/services/` |
+| `/services/websites/` | 301 | `/services/` | 200 | 1 | `https://aiviumdigital.com/services/` |
+| `/services/tracking-reporting` | 301 | `/ai-seo/` | 200 | 1 | `https://aiviumdigital.com/ai-seo/` |
+| `/services/tracking-reporting/` | 301 | `/ai-seo/` | 200 | 1 | `https://aiviumdigital.com/ai-seo/` |
+| `/services/lead-generation` | 301 | `/services/` | 200 | 1 | `https://aiviumdigital.com/services/` |
+| `/services/lead-generation/` | 301 | `/services/` | 200 | 1 | `https://aiviumdigital.com/services/` |
+| `/local-seo` | 301 | `/ai-seo/` | 200 | 1 | `https://aiviumdigital.com/ai-seo/` |
+| `/local-seo/` | 301 | `/ai-seo/` | 200 | 1 | `https://aiviumdigital.com/ai-seo/` |
+| `/ai-visibility` | 301 | `/ai-seo/` | 200 | 1 | `https://aiviumdigital.com/ai-seo/` |
+| `/ai-visibility/` | 301 | `/ai-seo/` | 200 | 1 | `https://aiviumdigital.com/ai-seo/` |
+| `/home-services` | 301 | `/industries/home-services/` | 200 | 1 | `https://aiviumdigital.com/industries/home-services/` |
+| `/home-services/` | 301 | `/industries/home-services/` | 200 | 1 | `https://aiviumdigital.com/industries/home-services/` |
+| `/roofing` | 301 | `/industries/home-services/` | 200 | 1 | `https://aiviumdigital.com/industries/home-services/` |
+| `/roofing/` | 301 | `/industries/home-services/` | 200 | 1 | `https://aiviumdigital.com/industries/home-services/` |
+| `/hvac` | 301 | `/industries/home-services/` | 200 | 1 | `https://aiviumdigital.com/industries/home-services/` |
+| `/hvac/` | 301 | `/industries/home-services/` | 200 | 1 | `https://aiviumdigital.com/industries/home-services/` |
+| `/plumbing` | 301 | `/industries/home-services/` | 200 | 1 | `https://aiviumdigital.com/industries/home-services/` |
+| `/plumbing/` | 301 | `/industries/home-services/` | 200 | 1 | `https://aiviumdigital.com/industries/home-services/` |
+| `/electrical` | 301 | `/industries/home-services/` | 200 | 1 | `https://aiviumdigital.com/industries/home-services/` |
+| `/electrical/` | 301 | `/industries/home-services/` | 200 | 1 | `https://aiviumdigital.com/industries/home-services/` |
+| `/landscaping` | 301 | `/industries/home-services/` | 200 | 1 | `https://aiviumdigital.com/industries/home-services/` |
+| `/landscaping/` | 301 | `/industries/home-services/` | 200 | 1 | `https://aiviumdigital.com/industries/home-services/` |
+| `/fencing` | 301 | `/industries/home-services/` | 200 | 1 | `https://aiviumdigital.com/industries/home-services/` |
+| `/fencing/` | 301 | `/industries/home-services/` | 200 | 1 | `https://aiviumdigital.com/industries/home-services/` |
+| `/field-notes` | 301 | `/signals/` | 200 | 1 | `https://aiviumdigital.com/signals/` |
+| `/field-notes/` | 301 | `/signals/` | 200 | 1 | `https://aiviumdigital.com/signals/` |
+| `/field-notes/ai-search-decision-making-2026` | 301 | `/signals/ai-search-decision-making-2026/` | 200 | 1 | `https://aiviumdigital.com/signals/ai-search-decision-making-2026/` |
+| `/field-notes/ai-search-decision-making-2026/` | 301 | `/signals/ai-search-decision-making-2026/` | 200 | 1 | `https://aiviumdigital.com/signals/ai-search-decision-making-2026/` |
+| `/field-notes/best-ai-visibility-tools` | 301 | `/signals/best-ai-visibility-tools/` | 200 | 1 | `https://aiviumdigital.com/signals/best-ai-visibility-tools/` |
+| `/field-notes/best-ai-visibility-tools/` | 301 | `/signals/best-ai-visibility-tools/` | 200 | 1 | `https://aiviumdigital.com/signals/best-ai-visibility-tools/` |
+| `/services` | 301 | `/services/` | 200 | 1 | `https://aiviumdigital.com/services/` |
+| `/industries/restaurants` | 410 | — | 410 | 0 | — |
+| `/industries/restaurants/` | 410 | — | 410 | 0 | — |
+| `/beyond-the-algorithm` | 410 | — | 410 | 0 | — |
+| `/beyond-the-algorithm/` | 410 | — | 410 | 0 | — |
+
+The discovered legacy Field Notes routes are the two published posts above; slugs were preserved in the Signals rename, and the `/field-notes/<slug>` prefix rule maps any other historical slug one-to-one onto `/signals/<slug>/` in one hop. Host and protocol canonicalization is a separate single Caddy hop (`http://` → 308 `https://`, `www.` → 301 apex, path preserved) before these path rules apply. The same 41-form audit passes against the local build (`node scripts/redirect-audit.mjs http://127.0.0.1:<port>`), so repo and production agree.
+
+### Engine-roster standardization
+
+The site alternated between two "six engine" rosters: the logo rows on `/` and `/ai-visibility-audit/` showed **Grok** as the sixth engine, while every prose enumeration, FAQ answer, FAQ schema, meta description, `llms.txt`, and the Share of Answer study methodology (`research/share-of-answer/queries-v1.md`) used **Google AI Overviews**. Standardized on the roster the study and all reporting copy already define:
+
+**ChatGPT, Claude, Gemini, Perplexity, Copilot, and Google AI Overviews** ("six engines").
+
+- Both logo rows now end with Google AI Overviews (new `public/assets/engines/google.svg`, label "AI Overviews"); `grok.svg` deleted. Grok no longer appears anywhere in site copy.
+- Shortlist enumerations normalized to roster order: homepage hero lede and `/ai-seo/` meta + OG descriptions now read "ChatGPT, Claude, Perplexity, and Google AI Overviews".
+- `/services/` GEO cell reworded from "Google's AI surfaces" to "Google AI Overviews", removing the one competing "surfaces" framing.
+- Every "six engines" count (share-of-answer cells on `/ai-seo/` and `/services/`, the audit-page "Six engines, one baseline" caption, both mentions in the best-ai-visibility-tools post) now resolves to this single roster.
+
+Verified after the change: `npm test` 38/38 pass, `npm run build` pass, `npm run verify` pass (verify-dist + verify-http, 47-route matrix, canonicals and sitemap intact).
