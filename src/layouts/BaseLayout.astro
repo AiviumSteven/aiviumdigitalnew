@@ -63,6 +63,8 @@ const ogImageUrl = new URL(ogImage, site).href;
     <link rel="stylesheet" href="/styles/main.css" />
     {styles.map((href) => <link rel="stylesheet" href={href} />)}
 
+    <script is:inline src="/js/analytics.js"></script>
+
     <slot name="head" />
   </head>
   <body class={bodyClass}>

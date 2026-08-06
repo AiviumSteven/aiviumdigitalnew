@@ -276,6 +276,8 @@
       labeled[q.label] = answers[key] || "(skipped)";
     });
     sendLead({ contact: c, answers: labeled, page: location.href, submitted_at: new Date().toISOString() });
+    /* GA4 funnel event — event name only, no form values (see analytics.js). */
+    window.gtag?.("event", "submit_lead_form", { page_type: "lead_funnel" });
 
     try { sessionStorage.removeItem("aivium-quiz"); } catch { /* noop */ }
     mountCalendly(c);
