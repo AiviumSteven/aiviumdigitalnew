@@ -5,7 +5,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteNav from "../../components/SiteNav.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import { getSignals, type SignalEntry } from "../../lib/signals";
-import { getAuthor } from "../../data/authors";
+import { getAuthor, personStub } from "../../data/authors";
 
 export async function getStaticPaths() {
   return (await getSignals()).map((entry) => ({
@@ -37,8 +37,6 @@ const heroOg = entry.data.image
   : null;
 const ogImage = heroOg?.src ?? "/assets/og-image.jpg";
 
-const authorImg = author.image ? await getImage({ src: author.image, width: 800 }) : null;
-const authorUrl = author.page ? `${site}${author.page}` : `${site}/`;
 const faq = entry.data.faq;
 
 const description = excerpt ?? `${title} — a signal from Aivium Digital.`;
@@ -65,20 +63,12 @@ const jsonLd = {
       image: new URL(ogImage, site).href,
       datePublished: publishedAt,
       ...(updatedAt ? { dateModified: updatedAt } : {}),
-      author: { "@id": `${site}/#${author.id}` },
+      // Embedded stub of the canonical Person on stevenwmills.com — the
+      // entity home. Never a bare cross-domain @id, never a second full
+      // Person node (2026-08-01 author-graph change).
+      author: personStub(author),
       publisher: { "@id": `${site}/#org` },
       isPartOf: { "@id": `${site}/signals/#blog` },
-    },
-    {
-      "@type": "Person",
-      "@id": `${site}/#${author.id}`,
-      name: author.name,
-      jobTitle: author.role,
-      description: author.bio,
-      worksFor: { "@id": `${site}/#org` },
-      url: authorUrl,
-      ...(authorImg ? { image: new URL(authorImg.src, site).href } : {}),
-      ...(author.sameAs.length ? { sameAs: author.sameAs } : {}),
     },
     {
       "@type": "Organization",

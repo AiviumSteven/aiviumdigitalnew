@@ -31,14 +31,34 @@ export interface Author {
   sameAs: string[];
   /** Author page path on this site (Person JSON-LD url), if one exists. */
   page?: string;
+  /**
+   * Canonical cross-site Person @id — the entity home. Since 2026-08-01
+   * the full Person node for Steven lives ONLY on stevenwmills.com; this
+   * site embeds stubs pointing there (never a bare cross-domain @id, and
+   * never a second full Person node — that reintroduces the dual-entity
+   * ambiguity the personal site exists to kill).
+   */
+  personId: string;
+  /** The entity-home URL the stub's url field carries. */
+  personUrl: string;
+}
+
+/** Embedded Person stub for JSON-LD author/founder references. */
+export function personStub(author: Author) {
+  return {
+    '@type': 'Person',
+    '@id': author.personId,
+    name: author.name,
+    url: author.personUrl,
+  } as const;
 }
 
 export const AUTHORS: Record<string, Author> = {
   'steven-mills': {
-    name: 'Steven Mills',
+    name: 'Steven W. Mills',
     role: 'Founder & CEO, Aivium Digital',
     bio:
-      'Steven Mills is the founder and CEO of Aivium and Aivium Digital. ' +
+      'Steven W. Mills is the founder and CEO of Aivium and Aivium Digital. ' +
       'A digital marketer for over a decade, specialized in AI since 2022, ' +
       'he helps established businesses get found and cited by AI search: ' +
       'ChatGPT, Claude, Gemini, Perplexity, Copilot, and Google AI ' +
@@ -48,8 +68,10 @@ export const AUTHORS: Record<string, Author> = {
     initials: 'SM',
     image: stevenMills,
     portrait: stevenMillsPortrait,
-    sameAs: ['https://www.linkedin.com/in/stevenwmills/'],
+    sameAs: ['https://stevenwmills.com/', 'https://www.linkedin.com/in/stevenwmills/'],
     page: '/about-steven/',
+    personId: 'https://stevenwmills.com/#person',
+    personUrl: 'https://stevenwmills.com/',
   },
 };
 

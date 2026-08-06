@@ -1,51 +1,33 @@
 ---
-import { Image, getImage } from "astro:assets";
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteNav from "../components/SiteNav.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import { getAuthor } from "../data/authors";
+import { getAuthor, personStub } from "../data/authors";
 import { getSignalRefs } from "../lib/signals";
 
 const site = "https://aiviumdigital.com";
 const author = getAuthor("steven-mills");
 const posts = (await getSignalRefs()).slice(0, 6);
 
-const authorImg = author.image ? await getImage({ src: author.image, width: 800 }) : null;
-
 const fmtDate = (iso: string | null) =>
   iso
     ? new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" })
     : null;
 
-// ProfilePage: this URL is the canonical home of the Person entity that
-// every post's byline JSON-LD points at.
+// Satellite bio (2026-08-01 author-graph change): the canonical home of
+// the Person entity is stevenwmills.com — this page corroborates it via
+// an embedded stub instead of declaring a second full Person, which would
+// reintroduce exactly the dual-entity ambiguity the personal site kills.
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "ProfilePage",
+      "@type": "AboutPage",
       "@id": `${site}/about-steven/#page`,
       url: `${site}/about-steven/`,
       name: `About ${author.name}`,
-      mainEntity: { "@id": `${site}/#${author.id}` },
-    },
-    {
-      "@type": "Person",
-      "@id": `${site}/#${author.id}`,
-      name: author.name,
-      jobTitle: author.role,
-      description: author.bio,
-      url: `${site}/about-steven/`,
-      worksFor: { "@id": `${site}/#org` },
-      ...(authorImg ? { image: new URL(authorImg.src, site).href } : {}),
-      ...(author.sameAs.length ? { sameAs: author.sameAs } : {}),
-      knowsAbout: [
-        "Generative engine optimization (GEO)",
-        "Answer engine optimization (AEO)",
-        "AI search visibility",
-        "SEO",
-        "AI agents and workflow automation",
-      ],
+      mainEntity: personStub(author),
     },
     {
       "@type": "Organization",
@@ -54,7 +36,7 @@ const jsonLd = {
       url: `${site}/`,
       logo: `${site}/assets/aivium-digital-lockup-horizontal-dark.svg`,
       sameAs: ["https://aivium.com/", "https://www.linkedin.com/company/aiviumdigital/"],
-      founder: { "@id": `${site}/#${author.id}` },
+      founder: personStub(author),
       parentOrganization: {
         "@type": "Organization",
         "@id": "https://aivium.com/#organization",
@@ -67,8 +49,8 @@ const jsonLd = {
 ---
 
 <BaseLayout
-  title="About Steven Mills | Founder & CEO, Aivium Digital"
-  description="Steven Mills is the founder and CEO of Aivium and Aivium Digital. A digital marketer for over a decade, specialized in AI since 2022, he helps established businesses get found and cited by AI search and builds AI solutions that make them run more efficiently."
+  title="About Steven W. Mills | Founder & CEO, Aivium Digital"
+  description="Steven W. Mills is the founder and CEO of Aivium and Aivium Digital. A digital marketer for over a decade, specialized in AI since 2022, he helps established businesses get found and cited by AI search and builds AI solutions that make them run more efficiently."
   canonical="/about-steven/"
 >
   <Fragment slot="head">
