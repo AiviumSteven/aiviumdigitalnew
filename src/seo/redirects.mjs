@@ -39,6 +39,8 @@ const LEGACY = {
   "/fencing": "/industries/home-services/",
   // Editorial history
   "/field-notes": "/signals/",
+  // Shorthand audit route used in old campaigns and print collateral
+  "/audit": "/ai-visibility-audit/",
 };
 
 /** Retired with no replacement → 410 Gone. Keep out of nav and sitemap.
@@ -67,6 +69,16 @@ const hasFileExtension = (pathname) => /\.[a-zA-Z0-9]+$/.test(pathname.split("/"
  *   null                              — hand the request to Astro
  */
 export function resolveSeoRoute(pathname) {
+  // Legacy Field Notes taxonomy archives (/field-notes/tag/<slug>,
+  // /field-notes/category/<slug>, /field-notes/page/<n>, any depth,
+  // either slash form) → the Signals hub. Signals has no taxonomy or
+  // pagination routes, so the hub is the closest live destination.
+  // Must run before the post-slug rule below, which would otherwise
+  // mint a dead /signals/tag/<slug>/ URL.
+  if (/^\/field-notes\/(tag|category|page)(\/|$)/.test(pathname)) {
+    return { kind: "redirect", to: "/signals/", status: 301 };
+  }
+
   // /field-notes/<slug>/ → /signals/<slug>/ (one-to-one; the blog moved
   // wholesale in the Signals rename, slugs unchanged).
   if (pathname.startsWith("/field-notes/") && pathname.length > "/field-notes/".length) {

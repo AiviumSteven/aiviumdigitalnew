@@ -39,6 +39,12 @@ const LEGACY_BOTH_FORMS = [
   // Discovered legacy Field Notes posts (slugs unchanged in the Signals rename).
   ['/field-notes/ai-search-decision-making-2026', '/signals/ai-search-decision-making-2026/'],
   ['/field-notes/best-ai-visibility-tools', '/signals/best-ai-visibility-tools/'],
+  // Legacy Field Notes taxonomy archives — no taxonomy on /signals/, so the hub.
+  ['/field-notes/tag/ai-seo', '/signals/'],
+  ['/field-notes/category/strategy', '/signals/'],
+  ['/field-notes/page/2', '/signals/'],
+  // Shorthand audit route from old campaigns.
+  ['/audit', '/ai-visibility-audit/'],
 ];
 
 /** Bare-path canonicalization the brief also requires (one hop). */

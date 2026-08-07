@@ -40,6 +40,8 @@ describe('legacy one-hop redirect map', () => {
     '/landscaping/': '/industries/home-services/',
     '/fencing/': '/industries/home-services/',
     '/field-notes/': '/signals/',
+    '/audit': '/ai-visibility-audit/',
+    '/audit/': '/ai-visibility-audit/',
   };
   for (const [from, to] of Object.entries(cases)) {
     it(`${from} → 301 ${to}`, () => {
@@ -64,6 +66,32 @@ describe('legacy one-hop redirect map', () => {
     });
     // Unslashed variant still lands on the canonical URL in one hop.
     assert.equal(redirect('/field-notes/some-post').to, '/signals/some-post/');
+  });
+
+  it('field-notes taxonomy archives land on the signals hub in one hop', () => {
+    for (const path of [
+      '/field-notes/tag/ai-seo',
+      '/field-notes/tag/ai-seo/',
+      '/field-notes/category/strategy',
+      '/field-notes/category/strategy/',
+      '/field-notes/page/2',
+      '/field-notes/page/2/',
+      // Bare taxonomy roots and nested paginated archives too.
+      '/field-notes/tag',
+      '/field-notes/category/',
+      '/field-notes/tag/ai-seo/page/3/',
+    ]) {
+      assert.deepEqual(
+        resolveSeoRoute(path),
+        { kind: 'redirect', to: '/signals/', status: 301 },
+        path,
+      );
+    }
+  });
+
+  it('taxonomy interception never swallows real post slugs', () => {
+    assert.equal(redirect('/field-notes/tagging-strategies').to, '/signals/tagging-strategies/');
+    assert.equal(redirect('/field-notes/page-speed-basics/').to, '/signals/page-speed-basics/');
   });
 });
 

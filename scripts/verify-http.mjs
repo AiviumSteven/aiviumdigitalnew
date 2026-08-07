@@ -71,6 +71,12 @@ const MATRIX = [
   ['/fencing/', 301, '/industries/home-services/'],
   ['/field-notes/', 301, '/signals/'],
   ['/field-notes/ai-search-decision-making-2026/', 301, '/signals/ai-search-decision-making-2026/'],
+  ['/field-notes/tag/ai-seo/', 301, '/signals/'],
+  ['/field-notes/tag/ai-seo', 301, '/signals/'],
+  ['/field-notes/category/strategy/', 301, '/signals/'],
+  ['/field-notes/page/2/', 301, '/signals/'],
+  ['/audit', 301, '/ai-visibility-audit/'],
+  ['/audit/', 301, '/ai-visibility-audit/'],
   // Retired
   ['/industries/restaurants', 410, null],
   ['/industries/restaurants/', 410, null],
