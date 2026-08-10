@@ -1,0 +1,142 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { orgNode, webPageNode, breadcrumbNode, graph } from "../../lib/schema";
+
+const trail: [string, string][] = [
+  ["Home", "/"],
+  ["Locations", "/locations/"],
+];
+
+const description =
+  "Where Aivium Digital works: based in Hagerstown, Maryland, closest to the ground across Maryland and the tri-state corridor, serving clients nationwide.";
+
+const markets = [
+  {
+    href: "/locations/maryland/",
+    name: "Maryland",
+    blurb:
+      "The state hub: how AI visibility and AI automation work for Maryland businesses, from the metros to the mountains.",
+  },
+  {
+    href: "/locations/hagerstown-md/",
+    name: "Hagerstown, MD",
+    blurb:
+      "Home base. Western Maryland and the tri-state corridor where our earliest visibility work was built.",
+  },
+  {
+    href: "/locations/montgomery-county-md/",
+    name: "Montgomery County, MD",
+    blurb:
+      "Rockville, Bethesda, Gaithersburg, Silver Spring: the county where buyers research everything before they call.",
+  },
+  {
+    href: "/locations/baltimore-md/",
+    name: "Baltimore, MD",
+    blurb:
+      "The reputation town: translating decades of earned trust into the citations AI engines can actually read.",
+  },
+  {
+    href: "/locations/martinsburg-wv/",
+    name: "Martinsburg, WV",
+    blurb:
+      "The Eastern Panhandle: West Virginia's growth engine, thirty minutes up I-81 from our home base.",
+  },
+  {
+    href: "/services/",
+    name: "Everywhere else",
+    blurb:
+      "Engagements run nationally from Maryland: the same audit, the same two systems, delivered remotely.",
+  },
+];
+
+const jsonLd = graph(
+  webPageNode("/locations/", "Aivium Digital Locations", description),
+  breadcrumbNode(trail),
+  orgNode(),
+);
+---
+
+<BaseLayout
+  title="Aivium Digital | Locations"
+  description={description}
+  ogDescription="Based in Hagerstown, Maryland. Closest to the ground across Maryland and the tri-state corridor, serving clients nationwide."
+  canonical="/locations/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <SiteNav />
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__content">
+          <Breadcrumbs trail={trail} />
+          <hgroup class="hero__title">
+            <h1 class="hero__eyebrow">Where Aivium Digital works, from home base out.</h1>
+            <p class="hero__headline">Based in Maryland.<br />Built for&nbsp;everywhere.</p>
+          </hgroup>
+          <p class="lede">
+            Aivium Digital is based in Hagerstown, Maryland, and serves
+            clients across the United States. These are the markets
+            closest to home, where the local layer of our work runs
+            deepest. Every other engagement runs remotely, on the same
+            system.
+          </p>
+          <div class="page-hero__actions">
+            <a class="btn btn--primary" href="/discovery/">Book a discovery call</a>
+            <a class="btn btn--ghost" href="#markets">The markets</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="markets">
+      <div class="container">
+        <div class="pagesec__head">
+          <h2>The markets we know street by street</h2>
+          <p class="lede">
+            One system everywhere. The closer we are, the deeper the
+            local layer.
+          </p>
+        </div>
+        <div class="dgrid">
+          {
+            markets.map((m) => (
+              <div class="dgrid__cell">
+                <h3>
+                  <a href={m.href}>{m.name}</a>
+                </h3>
+                <p>{m.blurb}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container cta__inner">
+        <div class="cta__content">
+          <h2 class="cta__heading">
+            <span class="cta__question">Don&rsquo;t see your market?</span>
+            It still works. Let&rsquo;s talk.
+          </h2>
+          <a class="btn btn--primary cta__btn" href="/discovery/">Book a discovery call</a>
+          <ul class="cta__checklist" aria-label="What the audit involves">
+            <li>30 minutes</li>
+            <li>Free</li>
+            <li>No deck</li>
+            <li>No obligation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

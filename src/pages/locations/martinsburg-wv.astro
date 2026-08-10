@@ -1,0 +1,251 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { orgNode, webPageNode, breadcrumbNode, graph } from "../../lib/schema";
+import { COMPANY } from "../../data/company";
+
+const trail: [string, string][] = [
+  ["Home", "/"],
+  ["Locations", "/locations/"],
+  ["Martinsburg, WV", "/locations/martinsburg-wv/"],
+];
+
+const description =
+  "Aivium Digital, based 30 minutes away in Hagerstown, helps Martinsburg and Eastern Panhandle businesses win Google and AI search and automate their operations.";
+
+const faq = [
+  {
+    q: "Do you work outside Martinsburg itself?",
+    a: "Yes, across the Panhandle: Falling Waters, Inwood, Hedgesville, Charles Town, Shepherdstown, Berkeley Springs, and the Berkeley, Jefferson, and Morgan county areas around them. Many of the businesses that fit us best serve customers across the state lines too, and the work is built for exactly that.",
+  },
+  {
+    q: "You're a Maryland company. Why should a West Virginia business hire you?",
+    a: "Because Hagerstown is thirty minutes up I-81, in the same tri-state market you serve. We compete in and understand the same corridor: the same buyers, the same cross-border competitors, the same seasonal rhythms. You get a partner close enough to meet without settling for whoever happens to share your area code.",
+  },
+  {
+    q: "Is AI search actually relevant in a market this size?",
+    a: "More than in the big metros, not less. The Panhandle's growth is new residents, and new residents have no local word of mouth to lean on: their first 'who should I call' goes to Google or an AI assistant. Where the engines' data is thin, the first business to give them clear, consistent signals tends to own the answer. Early is an advantage here.",
+  },
+];
+
+const jsonLd = graph(
+  webPageNode(
+    "/locations/martinsburg-wv/",
+    "AI Consulting, AI SEO & Automation in Martinsburg, WV",
+    description,
+  ),
+  breadcrumbNode(trail),
+  orgNode(),
+  {
+    "@type": "FAQPage",
+    "@id": `${COMPANY.url}/locations/martinsburg-wv/#faq`,
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+);
+---
+
+<BaseLayout
+  title="Aivium Digital | AI Consulting in Martinsburg, WV"
+  description={description}
+  ogDescription="AI-search visibility and custom AI automation for Martinsburg and the Eastern Panhandle, from a partner thirty minutes up I-81 in Hagerstown."
+  canonical="/locations/martinsburg-wv/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <SiteNav />
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__content">
+          <Breadcrumbs trail={trail} />
+          <hgroup class="hero__title">
+            <h1 class="hero__eyebrow">AI visibility and AI automation for Martinsburg and the Eastern Panhandle.</h1>
+            <p class="hero__headline">New neighbors.<br />First&nbsp;answers.</p>
+          </hgroup>
+          <p class="lede">
+            Aivium Digital is an AI visibility and AI automation company
+            based thirty minutes up I-81 in Hagerstown, Maryland. We help
+            Martinsburg and Eastern Panhandle businesses become the name
+            Google and AI assistants give when buyers, including the
+            region's steady stream of new residents, ask who to call.
+          </p>
+          <div class="page-hero__actions">
+            <a class="btn btn--primary" href="/discovery/">Book a discovery call</a>
+            <a class="btn btn--ghost" href="#market">Why the Panhandle</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="market">
+      <div class="container defblock">
+        <h2>The fastest-growing corner of West Virginia</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            The Panhandle grows by arrival. And every new arrival's first
+            local question, who do I call, goes to a search box or an AI
+            assistant.
+          </p>
+          <p>
+            Berkeley and Jefferson counties have been West Virginia's
+            growth engine for years, pulled by the I-81 corridor and the
+            Washington-market commuters the MARC trains carry out of
+            Martinsburg every morning. Growth like that resets a market's
+            memory: a growing share of your customers were not here five
+            years ago, and they choose businesses the way newcomers do,
+            by asking ChatGPT, Claude, Gemini, Perplexity, Copilot, or
+            Google AI Overviews and trusting the shortlist that comes
+            back.
+          </p>
+          <p>
+            For established Panhandle businesses this cuts both ways. The
+            reputation you built no longer reaches part of your own
+            market. But the engines' data here is still thin, which means
+            the first companies to give them clear, consistent signals
+            get named first, and defaults, once set, are sticky. That
+            window is the opportunity.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="problems">
+      <div class="container">
+        <div class="pagesec__head">
+          <h2>What Panhandle businesses are up against</h2>
+          <p class="lede">
+            The same four pressures, from Falling Waters to Charles Town.
+          </p>
+        </div>
+        <div class="dgrid">
+          <div class="dgrid__cell">
+            <h3>Buyers with no local memory</h3>
+            <p>
+              Every arriving household needs an HVAC company, a dentist,
+              a lawn service, an accountant, and knows nobody to ask.
+              The engines are their word of mouth, and they repeat
+              whoever is described best.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Competition that ignores state lines</h3>
+            <p>
+              Panhandle companies compete with Hagerstown, Frederick,
+              and Winchester firms for the same jobs. The engines do not
+              respect borders either: they recommend whoever has the
+              strongest signals across the corridor.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>An underserved middle</h3>
+            <p>
+              The options here run thin: big-city agencies that overlook
+              the Panhandle, or website shops that stop at launch. The
+              middle, an accountable partner building AI-grade
+              visibility for regional companies, is exactly what we are.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Growth outrunning the back office</h3>
+            <p>
+              When the work grows faster than the admin, jobs slip:
+              missed calls, slow estimates, no follow-up. Our
+              <a href="/ai-automation/">automation layer</a> wires
+              intake to invoice so growth compounds instead of leaking.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="nearby">
+      <div class="container defblock">
+        <h2>A neighbor, not a vendor</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            We are from this corridor. Our home is thirty minutes up
+            I-81, and our earliest visibility work was built for regional
+            businesses exactly like the Panhandle's.
+          </p>
+          <p>
+            The closeness is practical, not sentimental: an owner you can
+            actually meet, in your time zone, who knows what a Berkeley
+            County service company is up against because our home market
+            faces the same corridor. And the deliverables are the
+            national system, not a small-market version of it: the
+            <a href="/ai-seo/">visibility system</a> that gets you found
+            and cited across Google and the AI engines, the automation
+            layer behind it, and the
+            <a href="/ai-visibility-audit/">audit</a> that opens every
+            engagement. For
+            <a href="/industries/home-services/">home-services
+            companies</a> especially, this is the market where being the
+            first clear answer pays fastest.
+          </p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="xlink">
+          <div class="xlink__copy">
+            <h3>Our home base.</h3>
+            <p>
+              Hagerstown is home, and the Panhandle is the same market
+              seen from the other side of the line.
+              <a href="/about-steven/">Steven Mills</a> is hands-on in
+              every engagement.
+            </p>
+          </div>
+          <a class="btn btn--ghost" href="/locations/hagerstown-md/">Our Hagerstown page</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq pagesec" id="faq">
+      <div class="container faq__inner">
+        <div class="faq__head">
+          <h2>Panhandle questions, answered.</h2>
+          <p class="lede faq__lede">What businesses here ask us first.</p>
+        </div>
+        <div class="faq__list">
+          {
+            faq.map((f) => (
+              <details class="faq__item">
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container cta__inner">
+        <div class="cta__content">
+          <h2 class="cta__heading">
+            <span class="cta__question">Want to be the first name new neighbors hear?</span>
+            Let&rsquo;s talk.
+          </h2>
+          <a class="btn btn--primary cta__btn" href="/discovery/">Book a discovery call</a>
+          <ul class="cta__checklist" aria-label="What the audit involves">
+            <li>30 minutes</li>
+            <li>Free</li>
+            <li>No deck</li>
+            <li>No obligation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

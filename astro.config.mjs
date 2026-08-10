@@ -10,6 +10,11 @@ export default defineConfig({
   // the unslashed redirect keys below match both variants and POST /api/lead
   // is never bounced.
   trailingSlash: "ignore",
+  // compressHTML swallows the whitespace between a text node ending in a
+  // newline and a following inline element ("based in\n<a>" renders as
+  // "based inHagerstown"), mangling copy wherever a link starts a source
+  // line. The bytes it saves are not worth broken prose.
+  compressHTML: false,
   adapter: node({ mode: "standalone" }),
   redirects: astroRedirects(),
 });

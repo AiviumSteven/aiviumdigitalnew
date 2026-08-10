@@ -55,6 +55,10 @@ signals; one description everywhere is one strong one.
 **Founder:** Steven Mills — https://aiviumdigital.com/about-steven/
 **LinkedIn (company):** https://www.linkedin.com/company/aiviumdigital/
 **LinkedIn (Steven):** https://www.linkedin.com/in/stevenwmills/
+**Google Business Profile:** https://www.google.com/maps?cid=18225373925096010945
+(service-area business, address hidden; owner share link:
+https://share.google/kS8IXGSjm3FxYGf7D)
+**Facebook:** https://www.facebook.com/61578202922047/
 **Logo:** `public/assets/aivium-digital-lockup-horizontal-dark.svg`
 (export a 1024px PNG on dark for directories that reject SVG)
 

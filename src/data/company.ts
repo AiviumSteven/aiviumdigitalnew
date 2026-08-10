@@ -23,7 +23,12 @@ export const COMPANY = {
   tagline: "Be the answer AI gives.",
   logoPath: "/assets/aivium-digital-lockup-horizontal-dark.svg",
   /** Verified company profiles only (playbook kit). */
-  sameAs: ["https://aivium.com/", "https://www.linkedin.com/company/aiviumdigital/"],
+  sameAs: [
+    "https://aivium.com/",
+    "https://www.linkedin.com/company/aiviumdigital/",
+    "https://www.facebook.com/61578202922047/",
+    "https://www.google.com/maps?cid=18225373925096010945",
+  ],
   parent: {
     name: "Aivium",
     url: "https://aivium.com/",

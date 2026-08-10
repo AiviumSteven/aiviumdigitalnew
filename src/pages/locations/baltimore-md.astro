@@ -1,0 +1,247 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { orgNode, webPageNode, breadcrumbNode, graph } from "../../lib/schema";
+import { COMPANY } from "../../data/company";
+
+const trail: [string, string][] = [
+  ["Home", "/"],
+  ["Maryland", "/locations/maryland/"],
+  ["Baltimore, MD", "/locations/baltimore-md/"],
+];
+
+const description =
+  "Aivium Digital helps Baltimore businesses turn decades of earned reputation into AI-search citations, and builds the custom AI agents and automations behind them.";
+
+const faq = [
+  {
+    q: "Do you serve the whole Baltimore metro?",
+    a: "Yes. Baltimore City and the county around it: Towson, Catonsville, Dundalk, Owings Mills, Parkville, and out along the Beltway. We are a Maryland company based in Hagerstown, so the work runs remotely with in-person sessions when they genuinely help. We will not pretend to have a Harbor East office; accountability matters more than an address.",
+  },
+  {
+    q: "We have run on word of mouth for decades. Why change now?",
+    a: "Don't change it, extend it. Word of mouth still wins the buyers who have someone to ask. But Baltimore refills every year with people who don't: new homeowners, medical residents, students and their families, transplants. They ask Google and AI assistants instead, and those engines cannot repeat what your customers say across the fence unless it also exists as signals they can read. That translation is the work.",
+  },
+  {
+    q: "What does an engagement look like for a Baltimore company?",
+    a: "A free 30-minute discovery call, then a baseline of what Google and the AI engines currently say about you, then a fixed-scope roadmap. For trades and service companies the local layer usually comes first: profiles, reviews, and service-area content, because it is what both Google's local results and the AI engines check for trust.",
+  },
+];
+
+const jsonLd = graph(
+  webPageNode(
+    "/locations/baltimore-md/",
+    "AI SEO, AI Consulting & Automation in Baltimore, MD",
+    description,
+  ),
+  breadcrumbNode(trail),
+  orgNode(),
+  {
+    "@type": "FAQPage",
+    "@id": `${COMPANY.url}/locations/baltimore-md/#faq`,
+    mainEntity: faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  },
+);
+---
+
+<BaseLayout
+  title="Aivium Digital | AI SEO & AI Consulting in Baltimore, MD"
+  description={description}
+  ogDescription="AI-search visibility and custom AI automation for Baltimore businesses: make decades of earned reputation legible to the engines buyers now ask."
+  canonical="/locations/baltimore-md/"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <SiteNav />
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__content">
+          <Breadcrumbs trail={trail} />
+          <hgroup class="hero__title">
+            <h1 class="hero__eyebrow">AI visibility and AI automation for Baltimore businesses.</h1>
+            <p class="hero__headline">Earned offline.<br />Cited&nbsp;online.</p>
+          </hgroup>
+          <p class="lede">
+            Aivium Digital is a Maryland AI visibility and AI automation
+            company serving Baltimore and the metro around it. Baltimore
+            reputations are earned the long way, in decades of jobs done
+            right and names passed along. We make that record legible to
+            Google and the AI engines buyers now ask, and we build the AI
+            systems that keep up with the work it brings in.
+          </p>
+          <div class="page-hero__actions">
+            <a class="btn btn--primary" href="/discovery/">Book a discovery call</a>
+            <a class="btn btn--ghost" href="#market">The reputation gap</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="market">
+      <div class="container defblock">
+        <h2>A reputation town meets a new referrer</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Baltimore runs on earned reputation. The problem: ChatGPT has
+            never sat at a kitchen table in Hampden, and it is doing more
+            of the referring every year.
+          </p>
+          <p>
+            Businesses here are old by national standards. Trades firms
+            in their third generation, family names that have been on
+            trucks for fifty years, practices that outlived every
+            marketing fad by ignoring them. Their proof lives offline, in
+            repeat customers and passed-along names, and AI engines
+            cannot see any of it. When a buyer asks ChatGPT, Claude,
+            Gemini, Perplexity, Copilot, or Google AI Overviews who to
+            call, the engines read signals: consistent profiles, real
+            reviews, structured data, content that answers real
+            questions. The oldest reputation in the neighborhood loses to
+            a five-year-old company with legible signals.
+          </p>
+          <p>
+            That is the specific unfairness we fix. Not by replacing what
+            earned the reputation, but by translating it into the record
+            the engines check, so the business that actually did the work
+            is the one they recommend.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="problems">
+      <div class="container">
+        <div class="pagesec__head">
+          <h2>What Baltimore businesses bring us</h2>
+          <p class="lede">
+            Four patterns, one city.
+          </p>
+        </div>
+        <div class="dgrid">
+          <div class="dgrid__cell">
+            <h3>Proof the engines can't read</h3>
+            <p>
+              Decades of jobs done right, none of it legible to a
+              machine. We translate a real track record into consistent
+              identity, structured data, and citable pages, so the
+              record finally counts where buyers now look.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>A rowhouse city's demand</h3>
+            <p>
+              Century-old housing keeps Baltimore's plumbers, roofers,
+              electricians, and HVAC crews busier than almost any
+              market. Every one of those emergencies starts as a search,
+              and the engines name the shortlist.
+              <a href="/industries/home-services/">Home services</a> is
+              our deepest vertical.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Buyers without word of mouth</h3>
+            <p>
+              The universities and hospital systems pull thousands of
+              newcomers into the city every year. They have no neighbor
+              to ask, so they ask an engine, and it answers with whoever
+              has the strongest signals.
+            </p>
+          </div>
+          <div class="dgrid__cell">
+            <h3>Field crews, paper office</h3>
+            <p>
+              Crews on job sites, follow-up in a notebook. Our
+              <a href="/ai-automation/">automation layer</a> wires
+              intake, scheduling, estimates, and follow-through together
+              so the jobs your visibility wins actually get booked.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagesec" id="nearby">
+      <div class="container defblock">
+        <h2>Same state, short drive</h2>
+        <div class="defblock__body">
+          <p class="defblock__big">
+            Baltimore is not a market we fly into. It is one we drive
+            to, in our own state, under an owner's name.
+          </p>
+          <p>
+            Aivium Digital is based in Hagerstown and founder-led:
+            <a href="/about-steven/">Steven Mills</a> works hands-on in
+            every engagement. We run the same two systems here that we
+            run nationally: the <a href="/ai-seo/">visibility system</a>
+            that gets you found and cited across Google and the AI
+            engines, and the automation layer that puts AI to work in
+            operations. Every engagement opens with the
+            <a href="/ai-visibility-audit/">AI Visibility Audit</a>: what
+            the engines say about you today, and who they name instead.
+          </p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="xlink">
+          <div class="xlink__copy">
+            <h3>One state, one system.</h3>
+            <p>
+              Baltimore is the biggest of the Maryland markets we serve.
+              The state page covers how the whole system works here.
+            </p>
+          </div>
+          <a class="btn btn--ghost" href="/locations/maryland/">Our Maryland page</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq pagesec" id="faq">
+      <div class="container faq__inner">
+        <div class="faq__head">
+          <h2>Baltimore questions, answered.</h2>
+          <p class="lede faq__lede">What businesses here ask us first.</p>
+        </div>
+        <div class="faq__list">
+          {
+            faq.map((f) => (
+              <details class="faq__item">
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="container cta__inner">
+        <div class="cta__content">
+          <h2 class="cta__heading">
+            <span class="cta__question">Decades of good work, and the engines don&rsquo;t know your name?</span>
+            Let&rsquo;s fix that.
+          </h2>
+          <a class="btn btn--primary cta__btn" href="/discovery/">Book a discovery call</a>
+          <ul class="cta__checklist" aria-label="What the audit involves">
+            <li>30 minutes</li>
+            <li>Free</li>
+            <li>No deck</li>
+            <li>No obligation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>

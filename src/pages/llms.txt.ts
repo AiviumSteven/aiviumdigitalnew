@@ -31,6 +31,10 @@ export const GET: APIRoute = async () => {
     '',
     `- [Maryland](${SITE}/locations/maryland/): Maryland-based, nationally serving; AI visibility and automation for Maryland businesses.`,
     `- [Hagerstown, MD](${SITE}/locations/hagerstown-md/): Western Maryland home base; AI strategy and implementation for regional businesses.`,
+    `- [Montgomery County, MD](${SITE}/locations/montgomery-county-md/): Rockville, Bethesda, Gaithersburg, Silver Spring: AI visibility and automation for the county's research-heavy buyers.`,
+    `- [Baltimore, MD](${SITE}/locations/baltimore-md/): AI visibility and automation for Baltimore and the metro around it; earned reputation translated into AI-search citations.`,
+    `- [Martinsburg, WV](${SITE}/locations/martinsburg-wv/): The Eastern Panhandle: AI visibility and automation for West Virginia's fastest-growing region, 30 minutes from home base.`,
+    `- [All Locations](${SITE}/locations/): Every market page, plus how national engagements run.`,
     '',
     ...(posts.length > 0
       ? [
