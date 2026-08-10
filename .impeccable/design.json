@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "title": "Design System: Aivium Digital",
+  "extensions": {
+    "colorMeta": {
+      "void-950": { "role": "neutral", "displayName": "Void 950", "canonical": "#090c10", "tonalRamp": ["oklch(13% 0.012 250)", "oklch(20% 0.014 250)", "oklch(30% 0.016 250)", "oklch(42% 0.016 250)", "oklch(55% 0.014 250)", "oklch(68% 0.012 250)", "oklch(82% 0.008 250)", "oklch(95% 0.004 250)"] },
+      "void-900": { "role": "neutral", "displayName": "Void 900 (Brand Ink)", "canonical": "#0d1117" },
+      "void-850": { "role": "neutral", "displayName": "Void 850", "canonical": "#111722" },
+      "cream": { "role": "neutral", "displayName": "Brand Cream", "canonical": "#f6f2ea", "tonalRamp": ["oklch(15% 0.008 85)", "oklch(27% 0.009 85)", "oklch(39% 0.01 85)", "oklch(51% 0.011 85)", "oklch(63% 0.011 85)", "oklch(75% 0.011 85)", "oklch(86% 0.011 85)", "oklch(96% 0.01 85)"] },
+      "accent": { "role": "primary", "displayName": "Vermillion", "canonical": "#e5391b", "tonalRamp": ["oklch(15% 0.06 32)", "oklch(26% 0.1 32)", "oklch(38% 0.15 32)", "oklch(49% 0.19 32)", "oklch(58% 0.21 32)", "oklch(70% 0.16 32)", "oklch(83% 0.1 32)", "oklch(95% 0.03 32)"] },
+      "accent-bright": { "role": "primary", "displayName": "Vermillion Bright (fills)", "canonical": "#f03e1f" },
+      "accent-deep": { "role": "primary", "displayName": "Vermillion Deep (glow depths only, never text)", "canonical": "#7e1e0c" },
+      "on-accent": { "role": "neutral", "displayName": "Ink on Accent", "canonical": "#0b0806" },
+      "ok": { "role": "tertiary", "displayName": "Telemetry Green (status only)", "canonical": "#3ecf8e", "tonalRamp": ["oklch(15% 0.05 160)", "oklch(26% 0.08 160)", "oklch(38% 0.11 160)", "oklch(50% 0.13 160)", "oklch(62% 0.14 160)", "oklch(75% 0.15 160)", "oklch(85% 0.11 160)", "oklch(95% 0.05 160)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headlines; Archivo variable at 121% width (font-stretch), weight 500. On heroes the display-size line is often a <p> below the quiet eyebrow H1." },
+      "headline": { "displayName": "Headline", "purpose": "Section H2s and stat numerals, 121% width." },
+      "title": { "displayName": "Title", "purpose": "Card and channel H3s, 108% width (subhead stretch)." },
+      "body": { "displayName": "Body", "purpose": "Copy at normal width; measure capped 44-62ch." },
+      "label": { "displayName": "Label / Telemetry", "purpose": "IBM Plex Mono 500, uppercase, +0.16em. Measurement and designation only; never a kicker, never editorial voice." }
+    },
+    "shadows": [
+      { "name": "accent-bloom", "value": "0 0 48px rgba(229, 57, 27, 0.35)", "purpose": "The one accent-filled chip a diagram earns (growth output)." },
+      { "name": "planet-glow", "value": "0 0 56px rgba(229, 57, 27, 0.3)", "purpose": "Pixel-planet destinations." },
+      { "name": "pulse-glow", "value": "drop-shadow(0 0 4px rgba(229, 57, 27, 0.7))", "purpose": "Moving vermillion signal dashes on diagram wires (filter)." },
+      { "name": "lock-glow", "value": "drop-shadow(0 0 6px rgba(62, 207, 142, 0.6))", "purpose": "Green telemetry lock-in on waypoints (filter); large form 0 0 72px rgba(62, 207, 142, 0.45)." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The only easing; all state and entrance transitions." },
+      { "name": "duration-fast", "value": "180ms", "purpose": "Color/border/transform state changes." },
+      { "name": "duration-base", "value": "320ms", "purpose": "Structural changes (nav compress, progress fill, step rise)." },
+      { "name": "duration-slow", "value": "700ms", "purpose": "Entrance 'rise' animations (fade + 14-20px translate up, staggered 60-90ms per sibling)." },
+      { "name": "ambient-loops", "value": "linear, 45s-210s", "purpose": "Orbits, marquee, dash drifts: slow, linear, infinite; all motion gated behind prefers-reduced-motion: no-preference." }
+    ],
+    "breakpoints": [
+      { "name": "quiz-fields", "value": "640px" },
+      { "name": "flow-restack", "value": "760px" },
+      { "name": "mobile", "value": "767px" },
+      { "name": "primary-restack", "value": "900px" },
+      { "name": "nav-collapse", "value": "1100px" },
+      { "name": "nav-tight", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one primary intent per page: accent-bright pill with ink text.",
+      "html": "<button class=\"ds-btn-primary\">Book a discovery call</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; height: 3rem; padding: 0 2rem; border: 1px solid transparent; border-radius: 999px; background: var(--accent-bright, #f03e1f); color: var(--on-accent, #0b0806); font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 1rem; font-weight: 500; white-space: nowrap; cursor: pointer; transition: background-color 180ms cubic-bezier(0.16, 1, 0.3, 1), transform 180ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-primary:hover { background: var(--accent, #e5391b); } .ds-btn-primary:active { transform: scale(0.98); } .ds-btn-primary:focus-visible { outline: 2px solid var(--accent-bright, #f03e1f); outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action: transparent pill with a line-strong hairline border.",
+      "html": "<button class=\"ds-btn-ghost\">Nominate a nonprofit</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; height: 3rem; padding: 0 2rem; border: 1px solid var(--line-strong, rgba(246, 242, 234, 0.22)); border-radius: 999px; background: transparent; color: var(--cream, #f6f2ea); font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 1rem; font-weight: 500; white-space: nowrap; cursor: pointer; transition: border-color 180ms cubic-bezier(0.16, 1, 0.3, 1), transform 180ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-ghost:hover { border-color: var(--cream, #f6f2ea); } .ds-btn-ghost:active { transform: scale(0.98); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--accent-bright, #f03e1f); outline-offset: 3px; }"
+    },
+    {
+      "name": "Telemetry Nav Link",
+      "kind": "nav",
+      "refersTo": "label",
+      "description": "Nav links as instrument labels: mono uppercase, accent underline scaling in from the left.",
+      "html": "<a class=\"ds-nav-link\" href=\"#\">AI Visibility</a>",
+      "css": ".ds-nav-link { position: relative; display: inline-block; padding: 0.5rem 0.25rem; font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; white-space: nowrap; color: var(--cream-55, rgba(246, 242, 234, 0.55)); transition: color 180ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-nav-link::after { content: \"\"; position: absolute; inset: auto 0.25rem 0 0.25rem; height: 1px; background: var(--accent, #e5391b); transform: scaleX(0); transform-origin: left; transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-nav-link:hover, .ds-nav-link:focus-visible { color: var(--cream, #f6f2ea); } .ds-nav-link:hover::after, .ds-nav-link:focus-visible::after { transform: scaleX(1); }"
+    },
+    {
+      "name": "Mono Designation Label",
+      "kind": "chip",
+      "refersTo": "label",
+      "description": "The measurement voice: mono uppercase tracked label; accent variant designates system cards.",
+      "html": "<div><span class=\"ds-label ds-label--accent\">SYS-01 / AI Visibility</span><br /><span class=\"ds-label\">Duration 180 days</span></div>",
+      "css": ".ds-label { font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace; font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cream-55, rgba(246, 242, 234, 0.55)); } .ds-label--accent { color: var(--accent, #e5391b); }"
+    },
+    {
+      "name": "Input Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Sharp field on void: hairline border, accent border on focus, no outline ring.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field-label\" for=\"ds-email\">Work email</label><input class=\"ds-input\" id=\"ds-email\" type=\"email\" placeholder=\"you@organization.org\" /></div>",
+      "css": ".ds-field { display: grid; gap: 0.5rem; } .ds-field-label { font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace; font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cream-55, rgba(246, 242, 234, 0.55)); } .ds-input { width: 100%; padding: 0.75rem 1rem; background: var(--void-900, #0d1117); border: 1px solid var(--line, rgba(246, 242, 234, 0.1)); border-radius: 0; color: var(--cream, #f6f2ea); font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; font-size: 1.0625rem; transition: border-color 180ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-input::placeholder { color: var(--cream-32, rgba(246, 242, 234, 0.32)); } .ds-input:hover { border-color: var(--line-strong, rgba(246, 242, 234, 0.22)); } .ds-input:focus-visible { outline: none; border-color: var(--accent, #e5391b); }"
+    },
+    {
+      "name": "Quiz Option Row",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Funnel answer row: accent mono key, cream-72 text, radio ring; checked turns border accent and the ring into an accent dot.",
+      "html": "<label class=\"ds-option\"><input type=\"radio\" name=\"ds-q\" checked /><span class=\"ds-option-key\">A</span><span class=\"ds-option-text\">We show up in AI answers sometimes, inconsistently</span><span class=\"ds-option-ring\"></span></label>",
+      "css": ".ds-option { position: relative; display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; background: var(--void-900, #0d1117); border: 1px solid var(--line, rgba(246, 242, 234, 0.1)); border-radius: 0; cursor: pointer; font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; transition: border-color 180ms cubic-bezier(0.16, 1, 0.3, 1), background-color 180ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-option:hover { border-color: var(--line-strong, rgba(246, 242, 234, 0.22)); background: var(--void-850, #111722); } .ds-option input { position: absolute; opacity: 0; pointer-events: none; } .ds-option-key { font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace; font-size: 0.8125rem; font-weight: 500; color: var(--accent, #e5391b); min-width: 1.25rem; } .ds-option-text { flex: 1; font-size: 1.0625rem; color: var(--cream-72, rgba(246, 242, 234, 0.72)); transition: color 180ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-option-ring { width: 1.125rem; height: 1.125rem; border: 1.5px solid var(--line-strong, rgba(246, 242, 234, 0.22)); border-radius: 50%; flex-shrink: 0; transition: border-color 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-option:has(input:checked) { border-color: var(--accent, #e5391b); background: var(--void-850, #111722); } .ds-option:has(input:checked) .ds-option-text { color: var(--cream, #f6f2ea); } .ds-option:has(input:checked) .ds-option-ring { border-color: var(--accent, #e5391b); box-shadow: inset 0 0 0 4px var(--void-850, #111722), inset 0 0 0 12px var(--accent, #e5391b); } .ds-option:has(input:focus-visible) { outline: 2px solid var(--accent-bright, #f03e1f); outline-offset: 3px; }"
+    },
+    {
+      "name": "System Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Service module: sharp void-900 surface, accent mono designation, numbered capability rows via CSS counters.",
+      "html": "<article class=\"ds-syscard\"><span class=\"ds-syscard-designation\">SYS-01 / AI Visibility</span><h3 class=\"ds-syscard-title\">Get cited by the engines your buyers ask</h3><p class=\"ds-syscard-pitch\">Structured entity work, content the engines can quote, and measurement that proves it.</p><ul class=\"ds-syscard-caps\"><li>Entity and schema foundation</li><li>Answer-ready content system</li><li>Citation tracking across six engines</li></ul></article>",
+      "css": ".ds-syscard { display: grid; gap: 1rem; justify-items: start; padding: 2rem; background: var(--void-900, #0d1117); border: 1px solid var(--line, rgba(246, 242, 234, 0.1)); border-radius: 0; font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; color: var(--cream, #f6f2ea); transition: border-color 320ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-syscard:hover { border-color: var(--line-strong, rgba(246, 242, 234, 0.22)); } .ds-syscard-designation { font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace; font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent, #e5391b); } .ds-syscard-title { font-size: 1.375rem; font-weight: 500; font-stretch: 108%; letter-spacing: -0.01em; line-height: 1.15; } .ds-syscard-pitch { color: var(--cream-72, rgba(246, 242, 234, 0.72)); font-size: 1.0625rem; line-height: 1.65; } .ds-syscard-caps { list-style: none; counter-reset: cap; display: grid; gap: 0.75rem; margin: 0.5rem 0 0; padding: 0; width: 100%; } .ds-syscard-caps li { counter-increment: cap; display: flex; gap: 0.75rem; align-items: baseline; font-size: 0.875rem; color: var(--cream-72, rgba(246, 242, 234, 0.72)); padding-top: 0.75rem; border-top: 1px solid var(--line, rgba(246, 242, 234, 0.1)); } .ds-syscard-caps li::before { content: \"(\" counter(cap, decimal-leading-zero) \")\"; font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace; font-size: 0.8125rem; letter-spacing: 0.06em; color: var(--accent, #e5391b); flex-shrink: 0; }"
+    },
+    {
+      "name": "Commitment Plaque",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Impact-surface promise block: line-strong bordered void panel with a green telemetry tag.",
+      "html": "<div class=\"ds-commit\"><p class=\"ds-commit-tag\"><svg viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\" width=\"13\" height=\"13\"><path d=\"M2.5 8.5l3.5 3.5 7.5-8\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg> Committed</p><p class=\"ds-commit-body\">We will publish what worked and what did not, in the partner's own numbers.</p></div>",
+      "css": ".ds-commit { position: relative; padding: 1.5rem 2rem; border: 1px solid var(--line-strong, rgba(246, 242, 234, 0.22)); background: var(--void-900, #0d1117); border-radius: 0; font-family: Archivo, 'Helvetica Neue', Arial, sans-serif; } .ds-commit-tag { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.75rem; font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace; font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ok, #3ecf8e); } .ds-commit-body { margin: 0; color: var(--cream, #f6f2ea); font-size: 1.0625rem; line-height: 1.65; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Frontier Observatory",
+    "overview": "Cold void, warm signal. The site is an instrument watching deep space: pages are near-black voids partitioned by cream hairlines, and everything warm on screen is a signal worth attention, the vermillion of a rim-lit horizon, the green of a telemetry lock-in. It is a single dark theme locked at page level (color-scheme: dark); there is no light mode and no theme toggle. Density is editorial, not dashboard: wide sections, one idea per band, long measure capped in ch units, generous --space-section rhythm. Ornament is earned by the metaphor: orbit rings, starfields, signal traces, registration corner marks, pixelated 'transmission' imagery. Motion is concentrated into one authored moment above the fold per page; everything below stays calm, and every animation is wrapped in prefers-reduced-motion: no-preference.",
+    "keyCharacteristics": [
+      "Single locked dark theme; the void is the ground, cream is the voice, vermillion is the signal.",
+      "Text hierarchy is one cream at four opacities, never a gray ramp.",
+      "Hairlines partition everything; surfaces are sharp, interactive elements are pills.",
+      "Mono type appears only as measurement or designation, never as editorial voice.",
+      "One signature motion moment per page, above the fold; ambient loops are slow and linear."
+    ],
+    "rules": [
+      { "name": "The Opacity Ladder Rule", "body": "All text and border hierarchy is cream at a fixed alpha (1 / 0.72 / 0.55 / 0.32 / 0.22 / 0.10). Never introduce a gray hex for text or hairlines.", "section": "colors" },
+      { "name": "The Warm Signal Rule", "body": "Warmth means signal. Vermillion and green carry meaning (attention, status); they never fill large areas except the one accent block a diagram or pricing grid earns.", "section": "colors" },
+      { "name": "The Mono Is Measurement Rule", "body": "IBM Plex Mono appears only as data: card designations, telemetry readouts, channel and waypoint IDs, progress counts, field labels, nav links, checklists. It is never a section kicker and never editorial voice.", "section": "typography" },
+      { "name": "The Eyebrow Sentence Rule", "body": "Hero eyebrows are editorial sentences: sentence case, body-adjacent size, no mono, no uppercase, no ornament. The hero pattern is an hgroup where the keyword-carrying H1 is the quiet eyebrow line and the display-size hook below it is a p.", "section": "typography" },
+      { "name": "The Glow Not Shadow Rule", "body": "A shadow may only exist as colored light from a signal element (vermillion or green). Surfaces never cast shadows; separation is tonal steps and hairlines.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do build heroes as an hgroup: sentence-case editorial eyebrow (may be the H1), display headline, 44ch lede, primary + ghost pill pair, and if facts appear, a mono telemetry row.",
+      "Do partition with 1px --line hairlines and the void ladder (950 page, 900 panel, 850 raised); express hierarchy through cream opacities.",
+      "Do keep one primary CTA intent per page and one authored motion moment above the fold; below it, only slow linear ambient loops and 180/320ms state transitions on --ease-out.",
+      "Do wrap every animation in prefers-reduced-motion: no-preference and give every interactive element the 2px accent-bright focus-visible outline at 3px offset (fields instead turn their border accent).",
+      "Do read identity facts (phone, email, tagline, logo path) from src/data/company.ts and load per-surface CSS via BaseLayout's styles prop, after main.css.",
+      "Do start every page <title> with \"Aivium Digital | \"."
+    ],
+    "donts": [
+      "Don't use em dashes anywhere in site copy.",
+      "Don't set kickers or eyebrows in mono, uppercase, brackets, or chip styling; mono designations belong only to cards, telemetry, and measurements. Editorial sentences only.",
+      "Don't round a surface or sharpen an interactive element; radius is 0 or 999px, nothing between.",
+      "Don't use box-shadows for elevation, gray hex values for text, or a light theme; the world is one locked dark theme.",
+      "Don't use --accent-deep as text, --ok green as decoration or CTA, or accent fills beyond buttons and the one earned block per diagram/grid.",
+      "Don't fabricate stats, dates, testimonials, partners, or counters; numbers on screen are real and sourced (mono disclosure lines under stat rows).",
+      "Don't expand the engine roster: the six engines are ChatGPT, Claude, Gemini, Perplexity, Copilot, Google AI Overviews, and they are \"engines\", not \"surfaces\"."
+    ]
+  }
+}

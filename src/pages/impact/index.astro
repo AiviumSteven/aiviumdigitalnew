@@ -1,0 +1,688 @@
+---
+/**
+ * /impact/ — the Aivium Digital Impact Partner program.
+ *
+ * Direction: THE SIGNAL (user-pinned, seed 5238da87). Everything
+ * cycle-specific reads from src/data/impact.ts; flip applicationStatus
+ * there to move the page through announced → open → closed → selected.
+ * Submissions POST to /api/impact and stay out of the sales pipeline.
+ */
+import { Image } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import { COMPANY } from "../../data/company";
+import { getAuthor } from "../../data/authors";
+import { orgNode, webSiteNode, webPageNode, graph } from "../../lib/schema";
+import {
+  IMPACT_PROGRAM,
+  IMPACT_CHANNELS,
+  IMPACT_PHASES,
+  IMPACT_CHECKLIST,
+  IMPACT_CRITERIA,
+  IMPACT_NOT_INCLUDED,
+  IMPACT_FAQS,
+} from "../../data/impact";
+
+const program = IMPACT_PROGRAM;
+const status = program.applicationStatus;
+const steven = getAuthor("steven-mills");
+
+const TITLE = "Aivium Digital | Impact Partner: Pro Bono AI & Digital Services for Nonprofits";
+const DESCRIPTION =
+  "Aivium Digital is selecting one Mid-Atlantic nonprofit for a six-month pro bono engagement: AI visibility, better systems, automation, and measurable community impact.";
+const OG_TITLE = "Aivium Digital Impact Partner";
+const OG_DESCRIPTION =
+  "Six months. One organization. Real measurable impact. Apply or nominate a nonprofit for the Impact Partner program.";
+
+const jsonLd = graph(
+  webSiteNode(),
+  orgNode(),
+  webPageNode("/impact/", OG_TITLE, DESCRIPTION),
+  {
+    "@type": "FAQPage",
+    "@id": "https://aiviumdigital.com/impact/#faq",
+    mainEntity: IMPACT_FAQS.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  }
+);
+
+/* Hero content by lifecycle status */
+const heroHeadline =
+  status === "selected"
+    ? `Meet the ${program.year} Impact Partner.`
+    : "Six months. One organization. Real measurable impact.";
+
+const heroLede =
+  status === "selected" && program.selectedPartner
+    ? program.selectedPartner.mission
+    : status === "closed"
+      ? "Applications for the current Impact Partner cycle are closed. The engagement, and what it changes, will be documented openly."
+      : "We are choosing one nonprofit and giving it six months of the work our clients pay for: AI visibility, working systems, and a team with real leverage. Pro bono, scoped honestly, documented in public.";
+
+const heroPrimary =
+  status === "open"
+    ? { label: "Start the application", href: "/impact/apply/", cta: "apply" }
+    : status === "announced"
+      ? { label: "Get notified when applications open", href: "#get-involved", cta: "apply" }
+      : status === "selected" && program.selectedPartner?.caseStudyPath
+        ? { label: "Follow the journey", href: program.selectedPartner.caseStudyPath, cta: null }
+        : { label: "Follow the journey", href: "/signals/", cta: null };
+
+const heroSecondary =
+  status === "announced" || status === "open"
+    ? { label: "Nominate a nonprofit", href: "#nominate", cta: "nominate" }
+    : { label: "Hear about the next cycle", href: "#get-involved", cta: null };
+
+const TIMELINE_ROWS = [
+  { label: "Applications open", value: program.dates.applicationsOpen },
+  { label: "Applications close", value: program.dates.applicationsClose },
+  { label: "Finalist review", value: program.dates.finalistReview },
+  { label: "Partner announced", value: program.dates.partnerAnnounced },
+  { label: "Engagement begins", value: program.dates.engagementBegins },
+].filter((r) => r.value);
+
+const check = `<svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+/* Instrument chrome: the comp's channel-delta column and greeked
+   strips, deterministic so every build renders the same console.
+   Pure texture, hidden from AT. */
+let seed = 20260807;
+const rnd = () => {
+  seed = (seed * 1103515245 + 12345) % 2147483648;
+  return seed / 2147483648;
+};
+const CHANNEL_ROWS = Array.from({ length: 42 }, (_, i) => ({
+  n: String(i + 1).padStart(2, "0"),
+  d: `${rnd() > 0.5 ? "+" : "-"}0.${String(Math.floor(rnd() * 12)).padStart(2, "0")}`,
+}));
+/* Text-like wavering rules, comp's left column run */
+const strip = (w: number) => {
+  const half = Math.round(w / 2);
+  return `q ${Math.round(half / 2)} -1.3 ${half} 0 q ${Math.round(half / 2)} 1.3 ${half} 0`;
+};
+const STRIP_ROWS = Array.from({ length: 24 }, () => ({
+  d1: strip(18 + Math.round(rnd() * 26)),
+  d2: strip(8 + Math.round(rnd() * 20)),
+}));
+---
+
+<BaseLayout
+  title={TITLE}
+  description={DESCRIPTION}
+  ogTitle={OG_TITLE}
+  ogDescription={OG_DESCRIPTION}
+  canonical="/impact/"
+  styles={["/styles/impact.css"]}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
+
+  <SiteNav />
+
+  <main data-status={status}>
+    <!-- DIRECTION CONTRACT · seed 5238da87
+    COMP: .impeccable/comps/impact-hero-comp.png — the sketch approved on
+    the decision page. The comp is king; palette and wordmark swap to
+    Aivium Digital (vermillion #e5391b) is the one sanctioned divergence.
+    THESIS: Out of many faint signals, one is found, locked, and amplified.
+    The page IS the program's mechanism; it refuses the stacked
+    text-and-cards charity landing page.
+    OWN-WORLD: Frontier Observatory. Void #090c10, cream, vermillion
+    #e5391b, telemetry green lock, Archivo expanded display, mono only as
+    measurement, hairlines, sharp surfaces, pill actions.
+    STORY: a nonprofit leader sees their organization as the one signal
+    worth amplifying, trusts the honesty of the scope, and applies or
+    nominates in minutes.
+    FIRST VIEWPORT: a centered instrument console. Thin frame around the
+    viewport; faint greeked monitor rows fill the ground; ONE dominant
+    trace runs the full width at center and erupts into a dense sharp
+    vermillion burst center-right; a vertical cursor crosses it; a mono
+    channel-delta column runs the right edge, greeked strips the left,
+    instrument widgets in the corners. Headline and two pills sit
+    centered above the trace; the telemetry readout is the console
+    footer. The lock sequence is the page's only motion moment.
+    FORM: The Signal, candidate 4 of the grounded surface list.
+    FINISH: unreviewed and undocumented is unfinished; this build ends
+    with the finish review, the verdict, and DESIGN.md. -->
+
+    <section class="impact-hero">
+      <canvas class="impact-hero__field" aria-hidden="true"></canvas>
+
+      {/* Console chrome, straight from the comp. Texture, not content. */}
+      <div class="impact-hero__frame" aria-hidden="true"></div>
+      <div class="impact-hero__channels" aria-hidden="true">
+        <p class="impact-hero__channels-head">CH&nbsp;&nbsp;Δ</p>
+        {CHANNEL_ROWS.map((c) => (
+          <p>{c.n}&nbsp;&nbsp;{c.d}</p>
+        ))}
+      </div>
+      <svg class="impact-hero__strips" viewBox="0 0 60 660" aria-hidden="true">
+        {STRIP_ROWS.map((s, i) => (
+          <g transform={`translate(0 ${6 + i * 27})`}>
+            <circle cx="3" cy="3" r="1.4" fill="currentColor" />
+            <path d={`M10 3 ${s.d1}`} stroke="currentColor" stroke-width="1.4" fill="none" />
+            <path d={`M10 10 ${s.d2}`} stroke="currentColor" stroke-width="1.4" fill="none" opacity="0.6" />
+          </g>
+        ))}
+      </svg>
+      <svg class="impact-hero__widget impact-hero__widget--cluster" viewBox="0 0 76 56" aria-hidden="true">
+        <path d="M8 4 H2 V12 M2 44 v8 h6 M68 4 h6 v8 M74 44 v8 h-6" stroke="currentColor" stroke-width="1.2" fill="none" />
+        <path d="M10 16 q7 -1.4 14 0 t14 0 t14 0" stroke="currentColor" stroke-width="1.4" fill="none" />
+        <path d="M10 26 q6 -1.3 12 0 t12 0 t8 0" stroke="currentColor" stroke-width="1.4" fill="none" opacity="0.7" />
+        <path d="M10 36 q7 -1.4 14 0 t10 0" stroke="currentColor" stroke-width="1.4" fill="none" opacity="0.5" />
+      </svg>
+      <svg class="impact-hero__widget impact-hero__widget--reticle" viewBox="0 0 36 36" aria-hidden="true">
+        <circle cx="18" cy="18" r="13" stroke="currentColor" stroke-width="1.2" fill="none" />
+        <circle cx="18" cy="18" r="1.6" fill="currentColor" />
+        <path d="M18 1 V8 M18 28 V35 M1 18 H8 M28 18 H35" stroke="currentColor" stroke-width="1.2" />
+      </svg>
+      <svg class="impact-hero__widget impact-hero__widget--axis" viewBox="0 0 44 44" aria-hidden="true">
+        <path d="M8 36 V10 M8 36 H38 M8 36 L26 22" stroke="currentColor" stroke-width="1.2" fill="none" />
+        <path d="M6 12 L8 8 L10 12 M34 34 L38 36 L34 38" stroke="currentColor" stroke-width="1.2" fill="none" />
+      </svg>
+      <svg class="impact-hero__widget impact-hero__widget--globe" viewBox="0 0 44 44" aria-hidden="true">
+        <circle cx="22" cy="22" r="16" stroke="currentColor" stroke-width="1.2" fill="none" />
+        <ellipse cx="22" cy="22" rx="16" ry="6.5" stroke="currentColor" stroke-width="1" fill="none" />
+        <ellipse cx="22" cy="22" rx="6.5" ry="16" stroke="currentColor" stroke-width="1" fill="none" />
+        <path d="M6 22 H38" stroke="currentColor" stroke-width="1" />
+      </svg>
+      <svg class="impact-hero__widget impact-hero__widget--spark" viewBox="0 0 64 28" aria-hidden="true">
+        <rect x="1" y="1" width="62" height="26" stroke="currentColor" stroke-width="1" fill="none" />
+        <path d="M6 20 L16 14 L24 17 L34 8 L44 12 L58 6" stroke="currentColor" stroke-width="1.2" fill="none" />
+      </svg>
+      <svg class="impact-hero__widget impact-hero__widget--grid" viewBox="0 0 30 30" aria-hidden="true">
+        {[0, 1, 2, 3].map((r) =>
+          [0, 1, 2, 3].map((c) => <circle cx={4 + c * 7} cy={4 + r * 7} r="1.1" fill="currentColor" />)
+        )}
+      </svg>
+
+      <p class="impact-hero__lock" id="impact-lock" aria-hidden="true">
+        <span class="impact-hero__lock-ring"></span>
+        Signal locked
+      </p>
+
+      <div class="container impact-hero__inner">
+        <div class="impact-hero__content">
+          <hgroup>
+            <h1 class="impact-hero__eyebrow">
+              The Aivium Digital Impact Partner program for {program.region} nonprofits.
+            </h1>
+            <p class="impact-hero__headline">{heroHeadline}</p>
+          </hgroup>
+          <div class="impact-hero__actions">
+            <a class="btn btn--primary" href={heroPrimary.href} data-impact-cta={heroPrimary.cta}>
+              {heroPrimary.label}
+            </a>
+            <a class="btn btn--ghost" href={heroSecondary.href} data-impact-cta={heroSecondary.cta}>
+              {heroSecondary.label}
+            </a>
+          </div>
+        </div>
+        <p class="lede impact-hero__lede">{heroLede}</p>
+      </div>
+
+      <p class="impact-hero__telemetry" aria-label="Program facts">
+        <span>Duration <b>180 days</b></span>
+        <span>Professional fees <b>$0</b></span>
+        <span>Partners <b>1</b></span>
+        <span>Region <b>{program.region}</b></span>
+        {program.serviceValue && <span>Donated services <b>{program.serviceValue}</b></span>}
+      </p>
+    </section>
+
+    <section class="impact-sec impact-sec--flush">
+      <div class="container">
+        <div class="impact-why__grid">
+          <div>
+            <h2>Technology should amplify more than profits.</h2>
+            <p class="impact-why__big">
+              The organizations doing the most important work often run on the fewest resources.
+            </p>
+          </div>
+          <div class="impact-why__body">
+            <p>
+              Small teams carry fundraising, operations, and outreach at the same time, while AI
+              quietly changes how people find and choose who to support. We think nonprofits
+              deserve access to that shift too.
+            </p>
+            <p>
+              Impact Partner is our answer: choose one organization, find where technology creates
+              the most leverage for its people, and do the work alongside them for six months.
+            </p>
+            <p class="impact-quote">
+              The goal isn't giving a nonprofit more technology. It's giving its people
+              <em>more leverage</em> to accomplish the mission.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="impact-sec" aria-labelledby="channels-h">
+      <div class="container">
+        <h2 id="channels-h">We won't force your mission into a package.</h2>
+        <p class="impact-sec__lede">
+          The engagement starts from your goals and constraints, then draws from four channels of
+          work. The mix is decided together, not sold.
+        </p>
+        <ul class="impact-channels__list" role="list">
+          {IMPACT_CHANNELS.map((c) => (
+            <li class="impact-channel">
+              <span class="impact-channel__id" aria-hidden="true">{c.designation}</span>
+              <h3>{c.name}</h3>
+              <div>
+                <p class="impact-channel__line">{c.line}</p>
+                <p class="impact-channel__scope">{c.scope.join(" · ")}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="impact-sec" aria-labelledby="arc-h">
+      <div class="container">
+        <h2 id="arc-h">Six months, built so change can be measured.</h2>
+        <div class="impact-arc__diagram" aria-hidden="true">
+          <svg class="impact-arc__wires" viewBox="0 0 1280 340" fill="none">
+            <g class="arc-corners">
+              <path d="M14 30 V14 H30" />
+              <path d="M1250 14 H1266 V30" />
+              <path d="M1266 310 V326 H1250" />
+              <path d="M30 326 H14 V310" />
+            </g>
+            <path class="arc-base" d="M40 170 H1240" />
+            <path
+              class="arc-signal"
+              d="M40 170
+                 C 90 168, 120 172, 160 170
+                 C 200 166, 220 174, 260 170
+                 C 300 162, 320 178, 360 170
+                 C 400 156, 420 184, 460 170
+                 C 500 148, 520 192, 560 170
+                 C 600 138, 620 202, 660 170
+                 C 700 126, 720 214, 760 170
+                 C 800 112, 820 228, 860 170
+                 C 900 96, 920 244, 960 170
+                 C 1000 82, 1020 258, 1060 170
+                 C 1100 70, 1120 270, 1160 170
+                 C 1200 120, 1220 196, 1240 170" />
+            <circle class="arc-marker" cx="160" cy="170" r="6" />
+            <circle class="arc-marker" cx="480" cy="170" r="6" />
+            <circle class="arc-marker" cx="800" cy="170" r="6" />
+            <circle class="arc-marker arc-marker--end" cx="1240" cy="170" r="7" />
+          </svg>
+        </div>
+        <ol class="impact-arc__phases" role="list">
+          {IMPACT_PHASES.map((p) => (
+            <li class="impact-phase">
+              <h3>{p.name}</h3>
+              <p class="impact-phase__window">{p.n} · {p.window}</p>
+              <p>{p.line}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="impact-sec" aria-labelledby="fit-h">
+      <div class="container">
+        <h2 id="fit-h">A mission we believe in, and a team ready to build.</h2>
+        <p class="impact-sec__lede">
+          Need matters, and readiness matters. The strongest partner is one where six focused
+          months can create change we can honestly measure.
+        </p>
+        <ul class="impact-fit__list" role="list">
+          {IMPACT_CHECKLIST.map((item) => (
+            <li><Fragment set:html={check} />{item}</li>
+          ))}
+        </ul>
+        <p class="impact-fit__note">
+          You don't need to know what technology you need. Finding the right opportunities is
+          part of the engagement.
+        </p>
+      </div>
+    </section>
+
+    <section class="impact-sec" aria-labelledby="selection-h">
+      <div class="container">
+        <h2 id="selection-h">Not a popularity contest.</h2>
+        <p class="impact-sec__lede">
+          Aivium Digital selects the partner where we believe our team can create the greatest
+          responsible, measurable impact. No public voting, no follower counts.
+        </p>
+        <dl class="impact-selection__grid">
+          {IMPACT_CRITERIA.map((c) => (
+            <div>
+              <dt>{c.name}</dt>
+              <dd>{c.line}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="impact-sec" aria-labelledby="log-h">
+      <div class="container">
+        <h2 id="log-h">We'll tell the story honestly.</h2>
+        <p class="impact-sec__lede">
+          Part of the program's purpose is showing what thoughtful technology work actually does
+          for a mission-driven organization. So we document the engagement: where we started,
+          what we changed, what worked, and what didn't.
+        </p>
+        <div class="impact-log__commit">
+          <div class="impact-commit">
+            <p class="impact-commit__tag"><Fragment set:html={check} />Commitment</p>
+            <p>
+              The selected organization will never be required to provide a positive testimonial.
+              We want to document the work authentically.
+            </p>
+          </div>
+          <div class="impact-commit">
+            <p class="impact-commit__tag"><Fragment set:html={check} />Commitment</p>
+            <p>
+              Any public case study will clearly disclose that Aivium Digital provided the
+              defined professional services pro bono through the Impact Partner program.
+            </p>
+          </div>
+        </div>
+        <p class="impact-log__scope">
+          What may be documented: baseline performance · before and after metrics · strategy ·
+          implementation · interviews · lessons learned · final outcomes
+        </p>
+      </div>
+    </section>
+
+    <section class="impact-sec" aria-labelledby="boundaries-h">
+      <div class="container">
+        <h2 id="boundaries-h">A partnership, not unlimited agency services.</h2>
+        <p class="impact-sec__lede">
+          The engagement has a clearly defined scope built around where we can create the
+          greatest impact in six months. If a recommended initiative carries a third-party cost,
+          we discuss it before any commitment. The organization is never required to purchase
+          anything from Aivium Digital.
+        </p>
+        <details class="impact-boundaries__details">
+          <summary>
+            What's not automatically included
+            <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>
+          </summary>
+          <ul role="list">
+            {IMPACT_NOT_INCLUDED.map((item) => <li>{item}</li>)}
+          </ul>
+        </details>
+      </div>
+    </section>
+
+    <section class="impact-sec" id="get-involved" aria-labelledby="involved-h">
+      <div class="container">
+        <h2 id="involved-h">
+          {status === "closed"
+            ? "This cycle's applications are closed."
+            : status === "selected"
+              ? `The ${program.year} partner has been selected.`
+              : "Apply for your organization, or nominate one you believe in."}
+        </h2>
+
+        {TIMELINE_ROWS.length > 0 ? (
+          <dl class="impact-involved__timeline">
+            {TIMELINE_ROWS.map((r) => (
+              <div>
+                <dt>{r.label}</dt>
+                <dd>{r.value}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : (
+          status === "announced" && (
+            <p class="impact-sec__lede">Applications for our first Impact Partner open soon.</p>
+          )
+        )}
+
+        <div class="impact-involved__grid">
+          {(status === "announced" || status === "closed" || status === "selected") && (
+            <div class="impact-panel impact-panel--primary">
+              <h3>
+                {status === "announced" ? "Be first to know" : "Hear about the next cycle"}
+              </h3>
+              <p class="impact-panel__line">
+                {status === "announced"
+                  ? "Leave your details and we will tell you the moment applications open. No newsletter, no sequence, just the announcement."
+                  : "Leave your details and we will tell you when the next Impact Partner cycle opens."}
+              </p>
+              <form class="impact-form" data-impact-form="interest" novalidate>
+                <div class="impact-form__row">
+                  <div class="impact-field">
+                    <label for="int-name">Your name</label>
+                    <input id="int-name" name="name" type="text" required maxlength="150" autocomplete="name" />
+                  </div>
+                  <div class="impact-field">
+                    <label for="int-email">Email</label>
+                    <input id="int-email" name="email" type="email" required maxlength="320" autocomplete="email" />
+                  </div>
+                </div>
+                <div class="impact-field">
+                  <label for="int-org">Organization (optional)</label>
+                  <input id="int-org" name="org_name" type="text" maxlength="200" autocomplete="organization" />
+                </div>
+                <div class="impact-field visually-hidden" aria-hidden="true">
+                  <label for="int-hp">Leave this field empty</label>
+                  <input id="int-hp" name="website_confirm" type="text" tabindex="-1" autocomplete="off" />
+                </div>
+                <div>
+                  <button type="submit" class="btn btn--primary">Notify me</button>
+                </div>
+                <p class="impact-form__error" data-form-error>
+                  That didn't send. Try again, or email
+                  <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a> and we will add you directly.
+                </p>
+              </form>
+              <div class="impact-success" data-form-success>
+                <h3><Fragment set:html={check} />You're on the list.</h3>
+                <p>
+                  We will email you when applications open. Nothing else, no sales sequence,
+                  just the announcement.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {status === "open" && (
+            <div class="impact-panel impact-panel--primary">
+              <h3>Apply for your organization</h3>
+              <p class="impact-panel__line">
+                About ten minutes, and you don't need to know what technology you need. No trick
+                questions, and no sales pitch afterward.
+              </p>
+              <a class="btn btn--primary" href="/impact/apply/" data-impact-cta="apply">
+                Start the application
+              </a>
+            </div>
+          )}
+
+          {(status === "announced" || status === "open") && (
+            <div class="impact-panel" id="nominate">
+              <h3>Nominate a nonprofit</h3>
+              <p class="impact-panel__line">
+                Know an organization doing meaningful work? Point us at it. If it looks like a
+                fit, we will invite its team to apply.
+              </p>
+              <form class="impact-form" data-impact-form="nomination" novalidate>
+                <div class="impact-form__row">
+                  <div class="impact-field">
+                    <label for="nom-org">Nonprofit name</label>
+                    <input id="nom-org" name="org_name" type="text" required maxlength="200" />
+                  </div>
+                  <div class="impact-field">
+                    <label for="nom-website">Website (if known)</label>
+                    <input id="nom-website" name="website" type="text" maxlength="300" inputmode="url" placeholder="organization.org" />
+                  </div>
+                </div>
+                <div class="impact-field">
+                  <label for="nom-citystate">City and state</label>
+                  <input id="nom-citystate" name="city_state" type="text" required maxlength="150" />
+                </div>
+                <div class="impact-field">
+                  <label for="nom-reason">Why this organization?</label>
+                  <textarea id="nom-reason" name="reason" required maxlength="2000" rows="4"></textarea>
+                </div>
+                <div class="impact-form__row">
+                  <div class="impact-field">
+                    <label for="nom-name">Your name</label>
+                    <input id="nom-name" name="name" type="text" required maxlength="150" autocomplete="name" />
+                  </div>
+                  <div class="impact-field">
+                    <label for="nom-email">Your email</label>
+                    <input id="nom-email" name="email" type="email" required maxlength="320" autocomplete="email" />
+                  </div>
+                </div>
+                <div class="impact-form__row">
+                  <div class="impact-field">
+                    <label for="nom-rel">Your relationship to it</label>
+                    <input id="nom-rel" name="relationship" type="text" required maxlength="200" placeholder="Volunteer, donor, board member…" />
+                  </div>
+                  <div class="impact-field">
+                    <label for="nom-contact">Their contact (optional)</label>
+                    <input id="nom-contact" name="org_contact" type="text" maxlength="300" placeholder="Name or email, if known" />
+                  </div>
+                </div>
+                <label class="impact-check">
+                  <input type="checkbox" name="consent_contact" required value="confirmed" />
+                  I understand Aivium Digital may contact the organization to invite it to apply.
+                </label>
+                <div class="impact-field visually-hidden" aria-hidden="true">
+                  <label for="nom-hp">Leave this field empty</label>
+                  <input id="nom-hp" name="website_confirm" type="text" tabindex="-1" autocomplete="off" />
+                </div>
+                <div>
+                  <button type="submit" class="btn btn--ghost">Nominate this nonprofit</button>
+                </div>
+                <p class="impact-form__error" data-form-error>
+                  That didn't send. Try again, or email
+                  <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a> with the organization's name.
+                </p>
+              </form>
+              <div class="impact-success" data-form-success>
+                <h3><Fragment set:html={check} />Nomination received.</h3>
+                <p>
+                  Thanks for helping us find organizations doing meaningful work. If it looks
+                  like a fit, we will invite its team to complete the formal application.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {status === "selected" && program.selectedPartner && (
+            <div class="impact-panel">
+              <h3>{program.selectedPartner.name}</h3>
+              <p class="impact-panel__line">{program.selectedPartner.location}</p>
+              <p class="impact-panel__line">{program.selectedPartner.mission}</p>
+              {program.selectedPartner.caseStudyPath && (
+                <a class="btn btn--ghost" href={program.selectedPartner.caseStudyPath}>
+                  Follow the journey
+                </a>
+              )}
+            </div>
+          )}
+        </div>
+
+        <p class="impact-involved__legal">
+          Submitting an application or nomination does not create a client relationship or
+          guarantee selection. The selected organization and Aivium Digital will enter a separate
+          written agreement defining scope, responsibilities, permissions, and terms. Aivium
+          Digital may modify, postpone, or cancel a program cycle where necessary. Your details
+          are handled per our <a href="/privacy/">privacy policy</a> and never added to sales
+          sequences.
+        </p>
+      </div>
+    </section>
+
+    <section class="impact-sec" aria-labelledby="note-h">
+      <div class="container">
+        <div class="impact-note__grid">
+          <div>
+            <h2 id="note-h">A note from Steven.</h2>
+            {steven.portrait && (
+              <Image
+                class="impact-note__portrait"
+                src={steven.portrait}
+                alt="Steven Mills, founder of Aivium Digital"
+                widths={[320, 640]}
+                sizes="(max-width: 900px) 14rem, 20rem"
+              />
+            )}
+          </div>
+          <div class="impact-note__body">
+            <p>
+              I started Aivium around a simple belief: AI and technology should expand what
+              people are capable of, not remove people from the equation.
+            </p>
+            <p>
+              Plenty of incredible organizations do meaningful work with limited resources. They
+              shouldn't have to become technology companies to benefit from where technology is
+              going.
+            </p>
+            <p>
+              So instead of only talking about human-first technology, we want to practice it.
+              Find an organization already doing work that matters. Give its people better tools
+              and systems. See how much further the mission can reach.
+            </p>
+            <p class="impact-note__sig">
+              Steven Mills
+              <span>Founder, Aivium Digital</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="impact-sec" aria-labelledby="faq-h">
+      <div class="container">
+        <h2 id="faq-h">Questions, answered honestly.</h2>
+        <div class="faq__list" style="margin-top: var(--space-12); max-width: 52rem;">
+          {IMPACT_FAQS.map((f, i) => (
+            <details class="faq__item" data-faq-index={i}>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="impact-cta">
+      <div class="container">
+        <h2>Your organization already has a mission. Let's help more people experience it.</h2>
+        <p class="impact-cta__lede">
+          Tell us about the work you do, where you are trying to go, and what's in the way.
+        </p>
+        <div class="impact-cta__actions">
+          <a class="btn btn--primary" href={heroPrimary.href} data-impact-cta={heroPrimary.cta}>
+            {heroPrimary.label}
+          </a>
+          <a class="btn btn--ghost" href={heroSecondary.href} data-impact-cta={heroSecondary.cta}>
+            {heroSecondary.label}
+          </a>
+        </div>
+        <ul class="impact-cta__facts" aria-label="Program facts">
+          <li>Duration <b>6 months</b></li>
+          <li>Fees <b>$0</b></li>
+          <li>Partners <b>1</b></li>
+          <li>Obligation <b>none</b></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter />
+
+  <Fragment slot="scripts">
+    <script is:inline src="/js/impact-signal.js"></script>
+    <script is:inline src="/js/impact-page.js"></script>
+  </Fragment>
+</BaseLayout>

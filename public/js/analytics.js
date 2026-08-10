@@ -19,6 +19,8 @@
     if (path === "/") return "home";
     if (path.startsWith("/signals/")) return path === "/signals/" ? "signals_index" : "signal_article";
     if (path === "/discovery/") return "lead_funnel";
+    if (path === "/impact/") return "impact";
+    if (path.startsWith("/impact/")) return "impact_apply";
     if (path.startsWith("/locations/")) return "location";
     if (path.startsWith("/industries/")) return "industry";
     if (path === "/case-studies/") return "case_studies";

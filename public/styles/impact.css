@@ -1,0 +1,1053 @@
+/* ============================================================
+   /impact/ — The Signal.
+   One faint trace out of many is found, locked, and amplified.
+   Frontier Observatory tokens only; the hero owns the page's one
+   authored motion moment, everything below stays calm.
+   Loaded after main.css via BaseLayout's styles prop.
+   ============================================================ */
+
+/* ---- Hero: the signal console (comp: impact-hero-comp.png) ----- */
+
+.impact-hero {
+  position: relative;
+  height: calc(100dvh - var(--nav-height));
+  min-height: 640px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.impact-hero__field {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-atmosphere);
+  width: 100%;
+  height: 100%;
+}
+
+/* Light vignette behind the centered copy only; the monitor rows must
+   stay readable as the console's ground (comp density) */
+.impact-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(56% 42% at 50% 26%, rgba(9, 12, 16, 0.6) 0%, rgba(9, 12, 16, 0.22) 55%, transparent 76%),
+    linear-gradient(to top, rgba(9, 12, 16, 0.5) 0%, transparent 16%);
+  pointer-events: none;
+}
+
+/* The instrument's frame */
+.impact-hero__frame {
+  position: absolute;
+  inset: 14px;
+  z-index: 1;
+  border: 1px solid var(--line);
+  pointer-events: none;
+}
+
+/* Channel-delta column, right edge (comp texture, aria-hidden) */
+.impact-hero__channels {
+  position: absolute;
+  z-index: 2;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.72;
+  color: var(--cream-32);
+  text-align: left;
+  pointer-events: none;
+}
+
+.impact-hero__channels-head {
+  color: var(--cream-55);
+  margin-bottom: 0.35rem;
+}
+
+/* Greeked signal strips, left edge: the comp's near-full-height column */
+.impact-hero__strips {
+  position: absolute;
+  z-index: 2;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: min(660px, 74%);
+  color: var(--cream-32);
+  pointer-events: none;
+}
+
+/* Corner instrument widgets */
+.impact-hero__widget {
+  position: absolute;
+  z-index: 2;
+  color: var(--cream-32);
+  pointer-events: none;
+}
+
+.impact-hero__widget--axis {
+  left: 34px;
+  bottom: 34px;
+  width: 44px;
+  height: 44px;
+}
+
+.impact-hero__widget--globe {
+  right: 34px;
+  bottom: 34px;
+  width: 44px;
+  height: 44px;
+}
+
+.impact-hero__widget--spark {
+  right: 118px;
+  top: 96px;
+  width: 64px;
+  height: 28px;
+}
+
+.impact-hero__widget--grid {
+  left: 110px;
+  bottom: 42px;
+  width: 30px;
+  height: 30px;
+}
+
+.impact-hero__widget--cluster {
+  left: 34px;
+  top: 96px;
+  width: 76px;
+  height: 56px;
+}
+
+.impact-hero__widget--reticle {
+  left: 172px;
+  bottom: 38px;
+  width: 36px;
+  height: 36px;
+}
+
+/* Centered console content: headline block above the trace, lede
+   below it, telemetry as the console footer */
+.impact-hero__inner {
+  position: relative;
+  z-index: var(--z-content);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
+.impact-hero__content {
+  margin-top: clamp(2.5rem, 8vh, 6rem);
+  max-width: 46rem;
+}
+
+.impact-hero__eyebrow {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  font-stretch: var(--stretch-subhead);
+  line-height: 1.5;
+  color: var(--cream-72);
+}
+
+.impact-hero__headline {
+  margin-top: var(--space-3);
+  font-size: clamp(1.875rem, 1.05rem + 2.3vw, 3rem);
+  font-weight: 500;
+  font-stretch: var(--stretch-display);
+  letter-spacing: var(--tracking-display);
+  line-height: 1.14;
+  text-wrap: balance;
+  max-width: 30ch;
+  margin-inline: auto;
+}
+
+.impact-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.impact-hero__lede {
+  margin-top: auto;
+  margin-bottom: clamp(5rem, 13vh, 8.5rem);
+  max-width: 52ch;
+  text-align: center;
+  font-size: var(--text-small);
+  color: var(--cream-55);
+}
+
+/* Telemetry readout: the console footer. Mono is measurement. */
+.impact-hero__telemetry {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2) var(--space-6);
+  width: max-content;
+  max-width: min(56rem, calc(100% - 200px));
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--cream-55);
+}
+
+.impact-hero__telemetry span b {
+  font-weight: 500;
+  color: var(--cream);
+}
+
+/* Lock chip: appears at the lock moment beside the cursor, in the
+   clear band between the burst and the lede */
+.impact-hero__lock {
+  position: absolute;
+  z-index: 2;
+  left: calc(65.5% + 0.75rem);
+  top: 63%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ok);
+  opacity: 0;
+  transition: opacity var(--duration-slow) var(--ease-out);
+  pointer-events: none;
+}
+
+.impact-hero__lock.is-locked {
+  opacity: 1;
+}
+
+.impact-hero__lock-ring {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--ok);
+  border-radius: 50%;
+}
+
+.impact-hero__lock-ring::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--ok);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .impact-hero__lock.is-locked .impact-hero__lock-ring {
+    animation: impact-lock-pulse 2.6s var(--ease-out) infinite;
+  }
+  @keyframes impact-lock-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(62, 207, 142, 0.35); }
+    60%  { box-shadow: 0 0 0 10px rgba(62, 207, 142, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(62, 207, 142, 0); }
+  }
+}
+
+/* ---- Shared section scaffolding ------------------------------ */
+
+.impact-sec {
+  padding-block: var(--space-section);
+  border-top: 1px solid var(--line);
+}
+
+.impact-sec--flush {
+  border-top: 0;
+}
+
+.impact-sec h2 {
+  font-size: var(--text-h2);
+  font-weight: 500;
+  font-stretch: var(--stretch-display);
+  letter-spacing: var(--tracking-display);
+  line-height: 1.08;
+  text-wrap: balance;
+  max-width: 24ch;
+}
+
+.impact-sec__lede {
+  margin-top: var(--space-6);
+  max-width: 58ch;
+  color: var(--cream-72);
+  line-height: var(--leading-body);
+}
+
+/* ---- Why ------------------------------------------------------ */
+
+.impact-why__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--space-8) var(--space-16);
+  align-items: start;
+}
+
+.impact-why__big {
+  margin-top: var(--space-6);
+  font-size: var(--text-h3);
+  font-stretch: var(--stretch-subhead);
+  line-height: 1.4;
+  color: var(--cream);
+  max-width: 30ch;
+}
+
+.impact-why__body {
+  color: var(--cream-72);
+  line-height: var(--leading-body);
+  max-width: 58ch;
+}
+
+.impact-why__body p + p {
+  margin-top: var(--space-4);
+}
+
+.impact-quote {
+  margin-top: var(--space-12);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--line);
+  font-size: var(--text-h3);
+  font-stretch: var(--stretch-subhead);
+  line-height: 1.45;
+  color: var(--cream);
+  max-width: 44ch;
+}
+
+.impact-quote em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+/* ---- Channels: an instrument's channel strip ------------------ */
+
+.impact-channels__list {
+  margin-top: var(--space-12);
+  border-top: 1px solid var(--line);
+}
+
+.impact-channel {
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 4fr) minmax(0, 5fr);
+  gap: var(--space-4) var(--space-8);
+  align-items: baseline;
+  padding-block: var(--space-8);
+  border-bottom: 1px solid var(--line);
+}
+
+.impact-channel__id {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  color: var(--cream-32);
+}
+
+.impact-channel:hover .impact-channel__id {
+  color: var(--accent);
+}
+
+.impact-channel h3 {
+  font-size: var(--text-h3);
+  font-weight: 500;
+  font-stretch: var(--stretch-subhead);
+  letter-spacing: -0.01em;
+}
+
+.impact-channel__line {
+  color: var(--cream-72);
+  line-height: var(--leading-body);
+}
+
+.impact-channel__scope {
+  margin-top: var(--space-3);
+  font-size: var(--text-small);
+  color: var(--cream-55);
+}
+
+/* ---- The arc: one signal gaining amplitude ------------------- */
+
+.impact-arc__diagram {
+  position: relative;
+  margin-top: var(--space-16);
+}
+
+.impact-arc__wires {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.impact-arc__wires .arc-base {
+  stroke: var(--line-strong);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.impact-arc__wires .arc-signal {
+  stroke: var(--accent);
+  stroke-width: 2;
+  fill: none;
+}
+
+.impact-arc__wires .arc-marker {
+  fill: var(--void-950);
+  stroke: var(--cream-55);
+  stroke-width: 1.5;
+}
+
+.impact-arc__wires .arc-marker--end {
+  stroke: var(--ok);
+}
+
+.impact-arc__wires .arc-corners path {
+  stroke: var(--cream-32);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.impact-arc__phases {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+}
+
+.impact-phase h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  font-stretch: var(--stretch-subhead);
+}
+
+/* Measurement, set after its heading, never as a kicker above it */
+.impact-phase__window {
+  margin-top: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.impact-phase p {
+  margin-top: var(--space-2);
+  font-size: var(--text-small);
+  color: var(--cream-55);
+  line-height: 1.6;
+}
+
+/* ---- Fit: who we're listening for ---------------------------- */
+
+.impact-fit__list {
+  margin-top: var(--space-12);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4) var(--space-16);
+  max-width: 62rem;
+}
+
+.impact-fit__list li {
+  display: flex;
+  gap: var(--space-3);
+  align-items: baseline;
+  color: var(--cream-72);
+  line-height: var(--leading-body);
+  padding-block: var(--space-2);
+  border-bottom: 1px solid var(--line);
+}
+
+.impact-fit__list svg {
+  flex: none;
+  width: 0.85rem;
+  height: 0.85rem;
+  transform: translateY(1px);
+  color: var(--ok);
+}
+
+.impact-fit__note {
+  margin-top: var(--space-8);
+  font-size: var(--text-h3);
+  font-stretch: var(--stretch-subhead);
+  line-height: 1.45;
+  color: var(--cream);
+  max-width: 40ch;
+}
+
+/* ---- Selection ------------------------------------------------ */
+
+.impact-selection__grid {
+  margin-top: var(--space-12);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 var(--space-16);
+  max-width: 62rem;
+}
+
+.impact-selection__grid > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+  gap: var(--space-6);
+  padding-block: var(--space-6);
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+
+.impact-selection__grid dt {
+  font-weight: 500;
+  color: var(--cream);
+}
+
+.impact-selection__grid dd {
+  color: var(--cream-55);
+  font-size: var(--text-small);
+  line-height: 1.6;
+}
+
+/* ---- The log: transparency ----------------------------------- */
+
+.impact-log__commit {
+  margin-top: var(--space-12);
+  display: grid;
+  gap: var(--space-6);
+  max-width: 44rem;
+}
+
+.impact-commit {
+  position: relative;
+  padding: var(--space-6) var(--space-8);
+  border: 1px solid var(--line-strong);
+  background: var(--void-900);
+}
+
+.impact-commit p {
+  color: var(--cream);
+  line-height: var(--leading-body);
+}
+
+.impact-commit__tag {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ok);
+}
+
+.impact-commit__tag svg {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+.impact-log__scope {
+  margin-top: var(--space-8);
+  font-size: var(--text-small);
+  color: var(--cream-55);
+  max-width: 58ch;
+  line-height: 1.7;
+}
+
+/* ---- Boundaries ----------------------------------------------- */
+
+.impact-boundaries__details {
+  margin-top: var(--space-8);
+  max-width: 44rem;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.impact-boundaries__details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-4);
+  cursor: pointer;
+  color: var(--cream-72);
+  font-weight: 500;
+  list-style: none;
+}
+
+.impact-boundaries__details summary::-webkit-details-marker {
+  display: none;
+}
+
+.impact-boundaries__details summary svg {
+  flex: none;
+  width: 0.75rem;
+  height: 0.75rem;
+  color: var(--cream-55);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.impact-boundaries__details[open] summary svg {
+  transform: rotate(45deg);
+}
+
+.impact-boundaries__details ul {
+  columns: 2;
+  gap: var(--space-16);
+  padding-bottom: var(--space-6);
+}
+
+.impact-boundaries__details li {
+  font-size: var(--text-small);
+  color: var(--cream-55);
+  line-height: 1.9;
+  break-inside: avoid;
+}
+
+/* ---- Get involved --------------------------------------------- */
+
+.impact-involved__timeline {
+  margin-top: var(--space-8);
+  max-width: 34rem;
+}
+
+.impact-involved__timeline div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--line);
+}
+
+.impact-involved__timeline dt {
+  color: var(--cream-55);
+  font-size: var(--text-small);
+}
+
+.impact-involved__timeline dd {
+  color: var(--cream);
+  font-size: var(--text-small);
+  font-weight: 500;
+}
+
+.impact-involved__grid {
+  margin-top: var(--space-12);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.impact-panel {
+  border: 1px solid var(--line);
+  background: var(--void-900);
+  padding: var(--space-8);
+}
+
+.impact-panel--primary {
+  border-color: rgba(229, 57, 27, 0.45);
+}
+
+.impact-panel h3 {
+  font-size: var(--text-h3);
+  font-weight: 500;
+  font-stretch: var(--stretch-subhead);
+}
+
+.impact-panel__line {
+  margin-top: var(--space-3);
+  color: var(--cream-72);
+  line-height: var(--leading-body);
+}
+
+.impact-panel .btn {
+  margin-top: var(--space-6);
+}
+
+/* Forms inside panels: sharp fields on void, quiz grammar */
+.impact-form {
+  margin-top: var(--space-6);
+  display: grid;
+  gap: var(--space-4);
+}
+
+.impact-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.impact-field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.impact-field label {
+  font-size: var(--text-small);
+  color: var(--cream-55);
+}
+
+.impact-field input,
+.impact-field textarea,
+.impact-field select {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: var(--void-950);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-surface);
+  color: var(--cream);
+  font-family: inherit;
+  font-size: var(--text-body);
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+.impact-field textarea {
+  resize: vertical;
+  min-height: 6.5rem;
+}
+
+.impact-field input:hover,
+.impact-field textarea:hover,
+.impact-field select:hover {
+  border-color: var(--line-strong);
+}
+
+.impact-field input:focus-visible,
+.impact-field textarea:focus-visible,
+.impact-field select:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.impact-field input[aria-invalid="true"],
+.impact-field textarea[aria-invalid="true"],
+.impact-field select[aria-invalid="true"] {
+  border-color: var(--accent);
+}
+
+.impact-field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23f6f2ea' stroke-opacity='.55' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-4) center;
+  padding-right: var(--space-12);
+}
+
+.impact-check {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  font-size: var(--text-small);
+  color: var(--cream-72);
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+.impact-check input {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  margin-top: 0.2rem;
+  accent-color: var(--accent);
+}
+
+.impact-form__error {
+  display: none;
+  font-size: var(--text-small);
+  color: var(--accent);
+  line-height: 1.6;
+}
+
+.impact-form__error.is-visible {
+  display: block;
+}
+
+.impact-form__error a {
+  color: var(--cream);
+}
+
+.impact-form .btn[disabled] {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+.impact-success {
+  display: none;
+}
+
+.impact-success.is-visible {
+  display: block;
+}
+
+.impact-success h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.impact-success h3 svg {
+  width: 1rem;
+  height: 1rem;
+  color: var(--ok);
+}
+
+.impact-success p {
+  margin-top: var(--space-3);
+  color: var(--cream-72);
+  line-height: var(--leading-body);
+}
+
+.impact-involved__legal {
+  margin-top: var(--space-8);
+  max-width: 62ch;
+  font-size: 0.8125rem;
+  color: var(--cream-55);
+  line-height: 1.7;
+}
+
+.impact-involved__legal a {
+  color: var(--cream-72);
+}
+
+/* ---- A note from Steven --------------------------------------- */
+
+.impact-note__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: var(--space-12) var(--space-16);
+  align-items: start;
+}
+
+.impact-note__portrait {
+  width: 100%;
+  max-width: 20rem;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  filter: grayscale(24%);
+  border: 1px solid var(--line);
+}
+
+.impact-note__body p {
+  color: var(--cream-72);
+  line-height: var(--leading-body);
+  max-width: 58ch;
+}
+
+.impact-note__body p + p {
+  margin-top: var(--space-4);
+}
+
+.impact-note__sig {
+  margin-top: var(--space-8);
+  color: var(--cream);
+  font-weight: 500;
+}
+
+.impact-note__sig span {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--text-small);
+  font-weight: 400;
+  color: var(--cream-55);
+}
+
+/* ---- Final CTA ------------------------------------------------ */
+
+.impact-cta {
+  text-align: center;
+  padding-block: var(--space-section);
+  border-top: 1px solid var(--line);
+}
+
+.impact-cta h2 {
+  margin-inline: auto;
+}
+
+.impact-cta__lede {
+  margin: var(--space-6) auto 0;
+  max-width: 44ch;
+  color: var(--cream-72);
+  line-height: var(--leading-body);
+}
+
+.impact-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+.impact-cta__facts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2) var(--space-6);
+  margin-top: var(--space-8);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--cream-55);
+  list-style: none;
+  padding: 0;
+}
+
+.impact-cta__facts b {
+  font-weight: 500;
+  color: var(--cream);
+}
+
+/* ---- Apply flow extensions (over quiz.css) -------------------- */
+
+.impact-apply-intro {
+  max-width: 44rem;
+  margin-inline: auto;
+  padding-block: var(--space-12) var(--space-8);
+}
+
+/* Programmatic focus target on step change; the ring adds nothing */
+.quiz-step h1[tabindex="-1"]:focus,
+.quiz-step h2[tabindex="-1"]:focus {
+  outline: none;
+}
+
+.quiz-field select {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: var(--void-900);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-surface);
+  color: var(--cream);
+  font-family: inherit;
+  font-size: var(--text-body);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23f6f2ea' stroke-opacity='.55' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-4) center;
+  padding-right: var(--space-12);
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+.quiz-field select:hover {
+  border-color: var(--line-strong);
+}
+
+.quiz-field select:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.quiz-field select[aria-invalid="true"] {
+  border-color: var(--accent);
+}
+
+/* ---- Responsive ----------------------------------------------- */
+
+@media (max-width: 1100px) {
+  /* The side chrome needs room; the trace and frame carry the console */
+  .impact-hero__channels,
+  .impact-hero__strips,
+  .impact-hero__widget--grid {
+    display: none;
+  }
+
+  .impact-hero__telemetry {
+    max-width: calc(100% - 60px);
+  }
+}
+
+@media (max-width: 900px) {
+  /* Natural flow on phones: the console footer follows the lede
+     instead of anchoring to a fixed-height frame */
+  .impact-hero {
+    height: auto;
+    min-height: calc(100dvh - var(--nav-height));
+    padding-bottom: var(--space-8);
+  }
+
+  .impact-hero__inner {
+    height: auto;
+    min-height: 72vh;
+  }
+
+  .impact-hero__content {
+    margin-top: clamp(3.5rem, 8vh, 5rem);
+    padding-inline: var(--space-4);
+  }
+
+  .impact-hero__lede {
+    margin-bottom: var(--space-6);
+    padding-inline: var(--space-6);
+  }
+
+  .impact-hero__telemetry {
+    position: static;
+    transform: none;
+    margin: var(--space-4) auto 0;
+    width: auto;
+    max-width: calc(100% - 40px);
+  }
+
+  .impact-hero__lock,
+  .impact-hero__widget {
+    display: none;
+  }
+
+  .impact-why__grid,
+  .impact-note__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .impact-channel {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+
+  /* Heading first on mobile; the designation follows as metadata */
+  .impact-channel h3 {
+    order: -1;
+  }
+
+  .impact-arc__phases {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    border-left: 1px solid var(--line-strong);
+    padding-left: var(--space-6);
+  }
+
+  .impact-fit__list,
+  .impact-selection__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .impact-involved__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .impact-form__row {
+    grid-template-columns: 1fr;
+  }
+
+  .impact-boundaries__details ul {
+    columns: 1;
+  }
+
+  .impact-note__portrait {
+    max-width: 14rem;
+  }
+}

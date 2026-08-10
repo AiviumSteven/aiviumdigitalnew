@@ -1,0 +1,305 @@
+---
+/**
+ * /impact/apply/ — the Impact Partner application as a paced multi-step
+ * flow (the site's discovery-quiz grammar, minus the sales ending: no
+ * Calendly, no pitch, just a receipt). Renders a notify state instead
+ * whenever the program is not "open". Driven by /js/impact-apply.js;
+ * submits to /api/impact with type "application".
+ */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { COMPANY } from "../../data/company";
+import { IMPACT_PROGRAM } from "../../data/impact";
+
+const program = IMPACT_PROGRAM;
+const open = program.applicationStatus === "open";
+
+const SYSTEMS_ACCESS = ["Yes", "Mostly, some systems may need coordination", "Not sure yet"];
+const DOCUMENTATION = ["Yes", "Yes, but I would like to discuss the details", "Not sure yet"];
+const BUDGETS = [
+  "Under $250,000",
+  "$250,000 to $1 million",
+  "$1 million to $5 million",
+  "More than $5 million",
+  "Prefer not to say",
+];
+---
+
+<BaseLayout
+  title="Aivium Digital | Impact Partner Application"
+  description="Apply for the Aivium Digital Impact Partner program: a six-month pro bono engagement for one Mid-Atlantic nonprofit."
+  canonical="/impact/apply/"
+  noindex={true}
+  styles={["/styles/quiz.css", "/styles/impact.css"]}
+  bodyClass="quiz-page"
+>
+  <header class="quiz-nav">
+    <div class="container quiz-nav__inner">
+      <a class="quiz-nav__logo" href="/impact/" aria-label="Back to the Impact Partner program">
+        <img src="/assets/aivium-digital-lockup-horizontal-dark.svg" alt="Aivium Digital" />
+      </a>
+      <a class="nav__phone" href={`tel:${COMPANY.phoneE164}`}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>{COMPANY.phoneDisplay}</span>
+      </a>
+    </div>
+  </header>
+
+  {open ? (
+    <>
+      <div class="quiz-progress" data-progress>
+        <div class="container quiz-progress__inner">
+          <p class="quiz-progress__count" aria-live="polite">
+            Step <strong data-progress-current>1</strong> / <span data-progress-total>7</span>
+          </p>
+          <div class="quiz-progress__track" aria-hidden="true">
+            <div class="quiz-progress__fill" data-progress-fill></div>
+          </div>
+        </div>
+      </div>
+
+      <main class="quiz-main">
+        <div class="container">
+          <form class="quiz-stage" id="impact-apply" novalidate>
+            <section class="quiz-step" data-step="1">
+              <h1 class="quiz-step__question">Tell us about your organization.</h1>
+              <p class="quiz-step__hint">
+                About ten minutes total. No trick questions, and applying never puts you in a
+                sales funnel.
+              </p>
+              <div class="quiz-fields">
+                <div class="quiz-field">
+                  <label for="a-org">Organization name</label>
+                  <input id="a-org" name="org_name" type="text" autocomplete="organization" maxlength="200" required />
+                  <p class="quiz-field__error" data-error-for="a-org">Please enter the organization's name.</p>
+                </div>
+                <div class="quiz-field">
+                  <label for="a-website">Website</label>
+                  <input id="a-website" name="website" type="text" inputmode="url" autocomplete="url" placeholder="organization.org" maxlength="300" required />
+                  <p class="quiz-field__error" data-error-for="a-website">Please enter the website.</p>
+                </div>
+                <div class="quiz-field">
+                  <label for="a-city">City</label>
+                  <input id="a-city" name="city" type="text" autocomplete="address-level2" maxlength="100" required />
+                  <p class="quiz-field__error" data-error-for="a-city">Please enter the city.</p>
+                </div>
+                <div class="quiz-field">
+                  <label for="a-state">State</label>
+                  <input id="a-state" name="state" type="text" autocomplete="address-level1" maxlength="50" required />
+                  <p class="quiz-field__error" data-error-for="a-state">Please enter the state.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="quiz-step" data-step="2">
+              <h2 class="quiz-step__question">Who should we talk to?</h2>
+              <div class="quiz-fields">
+                <div class="quiz-field">
+                  <label for="a-name">Full name</label>
+                  <input id="a-name" name="contact_name" type="text" autocomplete="name" maxlength="150" required />
+                  <p class="quiz-field__error" data-error-for="a-name">Please enter a name.</p>
+                </div>
+                <div class="quiz-field">
+                  <label for="a-role">Role or title</label>
+                  <input id="a-role" name="contact_role" type="text" autocomplete="organization-title" maxlength="150" required />
+                  <p class="quiz-field__error" data-error-for="a-role">Please enter a role.</p>
+                </div>
+                <div class="quiz-field">
+                  <label for="a-email">Email</label>
+                  <input id="a-email" name="email" type="email" autocomplete="email" maxlength="320" required />
+                  <p class="quiz-field__error" data-error-for="a-email">Please enter a valid email address.</p>
+                </div>
+                <div class="quiz-field">
+                  <label for="a-phone">Phone</label>
+                  <input id="a-phone" name="phone" type="tel" autocomplete="tel" maxlength="50" required />
+                  <p class="quiz-field__error" data-error-for="a-phone">Please enter a phone number.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="quiz-step" data-step="3">
+              <h2 class="quiz-step__question">What does your organization do?</h2>
+              <div class="quiz-fields">
+                <div class="quiz-field quiz-field--full">
+                  <label for="a-mission">Your mission, in your own words</label>
+                  <textarea id="a-mission" name="mission" rows="3" maxlength="2000" required></textarea>
+                  <p class="quiz-field__error" data-error-for="a-mission">Please describe the mission.</p>
+                </div>
+                <div class="quiz-field quiz-field--full">
+                  <label for="a-audience">Who do you primarily serve?</label>
+                  <textarea id="a-audience" name="audience" rows="2" maxlength="1000" required></textarea>
+                  <p class="quiz-field__error" data-error-for="a-audience">Please tell us who you serve.</p>
+                </div>
+                <div class="quiz-field quiz-field--full">
+                  <label for="a-reach">Roughly how many people do you serve or engage each year?</label>
+                  <input id="a-reach" name="annual_reach" type="text" maxlength="100" required />
+                  <p class="quiz-field__error" data-error-for="a-reach">A rough estimate is fine.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="quiz-step" data-step="4">
+              <h2 class="quiz-step__question">Where could six months change things?</h2>
+              <div class="quiz-fields">
+                <div class="quiz-field quiz-field--full">
+                  <label for="a-challenge">What most limits your reach or impact right now?</label>
+                  <textarea id="a-challenge" name="challenge" rows="3" maxlength="2000" required></textarea>
+                  <p class="quiz-field__error" data-error-for="a-challenge">Please describe the challenge.</p>
+                </div>
+                <div class="quiz-field quiz-field--full">
+                  <label for="a-wish">What work do you wish technology could make easier?</label>
+                  <textarea id="a-wish" name="tech_wish" rows="3" maxlength="2000" required></textarea>
+                  <p class="quiz-field__error" data-error-for="a-wish">Please share a wish or two.</p>
+                </div>
+                <div class="quiz-field quiz-field--full">
+                  <label for="a-success">What would a successful six months look like?</label>
+                  <textarea id="a-success" name="success_vision" rows="3" maxlength="2000" required></textarea>
+                  <p class="quiz-field__error" data-error-for="a-success">Please describe success.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="quiz-step" data-step="5">
+              <h2 class="quiz-step__question">The practical part.</h2>
+              <div class="quiz-fields">
+                <div class="quiz-field quiz-field--full">
+                  <label for="a-contact">Who would be the primary project contact?</label>
+                  <input id="a-contact" name="project_contact" type="text" maxlength="200" required />
+                  <p class="quiz-field__error" data-error-for="a-contact">Please name a contact.</p>
+                </div>
+                <div class="quiz-field quiz-field--full">
+                  <label for="a-access">Could you give us access to relevant systems (website, analytics, CRM) as needed?</label>
+                  <select id="a-access" name="systems_access" required>
+                    <option value="" disabled selected>Select one</option>
+                    {SYSTEMS_ACCESS.map((o) => <option value={o}>{o}</option>)}
+                  </select>
+                  <p class="quiz-field__error" data-error-for="a-access">Please pick the closest answer.</p>
+                </div>
+                <div class="quiz-field quiz-field--full">
+                  <label for="a-doc">Are you comfortable with Aivium Digital documenting the engagement and results publicly?</label>
+                  <select id="a-doc" name="documentation_ok" required>
+                    <option value="" disabled selected>Select one</option>
+                    {DOCUMENTATION.map((o) => <option value={o}>{o}</option>)}
+                  </select>
+                  <p class="quiz-field__error" data-error-for="a-doc">Please pick the closest answer.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="quiz-step" data-step="6">
+              <h2 class="quiz-step__question">Optional context.</h2>
+              <p class="quiz-step__hint">
+                Everything here is optional and never a disqualifier. Skip anything you like.
+              </p>
+              <div class="quiz-fields">
+                <div class="quiz-field">
+                  <label for="a-budget">Annual operating budget</label>
+                  <select id="a-budget" name="budget">
+                    <option value="" selected>Select one (optional)</option>
+                    {BUDGETS.map((o) => <option value={o}>{o}</option>)}
+                  </select>
+                </div>
+                <div class="quiz-field">
+                  <label for="a-crm">Current CRM or donor platform</label>
+                  <input id="a-crm" name="crm" type="text" maxlength="200" />
+                </div>
+                <div class="quiz-field">
+                  <label for="a-employees">Employees</label>
+                  <input id="a-employees" name="employees" type="text" inputmode="numeric" maxlength="20" />
+                </div>
+                <div class="quiz-field">
+                  <label for="a-volunteers">Volunteers</label>
+                  <input id="a-volunteers" name="volunteers" type="text" inputmode="numeric" maxlength="20" />
+                </div>
+                <div class="quiz-field quiz-field--full">
+                  <label for="a-referral">How did you hear about the program?</label>
+                  <input id="a-referral" name="referral" type="text" maxlength="300" />
+                </div>
+              </div>
+            </section>
+
+            <section class="quiz-step" data-step="7">
+              <h2 class="quiz-step__question">Three confirmations, then you're done.</h2>
+              <div class="impact-form" style="margin-top: var(--space-6);">
+                <label class="impact-check">
+                  <input type="checkbox" name="confirm_accurate" required value="confirmed" />
+                  The information in this application is accurate.
+                </label>
+                <label class="impact-check">
+                  <input type="checkbox" name="confirm_scope" required value="confirmed" />
+                  I understand applying does not guarantee selection, and the selected engagement
+                  will be governed by a mutually agreed scope of work.
+                </label>
+                <label class="impact-check">
+                  <input type="checkbox" name="confirm_casestudy" required value="confirmed" />
+                  I understand the selected Impact Partner participates reasonably in documenting
+                  the engagement and its results.
+                </label>
+                <p class="impact-form__error" data-form-error>
+                  That didn't send. Your answers are still here; try again, or email them to
+                  <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>.
+                </p>
+              </div>
+            </section>
+
+            <section class="quiz-step" data-step="8" data-finish>
+              <p class="quiz-finish__kicker">Application received</p>
+              <h2 class="quiz-step__question">Thank you for the work you do.</h2>
+              <p class="quiz-step__hint">
+                The Aivium Digital team reviews applications after the submission period closes.
+                If we need anything else, we will reach out using the contact details you
+                provided. In the meantime, <a href="/impact/">the program page</a> has the full
+                journey.
+              </p>
+            </section>
+
+            <div class="quiz-field visually-hidden" aria-hidden="true">
+              <label for="a-hp">Leave this field empty</label>
+              <input id="a-hp" name="website_confirm" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div class="quiz-controls">
+              <button class="quiz-back" type="button" data-back hidden>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Back
+              </button>
+              <button class="btn btn--primary quiz-submit" type="button" data-next>
+                Continue
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </>
+  ) : (
+    <main class="quiz-main">
+      <div class="container impact-apply-intro">
+        <h1 class="quiz-step__question">
+          {program.applicationStatus === "announced"
+            ? "Applications open soon."
+            : "Applications are closed for this cycle."}
+        </h1>
+        <p class="quiz-step__hint">
+          {program.applicationStatus === "announced"
+            ? "The first Impact Partner application window has not opened yet. Leave your details on the program page and we will tell you the moment it does."
+            : "The current cycle is underway. The program page has the journey, and you can leave your details there to hear about the next cycle."}
+        </p>
+        <p style="margin-top: var(--space-8);">
+          <a class="btn btn--primary" href="/impact/#get-involved">Go to the program page</a>
+        </p>
+      </div>
+    </main>
+  )}
+
+  <footer class="quiz-footer">
+    <div class="container quiz-footer__inner">
+      <p>&copy; 2026 Aivium Digital</p>
+      <p><a href="/impact/">Impact Partner program</a></p>
+    </div>
+  </footer>
+
+  {open && (
+    <Fragment slot="scripts">
+      <script is:inline src="/js/impact-apply.js"></script>
+    </Fragment>
+  )}
+</BaseLayout>
