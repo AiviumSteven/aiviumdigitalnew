@@ -43,6 +43,15 @@ export interface Author {
   personUrl: string;
 }
 
+/**
+ * The author's LinkedIn profile from sameAs, for visible "LinkedIn ↗"
+ * links — never index into sameAs positionally for these (sameAs[0] is
+ * the entity home, not necessarily LinkedIn).
+ */
+export function linkedinOf(author: Author): string | undefined {
+  return author.sameAs.find((url) => url.includes('linkedin.com'));
+}
+
 /** Embedded Person stub for JSON-LD author/founder references. */
 export function personStub(author: Author) {
   return {

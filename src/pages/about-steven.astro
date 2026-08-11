@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SiteNav from "../components/SiteNav.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import { getAuthor, personStub } from "../data/authors";
+import { getAuthor, linkedinOf, personStub } from "../data/authors";
 import { getSignalRefs } from "../lib/signals";
 
 const site = "https://aiviumdigital.com";
@@ -86,7 +86,7 @@ const jsonLd = {
           </p>
           <div class="author-hero__links">
             <a class="btn btn--primary" href="/discovery/">Book a call with Steven</a>
-            <a class="author-hero__linkedin" href={author.sameAs[0]} target="_blank" rel="noopener">
+            <a class="author-hero__linkedin" href={linkedinOf(author)} target="_blank" rel="noopener">
               LinkedIn ↗
             </a>
           </div>

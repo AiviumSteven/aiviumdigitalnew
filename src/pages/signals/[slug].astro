@@ -5,7 +5,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import SiteNav from "../../components/SiteNav.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import { getSignals, type SignalEntry } from "../../lib/signals";
-import { getAuthor, personStub } from "../../data/authors";
+import { getAuthor, linkedinOf, personStub } from "../../data/authors";
 
 export async function getStaticPaths() {
   return (await getSignals()).map((entry) => ({
@@ -202,10 +202,10 @@ const jsonLd = {
               <span class="note__author-role">· {author.role}</span>
             </p>
             <p class="note__bio-text">{author.bio}</p>
-            {author.sameAs.length > 0 && (
+            {(author.page || linkedinOf(author)) && (
               <p class="note__bio-links">
                 {author.page && <a href={author.page}>More about {author.name.split(" ")[0]} →</a>}
-                <a href={author.sameAs[0]} target="_blank" rel="noopener">LinkedIn ↗</a>
+                {linkedinOf(author) && <a href={linkedinOf(author)} target="_blank" rel="noopener">LinkedIn ↗</a>}
               </p>
             )}
           </div>
