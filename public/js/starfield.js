@@ -10,10 +10,15 @@
   const STAR_DENSITY = 0.00012; // stars per px^2
   let stars = [];
   let raf = null;
+  /* Hero dimensions are read once per (re)seed, never per frame: querying
+     clientWidth/clientHeight after the canvas mutates forces a reflow. */
+  let w = 0;
+  let h = 0;
 
   function seed() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const { clientWidth: w, clientHeight: h } = canvas.parentElement;
+    w = canvas.parentElement.clientWidth;
+    h = canvas.parentElement.clientHeight;
     canvas.width = w * dpr;
     canvas.height = h * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -31,7 +36,6 @@
   }
 
   function draw(t) {
-    const { clientWidth: w, clientHeight: h } = canvas.parentElement;
     ctx.clearRect(0, 0, w, h);
     for (const s of stars) {
       let alpha = s.base;

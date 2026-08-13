@@ -10,7 +10,7 @@ interface Props {
   /** Set on blog posts: switches og:type to article + emits article: metas. */
   article?: { publishedTime: string; modifiedTime?: string | null };
   noindex?: boolean;
-  styles?: string[]; // extra stylesheets loaded after main.css
+  styles?: string[]; // extra stylesheets inlined after main.css
   bodyClass?: string;
 }
 
@@ -30,6 +30,24 @@ const {
 const site = "https://aiviumdigital.com";
 const url = site + canonical;
 const ogImageUrl = new URL(ogImage, site).href;
+
+/* All CSS is inlined into one <style> at build time: on a throttled mobile
+   connection every render-blocking stylesheet request costs a full round
+   trip before first paint. fonts.css uses URLs relative to /styles/, which
+   would resolve against the page URL once inlined, so they become absolute. */
+const cssSources = import.meta.glob("../../public/styles/*.css", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+}) as Record<string, string>;
+const readCss = (path: string) => {
+  const raw = cssSources[`../../public${path}`];
+  if (raw === undefined) throw new Error(`BaseLayout: unknown stylesheet ${path}`);
+  return raw.replace(/url\(\.\.\//g, "url(/");
+};
+const inlineCss = ["/styles/fonts.css", "/styles/tokens.css", "/styles/main.css", ...styles]
+  .map(readCss)
+  .join("\n");
 ---
 
 <!doctype html>
@@ -58,12 +76,23 @@ const ogImageUrl = new URL(ogImage, site).href;
     <meta name="twitter:description" content={ogDescription} />
     <meta name="twitter:image" content={ogImageUrl} />
 
-    <link rel="stylesheet" href="/styles/fonts.css" />
-    <link rel="stylesheet" href="/styles/tokens.css" />
-    <link rel="stylesheet" href="/styles/main.css" />
-    {styles.map((href) => <link rel="stylesheet" href={href} />)}
+    <link
+      rel="preload"
+      href="/assets/fonts/archivo-k3kQo8UDI-1M0wlSfdnoLg.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/plexmono--F6qfjptAgt5VM-kVkqdyU8n3twJwlBFgg.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <style is:inline set:html={inlineCss}></style>
 
-    <script is:inline src="/js/analytics.js"></script>
+    <script is:inline src="/js/analytics.js" defer></script>
 
     <slot name="head" />
   </head>
